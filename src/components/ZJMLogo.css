@@ -3,25 +3,37 @@
   --light-colour: #00819b;
 }
 
-#zSymbol {
+.zSymbol {
   fill: var(--dark-colour);
   transform-origin: 50% 50%;
   transition: all 500ms;
   opacity: 50%;
 }
 
-#mSymbol {
+.mSymbol {
   fill: var(--light-colour);
   transform-origin: 50% 50%;
   transition: all 300ms ease-in-out;
   opacity: 50%;
 }
 
-#logo-frame:hover #zSymbol {
+.zActive {
+  transform: translateX(-17%) translateY(2%) rotate(-90deg);
+  opacity: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.mSymbol.mActive {
+  transform: translateX(17%) rotate(90deg);
+  opacity: 100%;
+  transition: all 1s ease-in-out;
+}
+
+#logo-frame:hover .zSymbol {
   transform: translateX(-17%) translateY(2%) rotate(-90deg);
   opacity: 100%;
 }
-#logo-frame:hover #mSymbol {
+#logo-frame:hover .mSymbol {
   transform: translateX(17%) rotate(90deg);
   opacity: 100%;
 }

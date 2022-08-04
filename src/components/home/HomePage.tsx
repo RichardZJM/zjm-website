@@ -7,8 +7,7 @@ function HomePage() {
   return (
     <>
       <Typography variant="h1">Welcome Home</Typography>;
-      <ZJMLogo height="200px" width="300px" />
-      <ZJMLogo height="200px" width="300px" />
+      <ZJMLogo height="300px" width="450px" auto={true} />
     </>
   );
 }
