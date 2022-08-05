@@ -1,12 +1,19 @@
 import { AppBar, Button, Toolbar } from "@mui/material";
-import ZJMLogo from "../ZJMLogo";
-import React from "react";
-import { Box } from "@mui/system";
-import NavButton from "./NavButton";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import ZJMLogo from "../ZJMLogo";
+import NavButton from "./NavButton";
 
+/**
+ * Functional component of the website's nav bar
+ * @returns
+ */
 function Navbar() {
   const navigator = useNavigate();
+
+  /**
+   * Handle for the clicking of the logo, navigates user to the home page
+   */
   const handleLogoClick = () => {
     navigator("home");
   };

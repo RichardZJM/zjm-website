@@ -1,10 +1,13 @@
 import { Typography } from "@mui/material";
+import { Container } from "@mui/system";
 import React from "react";
+import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
 
-import ZJMLogo from "../ZJMLogo";
-import { Box, Container } from "@mui/system";
-
+/**
+ * Functional Component for the home page of the webside
+ * @returns JSX of the Home Page
+ */
 function HomePage() {
   return (
     <>

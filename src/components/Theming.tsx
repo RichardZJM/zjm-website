@@ -1,8 +1,8 @@
-// import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
+import { createTheme } from "@mui/material/styles";
 
-import { blue, pink } from "@mui/material/colors";
-import { createTheme, ThemeOptions } from "@mui/material/styles";
-
+/**
+ * Main website Theme
+ */
 export const theme = createTheme({
   palette: {
     // type: "light",

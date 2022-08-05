@@ -6,6 +6,10 @@ import HomePage from "./components/home/HomePage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/Theming";
 
+/**
+ * Functional Component, Layout of the website
+ * @returns JSX of App
+ */
 function App() {
   return (
     <>
