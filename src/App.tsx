@@ -3,16 +3,19 @@ import React from "react";
 import Navbar from "./components/navbar/Navbar";
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./components/home/HomePage";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { theme } from "./components/Theming";
 
 function App() {
   return (
     <>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Navigate to="home" />} />
-        <Route path="home" element={<HomePage />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Navigate to="home" />} />
+          <Route path="home" element={<HomePage />} />
+        </Routes>
+      </ThemeProvider>
     </>
   );
 }

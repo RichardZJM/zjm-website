@@ -1,0 +1,27 @@
+:root {
+  box-sizing: border-box;
+}
+
+.nav-button {
+  border-color: rgb(153, 153, 194);
+  /* border-bottom: 4px; */
+  box-sizing: border-box;
+  padding: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  margin: 0 1rem 0 1rem;
+}
+
+.nav-button:hover {
+  background-color: rgb(151, 189, 221);
+  border: 2px solid rgb(206, 200, 243);
+  border-radius: 20px;
+  /* height: 80%; */
+  /* width: auto; */
+}
+
+.nav-button.nav-button-active {
+  border: 2px solid rgb(131, 124, 175);
+  background-color: #17bbc1;
+  border-radius: 20px;
+}

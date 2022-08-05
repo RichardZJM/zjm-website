@@ -4,12 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { theme } from "./components/Theming";
+import { Button, CssBaseline } from "@mui/material";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <style>
+      @import
+      url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Gantari:wght@100;300;400;700&display=swap');
+    </style>
     <BrowserRouter>
       <App />
     </BrowserRouter>

@@ -12,9 +12,10 @@ function Navbar() {
   };
   return (
     <AppBar position="sticky">
-      <Toolbar sx={{ padding: "15px 10px" }}>
+      <Toolbar sx={{ padding: "5px 0px" }}>
         <Button
-          variant="contained"
+          variant="outlined"
+          color="secondary"
           onClick={() => {
             handleLogoClick();
           }}
@@ -23,11 +24,13 @@ function Navbar() {
             borderRadius: "20px",
             padding: "0",
           }}
+          style={{ backgroundColor: "white" }}
         >
-          <ZJMLogo height="100px" width="150px" />
+          <ZJMLogo height="4rem" width="6rem" />
         </Button>
-        <NavButton buttonText="experience" to="experience" />
-        <NavButton buttonText="projects" to="projects" />
+        <NavButton buttonText="Experience" to="experience" />
+        <NavButton buttonText="Projects" to="projects" />
+        <NavButton buttonText="Contact" to="contact" />
       </Toolbar>
     </AppBar>
   );
