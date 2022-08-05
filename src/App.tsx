@@ -1,25 +1,26 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+// import { Card, Paper } from "@mui/material";
+import Navbar from "./components/navbar/Navbar";
+import { Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "./components/home/HomePage";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { theme } from "./components/Theming";
 
+/**
+ * Functional Component, Layout of the website
+ * @returns JSX of App
+ */
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tssssx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Navigate to="home" />} />
+          <Route path="home" element={<HomePage />} />
+        </Routes>
+      </ThemeProvider>
+    </>
   );
 }
 

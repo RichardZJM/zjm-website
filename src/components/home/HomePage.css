@@ -1,0 +1,7 @@
+.drawn-profile-pic {
+  height: 20rem;
+  border-radius: 50%;
+}
+
+.drawn-profile-pic.drawn-profile-pic-active {
+}
