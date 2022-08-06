@@ -3,5 +3,9 @@
   border-radius: 50%;
 }
 
-.drawn-profile-pic.drawn-profile-pic-active {
+.home-page-container {
+  display: flex;
+  justify-content: center;
 }
+/* .drawn-profile-pic.drawn-profile-pic-active {
+} */

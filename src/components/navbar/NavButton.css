@@ -12,7 +12,8 @@
   margin: 0 1rem 0 1rem;
 }
 
-.nav-button:hover {
+.nav-button:hover,
+.nav-button.nav-button-active:hover {
   background-color: rgb(151, 189, 221);
   border: 2px solid rgb(206, 200, 243);
   border-radius: 20px;
