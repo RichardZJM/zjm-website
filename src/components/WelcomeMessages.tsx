@@ -4,7 +4,6 @@ const possibleWelcomeMessages: string[] = [
   "Willkommen",
   "пожаловать",
   "Bienvenidos",
-  "أهلا بك",
   "欢迎",
   "ようこそ",
 ];
