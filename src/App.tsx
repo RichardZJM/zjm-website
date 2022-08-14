@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "./components/navbar/Navbar";
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./components/home/HomePage";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/Theming";
 import possibleWelcomeMessages from "./components/WelcomeMessages";
 

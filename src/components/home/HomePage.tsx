@@ -1,6 +1,8 @@
-import { Paper, Typography, useTheme } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import Image from "../../images/SmallSky.png";
 import "./HomePage.css";
@@ -21,6 +23,8 @@ function HomePage(props: { welcomeMessage: string }) {
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
+    AOS.init({ duration: 600, once: true });
+    AOS.refresh();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -49,6 +53,8 @@ function HomePage(props: { welcomeMessage: string }) {
           <ZJMLogo height="fit-content(24rem)" width="auto" auto={true} />
 
           <Paper
+            data-aos="fade-up"
+            data-aos-duration="1500"
             sx={{
               padding: "1rem 2rem",
               marginTop: "3rem",
@@ -78,6 +84,7 @@ function HomePage(props: { welcomeMessage: string }) {
             }}
           >
             <img
+              data-aos="flip-left"
               className="drawn-profile-pic"
               src={require("../../images/PFP.png")}
               // src="../../../images/PFP.png"
@@ -85,6 +92,7 @@ function HomePage(props: { welcomeMessage: string }) {
               style={{ marginLeft: "4rem", marginRight: "4rem" }}
             />
             <Paper
+              data-aos="flip-right"
               sx={{
                 padding: "1rem 3rem",
                 borderRadius: "2rem",
@@ -118,16 +126,52 @@ function HomePage(props: { welcomeMessage: string }) {
           Short on time? Maybe looking for something specific?
         </Typography>
         <Typography
-          variant="h4"
+          variant="h5"
           sx={{
             fontWeight: "600",
-            color: theme.palette.success.main,
+            color: theme.palette.primary.main,
             fontStyle: "italic",
           }}
         >
           Jump to one of the below!
         </Typography>
-        <OptionsCard />
+        <Box
+          data-aos="fade-up"
+          data-aos-duration="1500"
+          sx={{
+            marginTop: "3rem",
+            display: "flex",
+            maxWidth: "85vw",
+            overflowX: "auto",
+            paddingBottom: "1rem",
+          }}
+        >
+          <OptionsCard
+            image={require("../../images/engineeringBG.jpg")}
+            title="About"
+            description="Summmary, interests, skills. Continue below."
+          />
+          <OptionsCard
+            image={require("../../images/engineeringBG.jpg")}
+            title="Engineering Experience"
+            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+          />
+          <OptionsCard
+            image={require("../../images/engineeringBG.jpg")}
+            title="Engineering Experience"
+            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+          />
+          <OptionsCard
+            image={require("../../images/engineeringBG.jpg")}
+            title="Engineering Experience"
+            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+          />
+          <OptionsCard
+            image={require("../../images/engineeringBG.jpg")}
+            title="Engineering Experience"
+            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+          />
+        </Box>
       </section>
     </>
   );

@@ -36,8 +36,8 @@ function Navbar() {
           <ZJMLogo height="4rem" width="6rem" />
         </Button>
         <NavButton buttonText="Experience" to="experience" />
-        <NavButton buttonText="Projects" to="projects" />
-        <NavButton buttonText="Contact" to="contact" />
+        {/* <NavButton buttonText="Projects" to="projects" />
+        <NavButton buttonText="Contact" to="contact" /> */}
       </Toolbar>
     </AppBar>
   );
