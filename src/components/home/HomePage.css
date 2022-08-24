@@ -3,5 +3,22 @@
   border-radius: 50%;
 }
 
-.drawn-profile-pic.drawn-profile-pic-active {
+.home-page-container {
+  display: flex;
+  justify-content: center;
 }
+
+.quick-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emphasis {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* .drawn-profile-pic.drawn-profile-pic-active {
+} */

@@ -1,0 +1,44 @@
+.flavor-image {
+  width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  backdrop-filter: 3px;
+  filter: brightness(80%);
+}
+
+.option-container {
+  align-items: center;
+  background-color: #ede7fd;
+  /* height: 20rem; */
+  position: relative;
+  width: 20rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  margin: 0 1rem;
+  border-radius: 0 0 2rem 0;
+  filter: drop-shadow(1px 1px 7px #93b3d3);
+}
+
+.option-title {
+  color: white;
+  position: absolute;
+  font-size: 3rem;
+  line-height: 3rem;
+  white-space: normal;
+  font-family: Catamaran, Arial, Helvetica, sans-serif;
+  z-index: 1000;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.option-description {
+  color: rgb(132, 139, 148);
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  white-space: normal;
+  margin: 1rem 1rem;
+  font-family: Catamaran, Arial, Helvetica, sans-serif;
+  z-index: 1000;
+}

@@ -21,7 +21,7 @@ function Logo(props: logoProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       id="logo-frame"
-      style={{ height: props.height, width: props.width }}
+      style={{ height: props.height, width: props.width, maxHeight: "24rem" }}
     >
       <g id="Frame 1">
         <path

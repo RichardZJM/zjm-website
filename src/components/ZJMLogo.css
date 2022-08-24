@@ -20,13 +20,13 @@
 .zActive {
   transform: translateX(-17%) translateY(2%) rotate(-90deg);
   opacity: 100%;
-  transition: all 1s ease-in-out;
+  transition: all 1.5s ease-in-out;
 }
 
 .mSymbol.mActive {
   transform: translateX(17%) rotate(90deg);
   opacity: 100%;
-  transition: all 1s ease-in-out;
+  transition: all 1.5s ease-in-out;
 }
 
 #logo-frame:hover .zSymbol {
