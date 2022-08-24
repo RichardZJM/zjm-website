@@ -12,6 +12,7 @@ function Logo(props: logoProps) {
   const [animationPlayed, setAnimationPlayed] = useState(false);
   useEffect(() => {
     if (props.auto && !animationPlayed) setAnimationPlayed(true);
+    //eslint-disable-next-line
   }, []);
   return (
     <svg

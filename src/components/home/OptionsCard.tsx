@@ -1,4 +1,3 @@
-import { Paper, Typography } from "@mui/material";
 import React from "react";
 import "./OptionsCard.css";
 
