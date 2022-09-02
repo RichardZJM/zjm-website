@@ -8,11 +8,15 @@
   justify-content: center;
 }
 
-.quick-options {
+.section-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.quick-options {
+  background-color: white; /*linear-gradient(white, white 80%, rgba(0, 0, 0, 0));*/
+  padding: 6rem 0 6rem 0;
 }
 
 .emphasis {

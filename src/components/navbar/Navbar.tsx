@@ -18,7 +18,7 @@ function Navbar() {
     navigator("home");
   };
   return (
-    <AppBar position="sticky">
+    <AppBar position="fixed">
       <Toolbar sx={{ padding: "5px 0px" }}>
         <Button
           variant="outlined"

@@ -1,10 +1,2 @@
-const possibleWelcomeMessages: string[] = [
-  "Welcome",
-  "Bienvenue",
-  "Willkommen",
-  "пожаловать",
-  "Bienvenidos",
-  "欢迎",
-  "ようこそ",
-];
+const possibleWelcomeMessages: string[] = ["Welcome", "Bienvenue", "欢迎"];
 export default possibleWelcomeMessages;
