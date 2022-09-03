@@ -18,6 +18,11 @@
   margin: 0 1rem;
   border-radius: 0 0 2rem 0;
   filter: drop-shadow(1px 1px 7px #93b3d3);
+  transition: all 0.5s;
+}
+
+.option-container:hover {
+  filter: brightness(105%);
 }
 
 .option-title {
