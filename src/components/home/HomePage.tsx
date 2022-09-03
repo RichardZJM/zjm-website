@@ -7,14 +7,12 @@ import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
 import OptionsCard from "./OptionsCard";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import About from "./About";
 
 /**
  * Functional Component for the home page of the webside
  * @returns JSX of the Home Page
  */
 function HomePage(props: { welcomeMessage: string }) {
-  const scollCompletion = 200;
   const [scrollPosition, setScrollPosition] = React.useState(0);
   const theme = useTheme();
   console.log(scrollPosition);
