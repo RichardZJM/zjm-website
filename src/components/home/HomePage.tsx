@@ -200,9 +200,9 @@ function HomePage(props: { welcomeMessage: string }) {
                 description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
               />
               <OptionsCard
-                image={require("../../images/engineeringBG.jpg")}
-                title="Engineering Experience"
-                description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+                image={require("../../images/contactBG.jpg")}
+                title="Contact Me!"
+                description="Contact Info, Github, Resume, LinkenIn"
               />
             </Box>
           </section>

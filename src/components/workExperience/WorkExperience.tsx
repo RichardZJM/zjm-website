@@ -18,10 +18,10 @@ function WorkExperience() {
             color: theme.palette.secondary.main,
             fontStyle: "bold",
             textAlign: "center",
-            margin: "8rem 0 4rem 0",
+            margin: "3rem 0 3rem 0",
           }}
         >
-          Click to Browse Any of the Below
+          Work Experience
         </Typography>
         <WorkExperienceCard
           image={require("../../images/hanonSystemsLogo.jpg")}
@@ -30,6 +30,7 @@ function WorkExperience() {
           dates="May 2021 — June 2022"
           description="R&D Fluid Transport. Development of Ford, GM, Lucid HVAC fluid line prototypes."
           link="/work-experience/hanon-systems"
+          reference="/references/2022 Letter of Recommendation, MENG Richard.pdf"
         />
       </Container>
     </>

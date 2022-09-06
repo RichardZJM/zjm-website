@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/Theming";
 import possibleWelcomeMessages from "./components/WelcomeMessages";
 import WorkExperience from "./components/workExperience/WorkExperience";
+import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 
 /**
  * Functional Component, Layout of the website
@@ -28,6 +29,10 @@ function App() {
             element={<HomePage welcomeMessage={welcomeMessage} />}
           />
           <Route path="work-experience" element={<WorkExperience />} />
+          <Route
+            path="work-experience/hanon-systems"
+            element={<HanonSystems />}
+          />
         </Routes>
       </ThemeProvider>
     </>

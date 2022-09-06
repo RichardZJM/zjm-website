@@ -10,7 +10,7 @@ type WorkExperienceCardProps = {
   image: any;
   description: string;
   link: string;
-  reference?: string;
+  reference: string;
 };
 
 function WorkExperienceCard(props: WorkExperienceCardProps) {
@@ -22,11 +22,13 @@ function WorkExperienceCard(props: WorkExperienceCardProps) {
 
   return (
     <Paper className="work-experience-contianer">
-      <Typography variant="h3">{props.title}</Typography>
-      <Typography variant="h4" color="primary">
+      <Typography variant="h3" textAlign="center" sx={{ fontWeight: "600" }}>
+        {props.title}
+      </Typography>
+      <Typography variant="h4" color="primary" textAlign="center">
         {props.employer}
       </Typography>
-      <Typography variant="h5" color="secondary">
+      <Typography variant="h5" color="secondary" textAlign="center">
         {props.dates}
       </Typography>
 
@@ -34,10 +36,10 @@ function WorkExperienceCard(props: WorkExperienceCardProps) {
       <h2 className="option-description">{props.description}</h2>
       <div>
         <Button variant="contained" onClick={readMoreHandler}>
-          Read More;
+          Read More
         </Button>
         <Button variant="text">
-          <Link to="/files/myfile.pdf" target="_blank" download>
+          <Link to={props.reference} target="_blank" download>
             Reference &#62;
           </Link>
         </Button>
