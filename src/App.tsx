@@ -6,6 +6,7 @@ import HomePage from "./components/home/HomePage";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/Theming";
 import possibleWelcomeMessages from "./components/WelcomeMessages";
+import WorkExperience from "./components/workExperience/WorkExperience";
 
 /**
  * Functional Component, Layout of the website
@@ -26,6 +27,7 @@ function App() {
             path="home"
             element={<HomePage welcomeMessage={welcomeMessage} />}
           />
+          <Route path="work-experience" element={<WorkExperience />} />
         </Routes>
       </ThemeProvider>
     </>

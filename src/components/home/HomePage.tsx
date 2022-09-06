@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
-import OptionsCard from "./OptionsCard";
+import OptionsCard from "../OptionsCard";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 /**
@@ -42,7 +42,7 @@ function HomePage(props: { welcomeMessage: string }) {
         >
           <img
             src={require("../../images/homePageHero.jpg")}
-            alt="Stylized Profile of Zijian (Richard) Meng"
+            alt="Zijian (Richard) Meng"
             style={{
               minWidth: "110rem",
               maxWidth: "100vw",
@@ -187,6 +187,7 @@ function HomePage(props: { welcomeMessage: string }) {
                 image={require("../../images/workBG.jpg")}
                 title="Work Experience"
                 description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+                link="/work-experience"
               />
               <OptionsCard
                 image={require("../../images/engineeringBG.jpg")}
