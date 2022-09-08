@@ -1,7 +1,6 @@
-import { Box, Container, Paper, useTheme } from "@mui/material";
+import { Container, useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import OptionsCard from "../OptionsCard";
 
 import "./WorkExperience.css";
 import WorkExperienceCard from "./WorkExperienceCard";
