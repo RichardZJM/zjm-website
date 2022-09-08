@@ -23,6 +23,7 @@
 
 .option-container:hover {
   filter: brightness(105%);
+  cursor: pointer;
 }
 
 .option-title {

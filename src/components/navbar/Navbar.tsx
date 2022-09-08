@@ -18,7 +18,7 @@ function Navbar() {
     navigator("home");
   };
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Toolbar sx={{ padding: "5px 0px" }}>
         <Button
           variant="outlined"
@@ -30,12 +30,13 @@ function Navbar() {
             backgroundColor: "white",
             borderRadius: "20px",
             padding: "0",
+            marginLeft: "1rem",
           }}
           style={{ backgroundColor: "white" }}
         >
           <ZJMLogo height="4rem" width="6rem" />
         </Button>
-        <NavButton buttonText="Experience" to="experience" />
+        <NavButton buttonText="Work" to="work-experience" />
         {/* <NavButton buttonText="Projects" to="projects" />
         <NavButton buttonText="Contact" to="contact" /> */}
       </Toolbar>

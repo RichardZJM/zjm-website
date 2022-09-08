@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
-import OptionsCard from "./OptionsCard";
+import OptionsCard from "../OptionsCard";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 /**
@@ -13,20 +13,11 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
  * @returns JSX of the Home Page
  */
 function HomePage(props: { welcomeMessage: string }) {
-  const [scrollPosition, setScrollPosition] = React.useState(0);
   const theme = useTheme();
-  console.log(scrollPosition);
-  const handleScroll = () => {
-    setScrollPosition(window.scrollY);
-  };
 
   React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
     AOS.init({ duration: 600, once: true });
     AOS.refresh();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   return (
@@ -42,7 +33,7 @@ function HomePage(props: { welcomeMessage: string }) {
         >
           <img
             src={require("../../images/homePageHero.jpg")}
-            alt="Stylized Profile of Zijian (Richard) Meng"
+            alt="Zijian (Richard) Meng"
             style={{
               minWidth: "110rem",
               maxWidth: "100vw",
@@ -187,6 +178,7 @@ function HomePage(props: { welcomeMessage: string }) {
                 image={require("../../images/workBG.jpg")}
                 title="Work Experience"
                 description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+                link="/work-experience"
               />
               <OptionsCard
                 image={require("../../images/engineeringBG.jpg")}
@@ -199,9 +191,9 @@ function HomePage(props: { welcomeMessage: string }) {
                 description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
               />
               <OptionsCard
-                image={require("../../images/engineeringBG.jpg")}
-                title="Engineering Experience"
-                description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+                image={require("../../images/contactBG.jpg")}
+                title="Contact Me!"
+                description="Contact Info, Github, Resume, LinkenIn"
               />
             </Box>
           </section>
