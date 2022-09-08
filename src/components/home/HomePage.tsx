@@ -13,20 +13,11 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
  * @returns JSX of the Home Page
  */
 function HomePage(props: { welcomeMessage: string }) {
-  const [scrollPosition, setScrollPosition] = React.useState(0);
   const theme = useTheme();
-  console.log(scrollPosition);
-  const handleScroll = () => {
-    setScrollPosition(window.scrollY);
-  };
 
   React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
     AOS.init({ duration: 600, once: true });
     AOS.refresh();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   return (

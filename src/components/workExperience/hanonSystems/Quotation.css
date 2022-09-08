@@ -1,0 +1,15 @@
+.quotation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quotation-flair {
+  width: 20rem;
+  color: aqua;
+}
+
+.upside-down {
+  transform: scaleY(-1);
+}
