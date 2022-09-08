@@ -239,9 +239,12 @@ duties efficiently with detailed technical understanding of the components/final
               <Chip label="Machine Design" color="info" />
               <Chip label="Manfacturing: Brazing" color="info" />
               <Chip label="Excel & VBA" color="info" />
+              <Chip label="Root Cause Analysis" color="info" />
             </div>
             <div className="chip-skills-container">
               <Chip label="Project Management" color="success" />
+              <Chip label="Organization and Planning" color="success" />
+              <Chip label="Multidisciplinary Communication" color="success" />
               <Chip label="Report Writing" color="success" />
               <Chip label="Technical Presentation" color="success" />
               <Chip label="Task Delegation" color="success" />
