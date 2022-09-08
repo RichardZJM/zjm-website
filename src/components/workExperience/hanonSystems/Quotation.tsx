@@ -1,5 +1,7 @@
 import { Typography, useTheme } from "@mui/material";
 import React from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Quotation.css";
 
 type QuotationProps = {
@@ -8,8 +10,14 @@ type QuotationProps = {
 
 function Quotation(props: QuotationProps) {
   const theme = useTheme();
+
+  React.useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+    AOS.refresh();
+  }, []);
+
   return (
-    <div className="quotation-container">
+    <div className="quotation-container" data-aos="zoom-out">
       <svg
         className="quotation-flair"
         viewBox="0 0 167 43"

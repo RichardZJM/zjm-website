@@ -1,0 +1,13 @@
+.footer-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  height: auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-image {
+  height: 2rem;
+}

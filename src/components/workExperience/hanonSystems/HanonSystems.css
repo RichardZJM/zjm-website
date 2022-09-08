@@ -111,7 +111,7 @@
 .collaboration-image-container {
   position: relative;
   width: 100%;
-  max-width: 40rem;
+  max-width: 35rem;
   height: 20rem;
   object-position: center;
   overflow: hidden;
@@ -119,6 +119,7 @@
 @media screen and (max-width: 1100px) {
   .collaboration-image-container {
     max-width: none;
+    height: 13rem;
   }
 }
 
@@ -126,4 +127,50 @@
   width: 100%;
   object-fit: contain;
   filter: brightness(60%);
+}
+
+.collaboration-list {
+  width: 90%;
+}
+
+.spacer {
+  background-color: rgb(17, 49, 49);
+  height: 1rem;
+  width: 100%;
+}
+
+.applied-skills-container {
+  box-sizing: border-box;
+  width: 100%;
+  background-position: center;
+  background-image: url("../../../images/hanonSystems/skills.jpg");
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+}
+
+.chip-container-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chip-skills-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: center;
+  max-width: 40rem;
+}
+
+.reference-prompt-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
 }

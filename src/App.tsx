@@ -8,6 +8,7 @@ import { theme } from "./components/Theming";
 import possibleWelcomeMessages from "./components/WelcomeMessages";
 import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
+import Footer from "./components/footer/Footer";
 
 /**
  * Functional Component, Layout of the website
@@ -34,6 +35,7 @@ function App() {
             element={<HanonSystems />}
           />
         </Routes>
+        <Footer />
       </ThemeProvider>
     </>
   );
