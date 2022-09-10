@@ -1,0 +1,95 @@
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-container {
+  padding: 10vh 2rem;
+  min-height: 15rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem 10rem;
+  background-image: url("../../images/about/ottawa.jpg");
+  width: 100%;
+  box-sizing: border-box;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.interests-container {
+  display: grid;
+  grid-template-columns: 550px 1fr;
+  background-color: rgb(26, 26, 28);
+  width: 100%;
+}
+@media only screen and (max-width: 1100px) {
+  .interests-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.interests-image-container {
+  background-image: url("../../images/about/forge.jpg");
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  width: 100%;
+  min-height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 1100px) {
+  .interests-image-container {
+    min-height: 15rem;
+  }
+}
+
+.body-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  padding: 1rem;
+}
+.hobby-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+}
+.programming-container {
+  display: flex;
+  gap: 3rem 5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  background-image: url("../../images/about/code.jpg");
+}
+.programming-text-container {
+  padding: 1rem 2rem;
+  max-width: 30rem;
+}
+.gameP-image {
+  border-radius: 3rem;
+  min-width: 17rem;
+  width: 60vw;
+  max-width: 30rem;
+}
+
+.strengths-weaknesses-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
