@@ -20,7 +20,7 @@ function HanonSystems() {
           sx={{ padding: "1rem", width: "95%", maxWidth: "2500px" }}
           className="title-container"
         >
-          <Typography variant="h2" maxWidth="20rem">
+          <Typography variant="h2" maxWidth="20rem" sx={{ fontSize: "3.5rem" }}>
             Mechanical Engineering Intern
           </Typography>
           <img
@@ -196,7 +196,11 @@ duties efficiently with detailed technical understanding of the components/final
             </Typography>
           </div>
           <ul className="collaboration-list">
-            <Typography variant="h5" marginBottom="1rem">
+            <Typography
+              variant="h6"
+              marginBottom="1rem"
+              sx={{ lineHeight: "1.5rem" }}
+            >
               A role emphasising <em> multidisiplinary communication</em>
             </Typography>
 
