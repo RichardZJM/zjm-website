@@ -9,6 +9,7 @@ import possibleWelcomeMessages from "./components/WelcomeMessages";
 import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 import Footer from "./components/footer/Footer";
+import About from "./components/About/About";
 
 /**
  * Functional Component, Layout of the website
@@ -29,6 +30,7 @@ function App() {
             path="home"
             element={<HomePage welcomeMessage={welcomeMessage} />}
           />
+          <Route path="about" element={<About />} />
           <Route path="work-experience" element={<WorkExperience />} />
           <Route
             path="work-experience/hanon-systems"

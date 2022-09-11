@@ -6,6 +6,9 @@
 .home-page-container {
   display: flex;
   justify-content: center;
+  background-image: url("../../images/homePageHero.jpg");
+  background-position: center top;
+  background-size: cover;
 }
 
 .section-container {
@@ -16,7 +19,8 @@
 }
 .quick-options {
   background-color: white; /*linear-gradient(white, white 80%, rgba(0, 0, 0, 0));*/
-  padding: 6rem 0 6rem 0;
+  padding: 3rem 0 6rem 0;
+  width: 100%;
 }
 
 .emphasis {
