@@ -6,7 +6,6 @@ import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
 import OptionsCard from "../OptionsCard";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import About from "../About/About";
 
 /**
@@ -23,18 +22,6 @@ function HomePage(props: { welcomeMessage: string }) {
 
   return (
     <>
-      {/* <img
-        src={require("../../images/homePageHero.jpg")}
-        alt="Zijian (Richard) Meng"
-        style={{
-          minWidth: "110rem",
-          maxWidth: "100vw",
-          display: "block",
-          objectFit: "cover",
-          filter: "brightness(70%)",
-        }}
-      /> */}
-
       <section className="home-page-container">
         <Container
           disableGutters
@@ -115,7 +102,8 @@ function HomePage(props: { welcomeMessage: string }) {
             color: theme.palette.secondary.main,
             fontStyle: "bold",
             textAlign: "center",
-            maxWidth: "40rem",
+            width: "40rem",
+            maxWidth: "90%",
           }}
         >
           Short on time? Maybe looking for something specific?
@@ -145,12 +133,13 @@ function HomePage(props: { welcomeMessage: string }) {
           <OptionsCard
             image={require("../../images/aboutBG.png")}
             title="About"
-            description=" Introduction, strengths, career goals, potential contributions, personal interests."
+            description=" Introduction, personal interests,career goals, strengths and weaknesses."
+            link="/about"
           />
           <OptionsCard
             image={require("../../images/workBG.jpg")}
             title="Work Experience"
-            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+            description="Mechanical engineering work experince. Tasks, skills, projects, overview, and testimonials."
             link="/work-experience"
           />
           <OptionsCard

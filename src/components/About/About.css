@@ -56,6 +56,7 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
+  box-sizing: border-box;
   justify-content: center;
   padding: 1rem;
 }
@@ -76,6 +77,7 @@
   align-items: center;
   padding: 3rem 1rem;
   box-sizing: border-box;
+  overflow: hidden;
   background-image: url("../../images/about/code.jpg");
 }
 .programming-text-container {
@@ -89,7 +91,77 @@
   max-width: 30rem;
 }
 
+.future-goals-container {
+  display: flex;
+  gap: 3rem 6rem;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-position: center top;
+  background-size: cover;
+  background-image: url("../../images/about/career.jpg");
+}
+.career-goals {
+  width: 40rem;
+  max-width: 85%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.goals-chips-container {
+  width: 90%;
+  display: flex;
+  gap: 2rem 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .strengths-weaknesses-container {
   display: grid;
+  padding-top: 2rem;
+
+  padding-bottom: 2rem;
+  gap: 2rem 0rem;
   grid-template-columns: 1fr 1fr;
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../images/about/whiteboard.jpg");
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 800px) {
+  .strengths-weaknesses-container {
+    grid-template-columns: 1fr;
+
+    padding-bottom: 0rem;
+  }
+}
+
+.s-w-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  gap: 2rem;
+}
+
+.s-w-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+@media only screen and (max-width: 800px) {
+  .s-w-container {
+    border-bottom: solid 3px rgb(114, 157, 237);
+    overflow: hidden;
+  }
 }

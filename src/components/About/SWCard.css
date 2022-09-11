@@ -1,0 +1,36 @@
+.sw-card {
+  box-sizing: border-box;
+  width: 90%;
+  width: 20rem;
+  height: 15rem;
+  padding: 1rem;
+  background-color: green;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  transition: all 0.2s;
+  transform: translateX(0rem);
+  border-radius: 1rem;
+}
+
+.sw-card:hover {
+  transform: translateX(1rem);
+}
+.sw-card:hover ~ .sw-card {
+  transform: translateY(10rem);
+}
+.sw-card:not(:first-child) {
+  margin-top: -10rem;
+  box-shadow: 0rem -0.5rem 1rem rgb(85, 85, 85);
+}
+
+.sw-icon-holder {
+  padding: 0.5rem;
+  width: 95%;
+  gap: 2rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
