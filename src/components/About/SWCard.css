@@ -15,7 +15,7 @@
   border-radius: 1rem;
 }
 
-.sw-card:hover {
+.sw-card:hover:not(:last-child) {
   transform: translateX(1rem);
 }
 .sw-card:hover ~ .sw-card {
@@ -23,7 +23,7 @@
 }
 .sw-card:not(:first-child) {
   margin-top: -10rem;
-  box-shadow: 0rem -0.5rem 1rem rgb(85, 85, 85);
+  box-shadow: 0rem -0.5rem 1rem rgba(85, 85, 85, 0.374);
 }
 
 .sw-icon-holder {

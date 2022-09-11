@@ -19,18 +19,6 @@ function About() {
   return (
     <Container maxWidth="xl">
       <section className="about-container">
-        <Typography
-          variant="h1"
-          color="secondary"
-          sx={{
-            fontWeight: "600",
-            fontStyle: "bold",
-            textAlign: "center",
-            maxWidth: "40rem",
-          }}
-        >
-          About
-        </Typography>
         <div className="location-container">
           <Typography variant="h3" color="white" sx={{ fontWeight: "700" }}>
             Origins
@@ -130,9 +118,9 @@ function About() {
         </div>
         <div className="strengths-weaknesses-container">
           <div className="s-w-wrapper">
-            <Paper sx={{ padding: "1rem" }}>
-              <Typography variant="h3">Strengths</Typography>
-            </Paper>
+            <Typography variant="h2" color="white" sx={{ fontWeight: "600" }}>
+              Strengths
+            </Typography>
             <div className="s-w-container">
               <SWCard
                 title="Organization & Multitasking"
@@ -162,9 +150,9 @@ function About() {
           </div>
 
           <div className="s-w-wrapper">
-            <Paper sx={{ padding: "1rem" }}>
-              <Typography variant="h3"> Weaknesses</Typography>
-            </Paper>
+            <Typography variant="h2" color="white" sx={{ fontWeight: "600" }}>
+              Weaknesses
+            </Typography>
 
             <div className="s-w-container">
               <SWCard

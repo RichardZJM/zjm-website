@@ -12,9 +12,24 @@ function Footer() {
       <Button
         variant="outlined"
         size="small"
+        onClick={() => navigate("/about")}
+      >
+        About
+      </Button>
+
+      <Button
+        variant="outlined"
+        size="small"
         onClick={() => navigate("/work-experience")}
       >
         Work Experience
+      </Button>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={() => navigate("/skills")}
+      >
+        Skills
       </Button>
 
       <img

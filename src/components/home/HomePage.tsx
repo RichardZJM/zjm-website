@@ -152,6 +152,7 @@ function HomePage(props: { welcomeMessage: string }) {
             image={require("../../images/skillsBG.jpg")}
             title="Skills"
             description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+            link="/skills"
           />
           <OptionsCard
             image={require("../../images/contactBG.jpg")}

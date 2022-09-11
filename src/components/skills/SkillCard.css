@@ -1,0 +1,89 @@
+.skill-card {
+  height: 15rem;
+  width: 90%;
+  max-width: 40rem;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  border-radius: 0 2rem 0 0;
+  overflow: hidden;
+  border: 2px solid rgb(255, 255, 255);
+  transition: all 0.2s;
+}
+
+.skill-image-container {
+  background-size: cover;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.skill-title-container {
+  width: fit-content;
+  padding: 0.5rem;
+}
+
+.title-text {
+  padding: 0;
+  margin: 0;
+  font-family: Catamaran;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.9rem;
+  text-align: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .title-text {
+    font-size: 1.2rem;
+  }
+}
+
+.skill-description-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.skill-card:hover:not(:last-child) {
+  transform: translateX(1rem);
+}
+
+.skill-card:hover ~ .skill-card {
+  transform: translateY(8rem);
+}
+
+.skill-card:not(:first-child) {
+  margin-top: -8rem;
+  box-shadow: 0.25rem -0.5rem 0.5rem rgba(0, 0, 0, 0.14);
+}
+
+.description-text {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 1100px) {
+  .description-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .description-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .description-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .description-text {
+    font-size: 1.1rem;
+  }
+}
