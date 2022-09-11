@@ -10,6 +10,7 @@ import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 import Footer from "./components/footer/Footer";
 import About from "./components/About/About";
+import Skills from "./components/skills/Skills";
 
 /**
  * Functional Component, Layout of the website
@@ -36,6 +37,7 @@ function App() {
             path="work-experience/hanon-systems"
             element={<HanonSystems />}
           />
+          <Route path="skills" element={<Skills />} />
         </Routes>
         <Footer />
       </ThemeProvider>
