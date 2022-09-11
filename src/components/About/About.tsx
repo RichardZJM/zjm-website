@@ -1,5 +1,4 @@
 import { Typography, Paper, Container, Chip, useTheme } from "@mui/material";
-import { height } from "@mui/system";
 import React from "react";
 import "./About.css";
 import SWCard from "./SWCard";
@@ -102,6 +101,7 @@ function About() {
           </div>
           <img
             className="gameP-image"
+            alt="Animated gif of my game."
             src={require("../../images/about/GameP.gif")}
           />
         </div>

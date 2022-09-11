@@ -1,4 +1,4 @@
-import { Card, Typography, useTheme, Paper } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import React from "react";
 import "./SWCard.css";
 
@@ -10,7 +10,6 @@ type SWCardProps = {
 };
 
 function SWCard(props: SWCardProps) {
-  const theme = useTheme();
   return (
     <div className="sw-card" style={{ backgroundColor: props.color }}>
       <Card className="sw-icon-holder">
