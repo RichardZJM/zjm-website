@@ -24,7 +24,7 @@
 
 .auto-image {
   width: 20rem;
-  max-width: 90vw;
+  max-width: 85vw;
   border-radius: 10%;
 }
 
@@ -130,7 +130,7 @@
 }
 
 .collaboration-list {
-  width: 90%;
+  width: 85%;
 }
 
 .spacer {
@@ -173,4 +173,5 @@
   justify-items: center;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 2rem;
 }

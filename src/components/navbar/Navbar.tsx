@@ -28,6 +28,7 @@ function Navbar() {
       <NavButton buttonText="About" to="about" />
       <NavButton buttonText="Work" to="work-experience" />
       <NavButton buttonText="Skills" to="skills" />
+      <NavButton buttonText="Projects" to="projects" />
     </>
   );
 
@@ -82,6 +83,24 @@ function Navbar() {
               }}
             >
               Work Experience
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            <Button
+              onClick={() => {
+                navigator("skills");
+              }}
+            >
+              Skills
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            <Button
+              onClick={() => {
+                navigator("projects");
+              }}
+            >
+              Projects
             </Button>
           </MenuItem>
         </div>

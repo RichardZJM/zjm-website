@@ -17,7 +17,7 @@ function HanonSystems() {
     <Container disableGutters maxWidth={false}>
       <Container className="flex-coloumn-container">
         <Paper
-          sx={{ padding: "1rem", width: "95%", maxWidth: "2500px" }}
+          sx={{ padding: "1rem", width: "90%", maxWidth: "2500px" }}
           className="title-container"
         >
           <Typography variant="h2" maxWidth="20rem" sx={{ fontSize: "3.5rem" }}>
@@ -264,14 +264,12 @@ the title of the best engineering intern in the history of Hanon Belleville"`}
             Quotes from Jason Ki-Sun Ryu, Manager Product Development
             Engineering. Read the full reference letter below.
           </Typography>
-          <Button variant="contained" size="small">
-            <Link
-              to="/references/2022 Letter of Recommendation, MENG Richard.pdf"
-              target="_blank"
-              download
-            >
-              Reference Letter &#62;
-            </Link>
+          <Button
+            variant="contained"
+            size="small"
+            href="/references/2022 Letter of Recommendation, MENG Richard.pdf"
+          >
+            Reference Letter &#62;
           </Button>
         </div>
       </Container>

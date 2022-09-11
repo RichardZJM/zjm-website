@@ -33,7 +33,7 @@ function Skills() {
           <div className="skill-type-wrapper">
             <Paper sx={{ padding: "1rem", marginBottom: "1rem" }}>
               <Typography
-                variant="h2"
+                variant="h3"
                 color="primary"
                 sx={{
                   fontWeight: "300",
@@ -74,7 +74,7 @@ function Skills() {
           <div className="skill-type-wrapper">
             <Paper sx={{ padding: "1rem", marginBottom: "1rem" }}>
               <Typography
-                variant="h2"
+                variant="h3"
                 color="secondary"
                 sx={{
                   fontWeight: "300",

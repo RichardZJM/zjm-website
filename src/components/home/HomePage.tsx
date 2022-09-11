@@ -64,14 +64,14 @@ function HomePage(props: { welcomeMessage: string }) {
               display: "flex",
               justifyContent: "center",
               flexFlow: "wrap",
+              gap: "2rem 4rem",
             }}
           >
             <img
               data-aos="flip-right"
               className="drawn-profile-pic"
               src={require("../../images/PFP.png")}
-              alt="Stylized Profile of Zijian (Richard) Meng"
-              style={{ marginLeft: "4rem", marginRight: "4rem" }}
+              alt=" Profile of Zijian (Richard) Meng"
             />
             <Paper
               data-aos="flip-left"
@@ -140,24 +140,24 @@ function HomePage(props: { welcomeMessage: string }) {
           <OptionsCard
             image={require("../../images/workBG.jpg")}
             title="Work Experience"
-            description="Mechanical engineering work experince. Tasks, skills, projects, overview, and testimonials."
+            description="Mechanical engineering work experience. Applied skills, projects, overview, and testimonials."
             link="/work-experience"
           />
           <OptionsCard
             image={require("../../images/engineeringBG.jpg")}
             title="Design Experience & Projects"
-            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+            description="Coursework, design team, and personal projects. Examples and code."
           />
           <OptionsCard
             image={require("../../images/skillsBG.jpg")}
             title="Skills"
-            description="Mechanical engineering work experince. Tasks, skills, project, overview, and testimonials."
+            description="Technical skills and professional skill summary."
             link="/skills"
           />
           <OptionsCard
             image={require("../../images/contactBG.jpg")}
             title="Contact Me!"
-            description="Contact Info, Github, Resume, LinkenIn"
+            description="Contact Info, Github, Resume, LinkedIn"
           />
         </Box>
       </section>
