@@ -124,7 +124,8 @@ function HomePage(props: { welcomeMessage: string }) {
           sx={{
             marginTop: "3rem",
             display: "flex",
-            maxWidth: "85vw",
+            width: "85vw",
+            maxWidth: "1200px",
             flexWrap: "wrap",
             gap: "2rem 3rem",
             justifyContent: "center",
