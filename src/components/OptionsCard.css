@@ -3,7 +3,7 @@
   max-height: 100%;
   object-fit: contain;
   backdrop-filter: 3px;
-  filter: brightness(80%);
+  filter: brightness(70%);
 }
 
 .option-container {
