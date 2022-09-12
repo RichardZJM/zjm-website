@@ -10,18 +10,6 @@ function WorkExperience() {
   return (
     <>
       <Container maxWidth="xl">
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: "600",
-            color: theme.palette.secondary.main,
-            fontStyle: "bold",
-            textAlign: "center",
-            margin: "3rem 0 3rem 0",
-          }}
-        >
-          Work Experience
-        </Typography>
         <WorkExperienceCard
           image={require("../../images/hanonSystemsLogo.jpg")}
           title="Mechanical Engineering Intern"

@@ -31,6 +31,13 @@ function Footer() {
       >
         Skills
       </Button>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={() => navigate("/projects")}
+      >
+        Projects
+      </Button>
 
       <img
         className="logo-image"

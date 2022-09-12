@@ -12,12 +12,12 @@ function Quotation(props: QuotationProps) {
   const theme = useTheme();
 
   React.useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 1300, once: true });
     AOS.refresh();
   }, []);
 
   return (
-    <div className="quotation-container" data-aos="zoom-out">
+    <div className="quotation-container" data-aos="zoom-in">
       <svg
         className="quotation-flair"
         viewBox="0 0 167 43"

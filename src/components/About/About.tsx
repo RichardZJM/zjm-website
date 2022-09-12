@@ -118,7 +118,7 @@ function About() {
         </div>
         <div className="strengths-weaknesses-container">
           <div className="s-w-wrapper">
-            <Typography variant="h2" color="white" sx={{ fontWeight: "600" }}>
+            <Typography variant="h3" color="white" sx={{ fontWeight: "600" }}>
               Strengths
             </Typography>
             <div className="s-w-container">
@@ -150,7 +150,7 @@ function About() {
           </div>
 
           <div className="s-w-wrapper">
-            <Typography variant="h2" color="white" sx={{ fontWeight: "600" }}>
+            <Typography variant="h3" color="white" sx={{ fontWeight: "600" }}>
               Weaknesses
             </Typography>
 

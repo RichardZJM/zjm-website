@@ -21,7 +21,7 @@ function WorkExperienceCard(props: WorkExperienceCardProps) {
   };
 
   return (
-    <Paper className="work-experience-contianer">
+    <Paper className="work-experience-container">
       <Typography variant="h3" textAlign="center" sx={{ fontWeight: "600" }}>
         {props.title}
       </Typography>
@@ -38,10 +38,8 @@ function WorkExperienceCard(props: WorkExperienceCardProps) {
         <Button variant="contained" onClick={readMoreHandler}>
           Read More
         </Button>
-        <Button variant="text">
-          <Link to={props.reference} target="_blank" download>
-            Reference &#62;
-          </Link>
+        <Button variant="text" href={props.reference}>
+          Reference &#62;
         </Button>
       </div>
     </Paper>

@@ -1,8 +1,9 @@
-.work-experience-contianer {
+.work-experience-container {
   padding: 3rem 0;
   flex-direction: column;
   align-items: center;
   display: flex;
+  margin: 2rem 0;
 }
 
 .work-options-image {

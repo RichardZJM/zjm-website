@@ -11,6 +11,7 @@ import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems"
 import Footer from "./components/footer/Footer";
 import About from "./components/About/About";
 import Skills from "./components/skills/Skills";
+import Projects from "./components/projects/Projects";
 
 /**
  * Functional Component, Layout of the website
@@ -38,6 +39,7 @@ function App() {
             element={<HanonSystems />}
           />
           <Route path="skills" element={<Skills />} />
+          <Route path="projects" element={<Projects />} />
         </Routes>
         <Footer />
       </ThemeProvider>
