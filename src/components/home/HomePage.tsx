@@ -147,6 +147,7 @@ function HomePage(props: { welcomeMessage: string }) {
             image={require("../../images/engineeringBG.jpg")}
             title="Design Experience & Projects"
             description="Coursework, design team, and personal projects. Examples and code."
+            link="/projects"
           />
           <OptionsCard
             image={require("../../images/skillsBG.jpg")}
@@ -158,6 +159,7 @@ function HomePage(props: { welcomeMessage: string }) {
             image={require("../../images/contactBG.jpg")}
             title="Contact Me!"
             description="Contact Info, Github, Resume, LinkedIn"
+            link="/contact"
           />
         </Box>
       </section>

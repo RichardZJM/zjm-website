@@ -1,12 +1,10 @@
-import { Container, useTheme } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Container } from "@mui/material";
 import React from "react";
 
 import "./WorkExperience.css";
 import WorkExperienceCard from "./WorkExperienceCard";
 
 function WorkExperience() {
-  const theme = useTheme();
   return (
     <>
       <Container maxWidth="xl">

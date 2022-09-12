@@ -1,6 +1,5 @@
 import { Chip, Paper, Typography, Button } from "@mui/material";
 import { Container } from "@mui/system";
-import { Link } from "react-router-dom";
 import React from "react";
 import "./HanonSystems.css";
 import AOS from "aos";
