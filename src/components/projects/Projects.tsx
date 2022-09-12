@@ -6,11 +6,40 @@ import "./Projects.css";
 import mech323 from "../../images/projects/mech323.jpg";
 import apsc200 from "../../images/projects/apsc200.jpg";
 import car from "../../images/projects/car.jpg";
+import lttp from "../../images/projects/lttp.jpg";
 
 function Projects() {
   return (
     <Container maxWidth="xl">
       <section className="projects-container">
+        <ProjectsCard
+          title="Listen To the Path"
+          subtitle="Hackathon Winner: Game Playable by Audio Only"
+          image={lttp}
+          chips={[
+            "C#",
+            "Unity",
+            "Hackathon",
+            "Procedural Maze",
+            "Audio Design",
+          ]}
+          description={`A game designed with accessible features, particularly with the visually impaired in mind. Developed during a Hackathon, it required rapid learning of new technologies, determination, and teamwork. Winner of "Best Overall Hack" and "Best Game", CuHacking 2021`}
+          githubLink="https://github.com/Rajykins/ListenToThePath"
+          explore="https://youtu.be/riZb6pExfhQ"
+        />
+        <ProjectsCard
+          title="Gear Ratio Optimizer"
+          subtitle="Simulation and Optimization of a RC vehicle gear ratio "
+          image={car}
+          chips={[
+            "SciPy",
+            "Python",
+            "Numerial Maximization",
+            "Numerial Methods for ODEs",
+          ]}
+          description="Numeric solutions from first principles force balance on an RC vehicle driven with a DC motor. Optimizaiton of solutions to estimate the optimal gear ratio for speed under specific competition criteria. "
+          githubLink="https://github.com/RichardZJM/gear-ratio-optimizer"
+        />
         <ProjectsCard
           title="Mech 323"
           subtitle="RC Car Gearbox and Housing"
@@ -35,19 +64,6 @@ function Projects() {
           ]}
           description="Design of a launch recovery system for a capsule launch out of an air cannon. In a group, research various potential solutions and iteratively impove a parachute-based design. Additionally, the design had to be built with strict price consideration. "
           explore="/reports/P2FinalReport.Section203.Team16.pdf"
-        />
-        <ProjectsCard
-          title="Gear Ratio Optimizer"
-          subtitle="Simulation and optimization of a RC vehicle for MECH323"
-          image={car}
-          chips={[
-            "SciPy",
-            "Python",
-            "Numerial Maximization",
-            "Numerial Methods for ODEs",
-          ]}
-          description="Numeric solutions from first principles force balance on an RC vehicle driven with a DC motor. Optimizaiton of solutions to estimate the optimal gear ratio for speed under specific competition criteria. "
-          githubLink="https://github.com/RichardZJM/gear-ratio-optimizer"
         />
       </section>
     </Container>
