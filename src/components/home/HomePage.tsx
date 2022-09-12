@@ -151,8 +151,8 @@ function HomePage(props: { welcomeMessage: string }) {
           />
           <OptionsCard
             image={require("../../images/skillsBG.jpg")}
-            title="Skills"
-            description="Technical skills and professional skill summary."
+            title="Skills & Potential Contributions"
+            description="Technical and professional skill summary. Potential contributions to groups."
             link="/skills"
           />
           <OptionsCard

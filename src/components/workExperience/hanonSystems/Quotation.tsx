@@ -17,7 +17,7 @@ function Quotation(props: QuotationProps) {
   }, []);
 
   return (
-    <div className="quotation-container" data-aos="zoom-in">
+    <div className="quotation-container" data-aos="fade-down">
       <svg
         className="quotation-flair"
         viewBox="0 0 167 43"
