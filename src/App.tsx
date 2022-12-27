@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import About from "./components/About/About";
 import Skills from "./components/skills/Skills";
 import Projects from "./components/projects/Projects";
+import StructuralSolverApp from "./components/projects/structuralSolver/StructuralSolverApp";
 
 /**
  * Functional Component, Layout of the website
@@ -40,6 +41,10 @@ function App() {
           />
           <Route path="skills" element={<Skills />} />
           <Route path="projects" element={<Projects />} />
+          <Route
+            path="projects/structural-solver"
+            element={<StructuralSolverApp />}
+          />
         </Routes>
         <Footer />
       </ThemeProvider>
