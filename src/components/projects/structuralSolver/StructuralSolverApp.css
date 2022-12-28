@@ -1,3 +1,11 @@
 canvas {
   border: red solid 3px;
+  cursor: pointer;
+}
+
+.solver-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
