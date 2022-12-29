@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   ToggleButton,
   ToggleButtonGroup,
@@ -7,13 +8,18 @@ import {
 import React, { useEffect, useRef, MouseEvent, useState } from "react";
 
 import "./StructuralSolverApp.css";
-import { closestNode } from "./StructuralSolverCalculations";
+import {
+  closestNode,
+  evaluateSystemEnergy,
+  powellOptimization,
+} from "./StructuralSolverCalculations";
 
 type Node = {
   x: number;
   y: number;
   isFixed: boolean;
   id: number;
+  mass: number;
 };
 
 export type { Node };
@@ -172,7 +178,7 @@ function StructuralSolverApp() {
         //Prevent new nodes from being made if a node is selected
         if (selectedNode) return;
 
-        const newNode: Node = { x, y, isFixed: false, id: nextID };
+        const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 10 };
         setNodeDict(
           (currNodeDict) => new Map(currNodeDict.set(nextID, newNode))
         );
@@ -223,6 +229,15 @@ function StructuralSolverApp() {
     }
   };
 
+  const handleSolve = () => {
+    // const test = (arr: number[]) => 5 * arr[0] ** 2 + 2 + 3 * arr[0] ** 2;
+    // const temp = powellOptimization(test, [[3, 3]], 1000);
+
+    const nrg = evaluateSystemEnergy(nodeDict, adjacencyDict, adjacencyDict, {
+      groundReference: (canvasRef.current?.height || 0) / 4,
+    });
+    console.log(nrg);
+  };
   return (
     <Container maxWidth="xl">
       <section className="solver-app">
@@ -237,6 +252,9 @@ function StructuralSolverApp() {
           <ToggleButton value="delete"> Delete Mode</ToggleButton>
         </ToggleButtonGroup>
         <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
+        <Button variant="contained" onClick={handleSolve}>
+          Solve It
+        </Button>
       </section>
     </Container>
   );
