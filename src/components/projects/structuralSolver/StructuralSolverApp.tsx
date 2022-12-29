@@ -8,11 +8,7 @@ import {
 import React, { useEffect, useRef, MouseEvent, useState } from "react";
 
 import "./StructuralSolverApp.css";
-import {
-  closestNode,
-  evaluateSystemEnergy,
-  powellOptimization,
-} from "./StructuralSolverCalculations";
+import { closestNode, solveStructure } from "./StructuralSolverCalculations";
 
 type Node = {
   x: number;
@@ -31,7 +27,7 @@ function StructuralSolverApp() {
   const [selectionMode, setSelectionMode] = useState<string | null>("build");
   const [selectedNode, setSelectedNode] = useState<Node | null>();
   const [nextID, setNextID] = useState(0);
-  const [nodeDict, setNodeDict] = useState<Map<number, Node>>(new Map());
+  const [nodeDict, setNodeDict] = useState<Map<number, Node>>(new Map()); //Should ideally be using a height balanaced BST for better performance although redraw operation is O(N)
   const [adjacencyDict, setAdjacencyDict] = useState<Map<number, Set<number>>>(
     new Map()
   );
@@ -232,11 +228,11 @@ function StructuralSolverApp() {
   const handleSolve = () => {
     // const test = (arr: number[]) => 5 * arr[0] ** 2 + 2 + 3 * arr[0] ** 2;
     // const temp = powellOptimization(test, [[3, 3]], 1000);
-
-    const nrg = evaluateSystemEnergy(nodeDict, adjacencyDict, adjacencyDict, {
-      groundReference: (canvasRef.current?.height || 0) / 4,
-    });
-    console.log(nrg);
+    // const nrg = evaluateSystemEnergy(nodeDict, adjacencyDict, adjacencyDict, {
+    // //   groundReference: (canvasRef.current?.height || 0) / 4,
+    // // });
+    // console.log(nrg);
+    solveStructure(nodeDict, adjacencyDict);
   };
   return (
     <Container maxWidth="xl">
