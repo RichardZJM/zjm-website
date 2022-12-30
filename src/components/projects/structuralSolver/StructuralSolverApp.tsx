@@ -93,26 +93,27 @@ function StructuralSolverApp() {
           setNodeDict((currNodeDict) => {
             const nodeMep = new Map(currNodeDict);
             nodeMep.delete(closeNode.id);
+            setAdjacencyDict((currAdjacencyDict) => {
+              const linkMep = new Map(currAdjacencyDict);
+
+              if (!currAdjacencyDict.has(closeNode.id)) {
+                return linkMep;
+              }
+              //Prune all the inbound edges to the target deleted node
+              const originNodes = currAdjacencyDict.get(closeNode.id);
+              if (!originNodes) return linkMep;
+
+              for (const originNode of Array.from(originNodes.keys())) {
+                linkMep.get(originNode)?.delete(closeNode.id);
+              }
+              console.log(linkMep);
+              linkMep.delete(closeNode.id);
+
+              redrawStructure(nodeMep, linkMep);
+              return linkMep;
+            });
 
             return nodeMep;
-          });
-
-          setAdjacencyDict((currAdjacencyDict) => {
-            const linkMep = new Map(currAdjacencyDict);
-            if (!currAdjacencyDict.has(closeNode.id)) {
-              redrawStructure(nodeDict, linkMep);
-              return linkMep;
-            }
-            //Prune all the inbound edges to the target deleted node
-            const originNodes = currAdjacencyDict.get(closeNode.id);
-            if (!originNodes) return linkMep;
-            for (const originNode of Array.from(originNodes.keys())) {
-              linkMep.get(originNode)?.delete(closeNode.id);
-            }
-            linkMep.delete(closeNode.id);
-
-            redrawStructure(nodeDict, linkMep);
-            return linkMep;
           });
         }
 
@@ -205,7 +206,6 @@ function StructuralSolverApp() {
     }
     contextRef.current.fillRect(node.x - 10, node.y - 10, 20, 20);
   };
-
   //Redraws the current links
   const redrawStructure = (
     nodes: Map<number, Node>,
@@ -219,12 +219,17 @@ function StructuralSolverApp() {
       canvasRef.current?.height,
       canvasRef.current?.width
     );
+
+    //Draw each empty node
+    for (const node of Array.from(nodes.values())) redrawNode(node);
+
     // For each link in the graph
     for (const nodeLinks of Array.from(adjacency.entries())) {
       const node1ID = nodeLinks[0];
       //We must check whether the node has been deleted
       const node1 = nodes.get(node1ID);
       if (!node1) continue;
+
       for (const node2ID of Array.from(nodeLinks[1].keys())) {
         const node2 = nodes.get(node2ID);
         if (!node2) continue;
@@ -268,7 +273,7 @@ function StructuralSolverApp() {
               Build Tools
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
-              Tools for Constructing Structures
+              Tools for constructing structures
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: "flex", gap: "3rem" }}>
@@ -291,6 +296,34 @@ function StructuralSolverApp() {
               <ToggleButton value="fixed"> Fixed Node</ToggleButton>
             </ToggleButtonGroup>
           </AccordionDetails>
+        </Accordion>
+
+        <Accordion sx={{ width: "100%", padding: "0" }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              Material and Linkage Properties
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Define the building blocks of the structure
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails
+            sx={{ display: "flex", gap: "3rem" }}
+          ></AccordionDetails>
+        </Accordion>
+
+        <Accordion sx={{ width: "100%", padding: "0" }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              Node Specifications
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Data values for setting specific node masses and positions
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails
+            sx={{ display: "flex", gap: "3rem" }}
+          ></AccordionDetails>
         </Accordion>
 
         <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
