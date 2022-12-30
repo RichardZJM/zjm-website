@@ -20,11 +20,14 @@ const solveStructure = (
   nodeDict: Map<number, Node>,
   adjacencyDict: Map<number, Set<number>>,
   systemProperties = {
-    stiffness: 5000, //Example Stiffness of Links  (N/m)
+    youngsModulus: 69e9, //Example Stiffness of Links (Aluminum) (N/m)
+    linkCrossSectionalArea: 0.0001, //Example crossectional area
     gravitationAcceleration: 9.81, //Acceleration due to gravity (m/s^2)
     linearDensity: 10, //Linear Density of Links   (kg/m)
-    groundReference: 500, //Hieght of ground reference
+    groundReference: 500, //Height of ground reference
     pixelToMeterRatio: 100,
+    groundStiffnessFactor: 500,
+    groundFrictionalFactor: 1,
   }
 ) => {
   //Convert Dictionary Representation to Matrix-based representations
@@ -32,18 +35,22 @@ const solveStructure = (
   const nodeComboList = Array.from(nodeDict.entries());
   nodeComboList.sort((a, b) => a[0] - b[0]);
   const nodeList = nodeComboList.map((ele) => [ele[1].x, ele[1].y]); //Store the info in array of [xpos,ypos]
-  //Mass matrix accounts for the mass of each node
-  const massMatrix = nodeComboList.map((ele) => ele[1].mass);
-  const variableNodesIndicies: number[] = []; //Used to determine which nodes are to be used in the optimization.
+
+  const massList = nodeComboList.map((ele) => ele[1].mass); //Mass matrix accounts for the mass of each node
+  const fixedNodesIndicies: Set<number> = new Set([]); //Used to determine which nodes are to be used in the optimization.
   for (let i = 0; i < nodeComboList.length; i++)
-    if (nodeComboList![i][1].isFixed) variableNodesIndicies.push(i);
+    if (nodeComboList![i][1].isFixed) fixedNodesIndicies.add(i);
 
   const idToIndex = new Map(nodeComboList.map((ele, i) => [ele[0], i]));
   const indexToId = new Map(nodeComboList.map((ele, i) => [i, ele[0]]));
 
   //We will need to get the unstressed length of each link. This can double as the adjacency matrix
   // We can also ge the mass matrix which accounts for the weight of the links by distributing thier mass to the two connected nodes evenly
+  // We can also cache the stiffness of each member based on the inital length
   const adjacencyMatrix: number[][] = [...Array(nodeList.length)].map(
+    (ele) => Array(nodeList.length).fill(0) //Create an placeholder array of 0 (representing no edge)
+  );
+  const stiffnessMatrix: number[][] = [...Array(nodeList.length)].map(
     (ele) => Array(nodeList.length).fill(0) //Create an placeholder array of 0 (representing no edge)
   );
   for (const [i, nodeInfo] of Array.from(nodeList.entries())) {
@@ -52,58 +59,110 @@ const solveStructure = (
     for (const targetNodeID of Array.from(connectedNodes)) {
       const targetNode = nodeList[idToIndex.get(targetNodeID) || 0];
       const targetNodeIndex = idToIndex.get(targetNodeID) || 0;
-      const length = Math.sqrt(
-        (nodeInfo[0] - targetNode[0]) ** 2 + (nodeInfo[1] - targetNode[1]) ** 2
-      );
+      const length =
+        Math.sqrt(
+          (nodeInfo[0] - targetNode[0]) ** 2 +
+            (nodeInfo[1] - targetNode[1]) ** 2
+        ) / systemProperties.pixelToMeterRatio;
       adjacencyMatrix[i][targetNodeIndex] = length;
-      massMatrix[i] +=
+      stiffnessMatrix[i][targetNodeIndex] =
+        ((1 / 4) *
+          systemProperties.linkCrossSectionalArea *
+          systemProperties.youngsModulus) /
+        length; //The usual formula does not have 1/4. This is a  factor for the undirected graph and the 1/2 term in the elastic potential energy term to reduce division during optimization
+      massList[i] +=
         ((length / 2) * systemProperties.linearDensity) /
         systemProperties.pixelToMeterRatio; // We only need to add to the origin nodes as the undirected graph will account for the other direction.
     }
   }
 
-  console.log(nodeList);
-  console.log(adjacencyMatrix);
-  console.log(massMatrix);
-  //We need to calculate the mass attributed to each link and distribute it to the two connected nodes
+  // console.log(nodeList);
+  // console.log(adjacencyMatrix);
+  // console.log(massList);
+  // console.log(stiffnessMatrix);
+  // console.log(fixedNodesIndicies);
 
-  // const evaluateSystemEnergy = () => {
-  //   let systemEnergy = 0;
+  //Objective function is the total system energy. Minimizing this will lead to the deformed shape of the structure
+  const evaluateSystemEnergy = (x: number[]) => {
+    let systemEnergy = 0;
+    const yOffset = x.length / 2;
 
-  //   //Gravitational Potential Energy
-  //   for (const nodeID of Array.from(nodeDict.keys())) {
-  //     const node = nodeDict.get(nodeID);
-  //     if (node)
-  //       systemEnergy +=
-  //         ((nodeDict.get(nodeID)?.mass || 0) *
-  //           gravitationAcceleration *
-  //           (groundReference - (nodeDict.get(nodeID)?.y || 0))) /
-  //         pixelToMeterRatio;
-  //   }
+    //Gravitational Potential Energy Summation for each node. DE = mg(h-href)
+    for (let i = 0; i < nodeList.length; i++) {
+      systemEnergy +=
+        (massList[i] *
+          systemProperties.gravitationAcceleration *
+          (systemProperties.groundReference - x[i + yOffset])) /
+        systemProperties.pixelToMeterRatio;
+    }
 
-  //   //!!!!!!!!!!!!TODO!!!!!!!!!!! MAKE THE DISTANCE RELATIVE TO THE DEFAULT LENGTH
-  //   //Elastic Energy
-  //   for (const nodeLinks of Array.from(adjacencyDict.entries())) {
-  //     const node1 = nodeDict.get(nodeLinks[0]);
-  //     if (!node1 || !nodeLinks[1]) continue;
-  //     for (const node2ID of Array.from(nodeLinks[1].keys())) {
-  //       const node2 = nodeDict.get(node2ID);
-  //       if (!node2) continue;
-  //       systemEnergy +=
-  //         ((1 / 4) *
-  //           stiffness *
-  //           Math.sqrt((node1.x - node2.x) ** 2 + (node1.y - node2.y) ** 2)) /
-  //         pixelToMeterRatio;
-  //     }
-  //   }
+    //Elastic Energy Summation for each edge. DE = 1/2 * 1/2 k (l-lref)^2 = 1/4 kE/lref(l-lref)^2. 1/4 factor is baked into the k term in this implementation.
+    for (let i = 0; i < nodeList.length; i++) {
+      for (let j = 0; j < nodeList.length; j++) {
+        const length =
+          Math.sqrt(
+            (x[i] - x[j]) ** 2 + (x[i + yOffset] - x[j + yOffset]) ** 2
+          ) / systemProperties.pixelToMeterRatio;
+        systemEnergy +=
+          stiffnessMatrix[i][j] * (length - adjacencyMatrix[i][j]) ** 2;
+      }
+    }
 
-  //   return systemEnergy;
-  // };
+    //A differentiable bound for the vertical position is need to create a ground plane. We can use a one-side quadratic term which creates this ground plane. The absolute value of a linear term relative to the original x location is used to represent a friction term and prevent the system for sliding realtive to the ground plane as the system is horizontally translationally invariant
+    for (let i = 0; i < nodeList.length; i++) {
+      if (x[i + yOffset] > systemProperties.groundReference) {
+        systemEnergy +=
+          systemProperties.groundStiffnessFactor *
+          ((systemProperties.groundReference - x[i + yOffset]) /
+            systemProperties.pixelToMeterRatio) **
+            2;
+        systemEnergy +=
+          (systemProperties.groundFrictionalFactor *
+            Math.abs(nodeList[i][0] - x[i])) /
+          systemProperties.pixelToMeterRatio;
+      }
+    }
+    // console.log(systemEnergy);
+    return systemEnergy;
+  };
+
+  // const x: number[] = [];
+  // for (const ele of nodeList) x.push(ele[0]);
+  // for (const ele of nodeList) x.push(ele[1]);
+  // console.log(evaluateSystemEnergy(x));
+
+  const { solution, fx, iter, isConverged } = powellOptimization(
+    evaluateSystemEnergy,
+    nodeList,
+    fixedNodesIndicies,
+    1000
+  );
+  // console.log(systemProperties.groundReference);
+  // console.log(nodeList);
+  // console.log(solution);
+  // console.log(fx);
+  // console.log(iter);
+  // console.log(isConverged);
+
+  for (let i = 0; i < solution.length; ++i) {
+    const nodeID = indexToId.get(i) || 0;
+    const node = nodeDict.get(nodeID);
+    if (!node) continue;
+    node.x = solution[i][0];
+    node.y = solution[i][1];
+  }
+
+  return nodeDict;
 };
 
 //Zeroth Order Powell Optimization. For the number of nodes expected, it would be far more efficient to use something like BFGS although the implementation is more difficult and excessive for a simple project like this.
-const powellOptimization = (func: Function, x0: number[][], maxIter = 1e2) => {
-  const eps = 1e-2; //Convergence Threshold (Joules)
+const powellOptimization = (
+  func: Function,
+  x0: number[][],
+  exclusion = new Set<Number>([]),
+  maxIter = 1000
+) => {
+  const eps = 1e-4; //Convergence Threshold
   let alpha = 0.001; //Scaling Rate (Dynamic)
   let isConverged = false; //Convergence Flag
 
@@ -113,21 +172,21 @@ const powellOptimization = (func: Function, x0: number[][], maxIter = 1e2) => {
 
   let pfx = Math.exp(10);
   let fx = func(x);
-  let pidx = 1;
 
   let iter = 0; //Number of iterative steps
   //Iterative Optimizaiton Loop
   while (!isConverged && iter < maxIter) {
     const indicies = randomIndicies(x); //Obtain random indicies to update the variables in random order
-
+    isConverged = true;
     for (let i = 0; i < indicies.length; i++) {
-      isConverged = true;
+      if (exclusion.has(indicies[i])) continue; //Skip the iteration of constant  (fixed nodes)
+      if (exclusion.has(indicies[i] - indicies.length / 2)) continue; //Skip the iteration of constant  (fixed nodes)
+
       //Numerical Forwards Partial Gradient
       x[indicies[i]] += 1e-6;
       let fxi = func(x);
       x[indicies[i]] -= 1e-6;
       let dx = (fxi - fx) / 1e-6;
-
       if (Math.abs(dx) > eps) isConverged = false; //Convergence Check
 
       x[indicies[i]] += -alpha * dx; //Update Step

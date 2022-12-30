@@ -1,10 +1,14 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   Container,
   ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useEffect, useRef, MouseEvent, useState } from "react";
 
 import "./StructuralSolverApp.css";
@@ -24,6 +28,7 @@ function StructuralSolverApp() {
   const canvasRef = useRef<HTMLCanvasElement>(null); //Reference to Canvas
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
 
+  const [nodeMode, setNodeMode] = useState<string | null>("free");
   const [selectionMode, setSelectionMode] = useState<string | null>("build");
   const [selectedNode, setSelectedNode] = useState<Node | null>();
   const [nextID, setNextID] = useState(0);
@@ -37,13 +42,13 @@ function StructuralSolverApp() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.width = window.innerWidth * 2;
-    canvas.height = window.innerHeight * 2;
-    canvas.style.width = `${window.innerWidth / 2}px`;
-    canvas.style.height = `${window.innerHeight / 2}px`;
+    canvas.height = 1200;
+    canvas.style.width = `${canvas.width / 2.1}px`;
+    canvas.style.height = `${canvas.height / 2.1}px`;
 
     const context = canvas.getContext("2d");
     if (!context) return;
-    context.scale(4, 4);
+    context.scale(2.1, 2.1);
     contextRef.current = context;
   }, []);
 
@@ -51,12 +56,22 @@ function StructuralSolverApp() {
     event: React.MouseEvent<HTMLElement>,
     newMode: string | null
   ) => {
-    setSelectionMode(newMode);
+    setSelectionMode((currentMode) => newMode || currentMode);
+    redrawNode(selectedNode);
+    setSelectedNode(null);
+  };
+
+  const handleNodeModeSelection = (
+    event: React.MouseEvent<HTMLElement>,
+    newMode: string | null
+  ) => {
+    setNodeMode((currentMode) => newMode || currentMode);
+    redrawNode(selectedNode);
+    setSelectedNode(null);
   };
 
   //Handles interactions to the canvas based on the user mode
   const nodeInteract = ({ nativeEvent }: MouseEvent<HTMLCanvasElement>) => {
-    // console.log(nodeDict);
     const { clientX, clientY } = nativeEvent;
     if (!contextRef.current || !canvasRef.current) return;
 
@@ -74,25 +89,30 @@ function StructuralSolverApp() {
 
         if (minDistance < 15 && closeNode) {
           //Delete the from the dict and the adjacency dict
-          setNodeDict((currNodeDict) => {
-            const mep = new Map(currNodeDict);
-            mep.delete(closeNode.id);
-            redrawNodes(mep);
-            return mep;
-          });
-          setAdjacencyDict((currAdjacencyDict) => {
-            const mep = new Map(currAdjacencyDict);
-            if (!currAdjacencyDict.has(closeNode.id)) return mep;
 
+          setNodeDict((currNodeDict) => {
+            const nodeMep = new Map(currNodeDict);
+            nodeMep.delete(closeNode.id);
+
+            return nodeMep;
+          });
+
+          setAdjacencyDict((currAdjacencyDict) => {
+            const linkMep = new Map(currAdjacencyDict);
+            if (!currAdjacencyDict.has(closeNode.id)) {
+              redrawStructure(nodeDict, linkMep);
+              return linkMep;
+            }
             //Prune all the inbound edges to the target deleted node
             const originNodes = currAdjacencyDict.get(closeNode.id);
-            if (!originNodes) return mep;
+            if (!originNodes) return linkMep;
             for (const originNode of Array.from(originNodes.keys())) {
-              mep.get(originNode)?.delete(closeNode.id);
+              linkMep.get(originNode)?.delete(closeNode.id);
             }
-            mep.delete(closeNode.id);
-            redrawLinks(nodeDict, mep);
-            return mep;
+            linkMep.delete(closeNode.id);
+
+            redrawStructure(nodeDict, linkMep);
+            return linkMep;
           });
         }
 
@@ -126,14 +146,8 @@ function StructuralSolverApp() {
           }
           //If the closest node to click is the selected node, deselect the node and end
           if (selectedNode.id == closeNode.id) {
+            redrawNode(selectedNode);
             setSelectedNode(null);
-            contextRef.current.strokeStyle = "Black";
-            contextRef.current.strokeRect(
-              selectedNode.x - 8,
-              selectedNode.y - 8,
-              16,
-              16
-            );
             return;
           }
 
@@ -144,12 +158,9 @@ function StructuralSolverApp() {
           contextRef.current.moveTo(selectedNode.x, selectedNode.y);
           contextRef.current.lineTo(closeNode.x, closeNode.y);
           contextRef.current.stroke();
-          contextRef.current.strokeRect(
-            selectedNode.x - 8,
-            selectedNode.y - 8,
-            16,
-            16
-          );
+          redrawNode(selectedNode);
+          redrawNode(closeNode);
+          setSelectedNode(null);
           //Add the nodes to the adjacency dict
           setAdjacencyDict((currAdjacencyDict) => {
             const mep = new Map(currAdjacencyDict);
@@ -163,49 +174,51 @@ function StructuralSolverApp() {
             if (currSet2) mep.set(closeNode.id, currSet2.add(selectedNode.id));
             else mep.set(closeNode.id, new Set([selectedNode.id]));
 
-            // console.log(mep);
             return mep;
           });
-
-          setSelectedNode(null);
           return;
         }
 
         //Prevent new nodes from being made if a node is selected
         if (selectedNode) return;
 
+        //Make a new Node otherwise
         const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 10 };
+        if (nodeMode == "fixed") newNode.isFixed = true;
         setNodeDict(
           (currNodeDict) => new Map(currNodeDict.set(nextID, newNode))
         );
         setNextID((id) => id + 1);
-        contextRef.current.fillStyle = "black";
+
+        contextRef.current.fillStyle = "grey";
+        if (newNode.isFixed) contextRef.current.fillStyle = "black";
         contextRef.current.fillRect(x - 10, y - 10, 20, 20);
       }
     }
   };
 
-  //Redraws the current nodes
-  const redrawNodes = (nodes: Map<number, Node>) => {
-    if (!contextRef.current || !canvasRef.current) return;
-    contextRef.current.clearRect(
-      0,
-      0,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-    for (const node of Array.from(nodes.values())) {
+  const redrawNode = (node: Node | undefined | null) => {
+    if (!contextRef.current || !node) return;
+    contextRef.current.fillStyle = "grey";
+    if (node.isFixed == true) {
       contextRef.current.fillStyle = "black";
-      contextRef.current.fillRect(node.x - 10, node.y - 10, 20, 20);
     }
+    contextRef.current.fillRect(node.x - 10, node.y - 10, 20, 20);
   };
+
   //Redraws the current links
-  const redrawLinks = (
+  const redrawStructure = (
     nodes: Map<number, Node>,
     adjacency: Map<number, Set<number>>
   ) => {
     if (!contextRef.current || !canvasRef.current) return;
 
+    contextRef.current.clearRect(
+      0,
+      0,
+      canvasRef.current?.height,
+      canvasRef.current?.width
+    );
     // For each link in the graph
     for (const nodeLinks of Array.from(adjacency.entries())) {
       const node1ID = nodeLinks[0];
@@ -215,38 +228,71 @@ function StructuralSolverApp() {
       for (const node2ID of Array.from(nodeLinks[1].keys())) {
         const node2 = nodes.get(node2ID);
         if (!node2) continue;
-        contextRef.current.strokeStyle = "Black";
+        contextRef.current.strokeStyle = "black";
         contextRef.current.lineWidth = 4;
         contextRef.current.beginPath();
         contextRef.current.moveTo(node1.x, node1.y);
         contextRef.current.lineTo(node2.x, node2.y);
         contextRef.current.stroke();
+        redrawNode(node1);
+        redrawNode(node2);
       }
     }
   };
 
   const handleSolve = () => {
-    // const test = (arr: number[]) => 5 * arr[0] ** 2 + 2 + 3 * arr[0] ** 2;
-    // const temp = powellOptimization(test, [[3, 3]], 1000);
-    // const nrg = evaluateSystemEnergy(nodeDict, adjacencyDict, adjacencyDict, {
-    // //   groundReference: (canvasRef.current?.height || 0) / 4,
-    // // });
-    // console.log(nrg);
-    solveStructure(nodeDict, adjacencyDict);
+    console.log(nodeDict);
+    const newDict = solveStructure(nodeDict, adjacencyDict, {
+      youngsModulus: 69e9, //Example Stiffness of Links (Aluminum) (N/m)
+      linkCrossSectionalArea: 0.00000005, //Example crossectional area
+      gravitationAcceleration: 9.81, //Acceleration due to gravity (m/s^2)
+      linearDensity: 10, //Linear Density of Links   (kg/m)
+      groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
+      pixelToMeterRatio: 100,
+      groundStiffnessFactor: 10000,
+      groundFrictionalFactor: 1,
+    });
+    console.log(newDict);
+    setNodeDict((currNodeDict) => {
+      redrawStructure(newDict, adjacencyDict);
+      return newDict;
+    });
   };
   return (
     <Container maxWidth="xl">
       <section className="solver-app">
         <Typography>WHAT</Typography>
-        <ToggleButtonGroup
-          exclusive
-          color="primary"
-          value={selectionMode}
-          onChange={handleModeSelection}
-        >
-          <ToggleButton value="build"> Build Mode </ToggleButton>
-          <ToggleButton value="delete"> Delete Mode</ToggleButton>
-        </ToggleButtonGroup>
+        <Accordion sx={{ width: "100%", padding: "0" }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              Build Tools
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Tools for Constructing Structures
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ display: "flex", gap: "3rem" }}>
+            <ToggleButtonGroup
+              exclusive
+              color="primary"
+              value={selectionMode}
+              onChange={handleModeSelection}
+            >
+              <ToggleButton value="build"> Build Mode </ToggleButton>
+              <ToggleButton value="delete"> Delete Mode</ToggleButton>
+            </ToggleButtonGroup>
+            <ToggleButtonGroup
+              exclusive
+              color="primary"
+              value={nodeMode}
+              onChange={handleNodeModeSelection}
+            >
+              <ToggleButton value="free"> Free Node </ToggleButton>
+              <ToggleButton value="fixed"> Fixed Node</ToggleButton>
+            </ToggleButtonGroup>
+          </AccordionDetails>
+        </Accordion>
+
         <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
         <Button variant="contained" onClick={handleSolve}>
           Solve It
