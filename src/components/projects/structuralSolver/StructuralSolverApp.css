@@ -9,3 +9,23 @@ canvas {
   justify-content: center;
   align-items: center;
 }
+
+.material-property-box {
+  min-width: 15rem;
+  width: 45%;
+  border: #79a1f2 solid 2px;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.node-card-grid {
+  display: grid;
+  gap: 1rem 2rem;
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}

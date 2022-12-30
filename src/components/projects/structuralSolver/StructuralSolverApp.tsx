@@ -9,10 +9,15 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import TripOriginIcon from "@mui/icons-material/TripOrigin";
+import CropSquareIcon from "@mui/icons-material/CropSquare";
 import React, { useEffect, useRef, MouseEvent, useState } from "react";
 
 import "./StructuralSolverApp.css";
 import { closestNode, solveStructure } from "./StructuralSolverCalculations";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import NodeCard from "./NodeCard";
 
 type Node = {
   x: number;
@@ -31,7 +36,7 @@ function StructuralSolverApp() {
   const [nodeMode, setNodeMode] = useState<string | null>("free");
   const [selectionMode, setSelectionMode] = useState<string | null>("build");
   const [selectedNode, setSelectedNode] = useState<Node | null>();
-  const [nextID, setNextID] = useState(0);
+  const [nextID, setNextID] = useState(1);
   const [nodeDict, setNodeDict] = useState<Map<number, Node>>(new Map()); //Should ideally be using a height balanaced BST for better performance although redraw operation is O(N)
   const [adjacencyDict, setAdjacencyDict] = useState<Map<number, Set<number>>>(
     new Map()
@@ -97,6 +102,7 @@ function StructuralSolverApp() {
               const linkMep = new Map(currAdjacencyDict);
 
               if (!currAdjacencyDict.has(closeNode.id)) {
+                redrawStructure(nodeMep, linkMep);
                 return linkMep;
               }
               //Prune all the inbound edges to the target deleted node
@@ -194,6 +200,12 @@ function StructuralSolverApp() {
         contextRef.current.fillStyle = "grey";
         if (newNode.isFixed) contextRef.current.fillStyle = "black";
         contextRef.current.fillRect(x - 10, y - 10, 20, 20);
+        contextRef.current.font = "20px Arial";
+        contextRef.current.fillText(
+          newNode.id.toString(),
+          newNode.x + 10,
+          newNode.y - 5
+        );
       }
     }
   };
@@ -205,6 +217,8 @@ function StructuralSolverApp() {
       contextRef.current.fillStyle = "black";
     }
     contextRef.current.fillRect(node.x - 10, node.y - 10, 20, 20);
+    contextRef.current.font = "20px Arial";
+    contextRef.current.fillText(node.id.toString(), node.x + 10, node.y - 5);
   };
   //Redraws the current links
   const redrawStructure = (
@@ -216,8 +230,8 @@ function StructuralSolverApp() {
     contextRef.current.clearRect(
       0,
       0,
-      canvasRef.current?.height,
-      canvasRef.current?.width
+      canvasRef.current?.height * 4,
+      canvasRef.current?.width * 4
     );
 
     //Draw each empty node
@@ -246,7 +260,6 @@ function StructuralSolverApp() {
   };
 
   const handleSolve = () => {
-    console.log(nodeDict);
     const newDict = solveStructure(nodeDict, adjacencyDict, {
       youngsModulus: 69e9, //Example Stiffness of Links (Aluminum) (N/m)
       linkCrossSectionalArea: 0.00000005, //Example crossectional area
@@ -255,28 +268,37 @@ function StructuralSolverApp() {
       groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
       pixelToMeterRatio: 100,
       groundStiffnessFactor: 10000,
-      groundFrictionalFactor: 1,
+      groundFrictionalFactor: 10,
     });
-    console.log(newDict);
-    setNodeDict((currNodeDict) => {
-      redrawStructure(newDict, adjacencyDict);
-      return newDict;
-    });
+
+    redrawStructure(newDict, adjacencyDict);
+    setNodeDict(newDict);
   };
+
+  const testNode: Node = { x: 1, y: 1, isFixed: false, id: nextID, mass: 10 };
+
   return (
     <Container maxWidth="xl">
       <section className="solver-app">
         <Typography>WHAT</Typography>
+
         <Accordion sx={{ width: "100%", padding: "0" }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+            <Typography sx={{ width: "40%", flexShrink: 0 }}>
               Build Tools
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
               Tools for constructing structures
             </Typography>
           </AccordionSummary>
-          <AccordionDetails sx={{ display: "flex", gap: "3rem" }}>
+          <AccordionDetails
+            sx={{
+              display: "flex",
+              gap: "1rem 3rem",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
             <ToggleButtonGroup
               exclusive
               color="primary"
@@ -300,32 +322,118 @@ function StructuralSolverApp() {
 
         <Accordion sx={{ width: "100%", padding: "0" }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-              Material and Linkage Properties
+            <Typography sx={{ width: "40%", flexShrink: 0 }}>
+              System Properties
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
               Define the building blocks of the structure
             </Typography>
           </AccordionSummary>
           <AccordionDetails
-            sx={{ display: "flex", gap: "3rem" }}
-          ></AccordionDetails>
+            sx={{
+              display: "flex",
+              gap: "3rem",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <div className="material-property-box">
+              <Typography variant="body1">Material Properties</Typography>
+              <TextField
+                variant="outlined"
+                label="Young's Modulus"
+                defaultValue="69"
+                size="small"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">GPa</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                variant="outlined"
+                label="Density"
+                defaultValue="2710"
+                size="small"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      kg/m<sup>3</sup>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <div className="material-property-box">
+              <Typography variant="body1">Linkage Cross-Section</Typography>
+              <ToggleButtonGroup
+                exclusive
+                color="primary"
+                value={nodeMode}
+                onChange={handleNodeModeSelection}
+              >
+                <ToggleButton size="small" value="free">
+                  <TripOriginIcon />
+                </ToggleButton>
+                <ToggleButton size="small" value="fixed">
+                  <CropSquareIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
+              <TextField
+                size="small"
+                variant="outlined"
+                label="Distance From Center to Inner Wall"
+                defaultValue="5"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">mm</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                size="small"
+                variant="outlined"
+                label="Distance From Center to Outer Wall"
+                defaultValue="8"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">mm</InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+          </AccordionDetails>
         </Accordion>
 
         <Accordion sx={{ width: "100%", padding: "0" }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+            <Typography sx={{ width: "40%", flexShrink: 0 }}>
               Node Specifications
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
               Data values for setting specific node masses and positions
             </Typography>
           </AccordionSummary>
-          <AccordionDetails
-            sx={{ display: "flex", gap: "3rem" }}
-          ></AccordionDetails>
+          <AccordionDetails>
+            <div className="node-card-grid">
+              {Array.from(nodeDict.entries())
+                .sort((a, b) => a[0] - b[0])
+                .map((ele) => (
+                  <NodeCard
+                    node={ele[1]}
+                    isSelected={false}
+                    key={
+                      ele[0] + ":" + ele[1].x.toString() + ele[1].y.toString()
+                    }
+                    systemProperties={{
+                      pixelToMeterRatio: 100,
+                      groundReference: (canvasRef.current?.height || 0) / 2.1,
+                    }}
+                  />
+                ))}
+            </div>
+          </AccordionDetails>
         </Accordion>
-
         <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
         <Button variant="contained" onClick={handleSolve}>
           Solve It
