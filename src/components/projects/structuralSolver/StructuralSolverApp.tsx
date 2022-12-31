@@ -75,6 +75,16 @@ function StructuralSolverApp() {
     setSelectedNode(null);
   };
 
+  //Function to update a node in the node dict in the node card (Passes as Props)
+  const updateNode = (newNode: Node) => {
+    console.log(newNode);
+    setNodeDict((currNodeDict) => {
+      const newDict = currNodeDict.set(newNode.id, newNode);
+      redrawStructure(newDict, adjacencyDict);
+      return newDict;
+    });
+  };
+
   //Handles interactions to the canvas based on the user mode
   const nodeInteract = ({ nativeEvent }: MouseEvent<HTMLCanvasElement>) => {
     const { clientX, clientY } = nativeEvent;
@@ -210,6 +220,7 @@ function StructuralSolverApp() {
     }
   };
 
+  //Redraws a particular node
   const redrawNode = (node: Node | undefined | null) => {
     if (!contextRef.current || !node) return;
     contextRef.current.fillStyle = "grey";
@@ -280,8 +291,10 @@ function StructuralSolverApp() {
   return (
     <Container maxWidth="xl">
       <section className="solver-app">
-        <Typography>WHAT</Typography>
-
+        {/* <Typography sx={{ margin: "1rem" }} variant="h3">
+          Pin-Jointed Structure Simulator
+        </Typography> */}
+        <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
         <Accordion sx={{ width: "100%", padding: "0" }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography sx={{ width: "40%", flexShrink: 0 }}>
@@ -422,6 +435,7 @@ function StructuralSolverApp() {
                   <NodeCard
                     node={ele[1]}
                     isSelected={false}
+                    updateNode={updateNode}
                     key={
                       ele[0] + ":" + ele[1].x.toString() + ele[1].y.toString()
                     }
@@ -434,10 +448,22 @@ function StructuralSolverApp() {
             </div>
           </AccordionDetails>
         </Accordion>
-        <canvas onMouseDown={nodeInteract} ref={canvasRef}></canvas>
-        <Button variant="contained" onClick={handleSolve}>
-          Solve It
-        </Button>
+
+        <Accordion sx={{ width: "100%", padding: "0" }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ width: "40%", flexShrink: 0 }}>
+              Simulate
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Equlibriated structure simulation; Vibration Analysis
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ display: "flex", justifyContent: "center" }}>
+            <Button variant="contained" onClick={handleSolve}>
+              Simulate the System Under Gravity
+            </Button>
+          </AccordionDetails>
+        </Accordion>
       </section>
     </Container>
   );

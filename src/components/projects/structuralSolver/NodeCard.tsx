@@ -5,11 +5,13 @@ import { Node } from "./StructuralSolverApp";
 type nodeCardProps = {
   node: Node | null | undefined;
   isSelected: boolean;
+  updateNode: Function;
   systemProperties: { pixelToMeterRatio: number; groundReference: number };
 };
 
 function NodeCard(props: nodeCardProps) {
   if (!props.node) return <></>;
+
   return (
     <Paper
       elevation={2}
@@ -36,6 +38,13 @@ function NodeCard(props: nodeCardProps) {
         InputProps={{
           endAdornment: <InputAdornment position="end">m</InputAdornment>,
         }}
+        onChange={(event) => {
+          console.log(+event.target.value);
+          if (!props.node) return;
+          props.node.x =
+            +event.target.value * props.systemProperties.pixelToMeterRatio;
+          props.updateNode(props.node);
+        }}
       />
       <TextField
         size="small"
@@ -50,6 +59,14 @@ function NodeCard(props: nodeCardProps) {
         InputProps={{
           endAdornment: <InputAdornment position="end">m</InputAdornment>,
         }}
+        onChange={(event) => {
+          console.log(+event.target.value);
+          if (!props.node) return;
+          props.node.y =
+            -event.target.value * props.systemProperties.pixelToMeterRatio +
+            props.systemProperties.groundReference;
+          props.updateNode(props.node);
+        }}
       />
       <TextField
         size="small"
@@ -60,6 +77,12 @@ function NodeCard(props: nodeCardProps) {
         defaultValue={props.node.mass.toFixed(3)}
         InputProps={{
           endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+        }}
+        onChange={(event) => {
+          console.log(+event.target.value);
+          if (!props.node) return;
+          props.node.mass = +event.target.value;
+          props.updateNode(props.node);
         }}
       />
     </Paper>
