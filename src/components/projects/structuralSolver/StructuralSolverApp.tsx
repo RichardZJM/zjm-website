@@ -34,6 +34,7 @@ function StructuralSolverApp() {
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
 
   const [nodeMode, setNodeMode] = useState<string | null>("free");
+  const [linkageMode, setLinkageMode] = useState<string | null>("round");
   const [selectionMode, setSelectionMode] = useState<string | null>("build");
   const [selectedNode, setSelectedNode] = useState<Node | null>();
   const [nextID, setNextID] = useState(1);
@@ -41,6 +42,12 @@ function StructuralSolverApp() {
   const [adjacencyDict, setAdjacencyDict] = useState<Map<number, Set<number>>>(
     new Map()
   );
+
+  const youngsModulusRef = useRef<HTMLTextAreaElement>();
+  const densityRef = useRef<HTMLTextAreaElement>();
+  const gravitationAccelerationRef = useRef<HTMLTextAreaElement>();
+  const innerWallDistanceRef = useRef<HTMLTextAreaElement>();
+  const outerWallDistanceRef = useRef<HTMLTextAreaElement>();
 
   //Use Effect intializes the canvas to the correct DPI
   useEffect(() => {
@@ -75,9 +82,16 @@ function StructuralSolverApp() {
     setSelectedNode(null);
   };
 
+  const handleLinkageModeSelection = (
+    event: React.MouseEvent<HTMLElement>,
+    newMode: string | null
+  ) => {
+    setLinkageMode((currentMode) => newMode || currentMode);
+  };
+
   //Function to update a node in the node dict in the node card (Passes as Props)
   const updateNode = (newNode: Node) => {
-    console.log(newNode);
+    // console.log(newNode);
     setNodeDict((currNodeDict) => {
       const newDict = currNodeDict.set(newNode.id, newNode);
       redrawStructure(newDict, adjacencyDict);
@@ -271,22 +285,35 @@ function StructuralSolverApp() {
   };
 
   const handleSolve = () => {
+    //Default linkage surface is a circle. A = pi * (Ro**2 - Ri**2)
+    let linkCrossSectionalArea =
+      (Math.PI *
+        ((+(outerWallDistanceRef.current?.value || "0")) ** 2 -
+          (+(innerWallDistanceRef.current?.value || "0")) ** 2)) /
+      1000000; //Convert to m^2;
+    if (linkCrossSectionalArea < 0)
+      alert("Error: Outer wall of link cannot be smaller that the inner wall!");
+    //If the square mode is active, convert to square. A = ((2Ro)**2 - (2Ri)**2) Conversion factor used instead of direct formula.
+    if (linkageMode == "square") linkCrossSectionalArea *= 4 / Math.PI;
+
     const newDict = solveStructure(nodeDict, adjacencyDict, {
-      youngsModulus: 69e9, //Example Stiffness of Links (Aluminum) (N/m)
-      linkCrossSectionalArea: 0.00000005, //Example crossectional area
-      gravitationAcceleration: 9.81, //Acceleration due to gravity (m/s^2)
-      linearDensity: 10, //Linear Density of Links   (kg/m)
+      youngsModulus: +(youngsModulusRef.current?.value || "0") * 1000000000, //Convert to Pa
+      linkCrossSectionalArea: linkCrossSectionalArea,
+      gravitationAcceleration: +(
+        gravitationAccelerationRef.current?.value || "0"
+      ), //Acceleration due to gravity (m/s^2)
+      linearDensity:
+        +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
       groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
       pixelToMeterRatio: 100,
-      groundStiffnessFactor: 10000,
+      groundStiffnessFactor: 500000,
       groundFrictionalFactor: 10,
     });
 
     redrawStructure(newDict, adjacencyDict);
+    // console.log(newDict);
     setNodeDict(newDict);
   };
-
-  const testNode: Node = { x: 1, y: 1, isFixed: false, id: nextID, mass: 10 };
 
   return (
     <Container maxWidth="xl">
@@ -351,12 +378,14 @@ function StructuralSolverApp() {
             }}
           >
             <div className="material-property-box">
-              <Typography variant="body1">Material Properties</Typography>
+              <Typography variant="body1">Physical Properties</Typography>
               <TextField
+                type="number"
                 variant="outlined"
                 label="Young's Modulus"
                 defaultValue="69"
                 size="small"
+                inputRef={youngsModulusRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">GPa</InputAdornment>
@@ -364,14 +393,31 @@ function StructuralSolverApp() {
                 }}
               />
               <TextField
+                type="number"
                 variant="outlined"
                 label="Density"
                 defaultValue="2710"
                 size="small"
+                inputRef={densityRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       kg/m<sup>3</sup>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                type="number"
+                variant="outlined"
+                label="Gravitational Acceleration"
+                defaultValue="9.81"
+                size="small"
+                inputRef={gravitationAccelerationRef}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      m/s<sup>2</sup>
                     </InputAdornment>
                   ),
                 }}
@@ -382,21 +428,23 @@ function StructuralSolverApp() {
               <ToggleButtonGroup
                 exclusive
                 color="primary"
-                value={nodeMode}
-                onChange={handleNodeModeSelection}
+                value={linkageMode}
+                onChange={handleLinkageModeSelection}
               >
-                <ToggleButton size="small" value="free">
+                <ToggleButton size="small" value="round">
                   <TripOriginIcon />
                 </ToggleButton>
-                <ToggleButton size="small" value="fixed">
+                <ToggleButton size="small" value="square">
                   <CropSquareIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
               <TextField
+                type="number"
                 size="small"
                 variant="outlined"
                 label="Distance From Center to Inner Wall"
                 defaultValue="5"
+                inputRef={innerWallDistanceRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">mm</InputAdornment>
@@ -404,10 +452,12 @@ function StructuralSolverApp() {
                 }}
               />
               <TextField
+                type="number"
                 size="small"
                 variant="outlined"
                 label="Distance From Center to Outer Wall"
                 defaultValue="8"
+                inputRef={outerWallDistanceRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">mm</InputAdornment>

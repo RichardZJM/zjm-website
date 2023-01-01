@@ -30,6 +30,7 @@ const solveStructure = (
     groundFrictionalFactor: 1,
   }
 ) => {
+  // console.log(systemProperties);
   //Convert Dictionary Representation to Matrix-based representations
   //Start by making the positional vectors for the nodes
   const nodeComboList = Array.from(nodeDict.entries());
@@ -115,7 +116,7 @@ const solveStructure = (
           systemProperties.groundStiffnessFactor *
           ((systemProperties.groundReference - x[i + yOffset]) /
             systemProperties.pixelToMeterRatio) **
-            2;
+            4;
         systemEnergy +=
           (systemProperties.groundFrictionalFactor *
             Math.abs(nodeList[i][0] - x[i])) /
@@ -135,13 +136,13 @@ const solveStructure = (
     evaluateSystemEnergy,
     nodeList,
     fixedNodesIndicies,
-    1000
+    100000
   );
   // console.log(systemProperties.groundReference);
   // console.log(nodeList);
   // console.log(solution);
   // console.log(fx);
-  // console.log(iter);
+  console.log(iter);
   // console.log(isConverged);
 
   for (let i = 0; i < solution.length; ++i) {
@@ -162,7 +163,7 @@ const powellOptimization = (
   exclusion = new Set<Number>([]),
   maxIter = 1000
 ) => {
-  const eps = 1e-4; //Convergence Threshold
+  const eps = 1e-3; //Convergence Threshold
   let alpha = 0.001; //Scaling Rate (Dynamic)
   let isConverged = false; //Convergence Flag
 
