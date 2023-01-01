@@ -33,7 +33,8 @@ function StructuralSolverApp() {
   const canvasRef = useRef<HTMLCanvasElement>(null); //Reference to Canvas
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
 
-  const [forceUpdate, setForceUpdate] = useState(false);
+  const [_, setForceUpdate] = useState(false);
+  const [showingStress, setShowingStress] = useState(false);
 
   const [nodeMode, setNodeMode] = useState<string | null>("free");
   const [linkageMode, setLinkageMode] = useState<string | null>("round");
@@ -93,7 +94,6 @@ function StructuralSolverApp() {
 
   //Function to update a node in the node dict in the node card (Passes as Props)
   const updateNode = (newNode: Node) => {
-    // console.log(newNode);
     setNodeDict((currNodeDict) => {
       const newDict = currNodeDict.set(newNode.id, newNode);
       redrawStructure(newDict, adjacencyDict);
@@ -109,6 +109,14 @@ function StructuralSolverApp() {
     const rect = canvasRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
+
+    //Disable Stress Contour when updating a system
+    if (showingStress) {
+      redrawStructure(nodeDict, adjacencyDict);
+      setShowingStress(false);
+    }
+
+    // setForceUpdate((curr) => !curr);
 
     switch (selectionMode) {
       case "delete": {
@@ -138,7 +146,6 @@ function StructuralSolverApp() {
               for (const originNode of Array.from(originNodes.keys())) {
                 linkMep.get(originNode)?.delete(closeNode.id);
               }
-              console.log(linkMep);
               linkMep.delete(closeNode.id);
 
               redrawStructure(nodeMep, linkMep);
@@ -165,7 +172,7 @@ function StructuralSolverApp() {
 
           //If no node is selected
           if (!selectedNode) {
-            //Select a node otherwise
+            //Select a node
             setSelectedNode(closeNode);
             contextRef.current.strokeStyle = "aqua";
             contextRef.current.lineWidth = 4;
@@ -212,8 +219,12 @@ function StructuralSolverApp() {
           return;
         }
 
-        //Prevent new nodes from being made if a node is selected
-        if (selectedNode) return;
+        //If a node is selected but the user click far away from any node, deselct
+        if (selectedNode) {
+          redrawNode(selectedNode);
+          setSelectedNode(null);
+          return;
+        }
 
         //Make a new Node otherwise
         const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 0 };
@@ -250,7 +261,9 @@ function StructuralSolverApp() {
   //Redraws the current links
   const redrawStructure = (
     nodes: Map<number, Node>,
-    adjacency: Map<number, Set<number>>
+    adjacency: Map<number, Set<number>>,
+    stressDict?: Map<number, Map<number, number>>,
+    maxStress?: number
   ) => {
     if (!contextRef.current || !canvasRef.current) return;
 
@@ -275,6 +288,27 @@ function StructuralSolverApp() {
         const node2 = nodes.get(node2ID);
         if (!node2) continue;
         contextRef.current.strokeStyle = "black";
+
+        //If stress values are available, colour code the links by stress and label the maximum stress
+        if (maxStress) {
+          contextRef.current.strokeStyle = interpolateColour(
+            stressDict?.get(node1ID)?.get(node2ID) || 0,
+            maxStress
+          );
+          if ((stressDict?.get(node1ID)?.get(node2ID) || 0) === maxStress) {
+            contextRef.current.fillStyle = contextRef.current.strokeStyle;
+            contextRef.current.fillText(
+              "MX",
+              (node1.x + node2.x) / 2,
+              (node1.y + node2.y) / 2
+            );
+            contextRef.current.fillText(
+              "MX: " + maxStress.toExponential(2) + " Pa",
+              10,
+              30
+            );
+          }
+        }
         contextRef.current.lineWidth = 4;
         contextRef.current.beginPath();
         contextRef.current.moveTo(node1.x, node1.y);
@@ -284,8 +318,26 @@ function StructuralSolverApp() {
         redrawNode(node2);
       }
     }
-  };
+    //Redraw the selected node border
+    if (!selectedNode || !selectedNode.id) return;
+    const updatedSelectedNode = nodes.get(selectedNode.id);
+    setSelectedNode(updatedSelectedNode);
+    if (!updatedSelectedNode) return;
 
+    contextRef.current.strokeStyle = "aqua";
+    contextRef.current.lineWidth = 4;
+    contextRef.current.strokeRect(
+      updatedSelectedNode.x - 8,
+      updatedSelectedNode.y - 8,
+      16,
+      16
+    );
+  };
+  // Interpolates the colours for the stress visualization
+  const interpolateColour = (stress: number, maxStress: number) => {
+    const hue = (stress / maxStress) * -160 + 160;
+    return "hsl(" + hue + ",100%,50%)";
+  };
   const handleSolve = () => {
     //Default linkage surface is a circle. A = pi * (Ro**2 - Ri**2)
     let linkCrossSectionalArea =
@@ -298,24 +350,27 @@ function StructuralSolverApp() {
     //If the square mode is active, convert to square. A = ((2Ro)**2 - (2Ri)**2) Conversion factor used instead of direct formula.
     if (linkageMode == "square") linkCrossSectionalArea *= 4 / Math.PI;
 
-    const newDict = solveStructure(nodeDict, adjacencyDict, {
-      youngsModulus: +(youngsModulusRef.current?.value || "0") * 1000000000, //Convert to Pa
-      linkCrossSectionalArea: linkCrossSectionalArea,
-      gravitationAcceleration: +(
-        gravitationAccelerationRef.current?.value || "0"
-      ), //Acceleration due to gravity (m/s^2)
-      linearDensity:
-        +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
-      groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
-      pixelToMeterRatio: 100,
-      groundStiffnessFactor: 100000,
-      groundFrictionalFactor: 10,
-    });
-
-    redrawStructure(newDict, adjacencyDict);
-    // console.log(newDict);
-    setNodeDict(newDict);
+    const { newNodeDict, stressDict, maxStress } = solveStructure(
+      nodeDict,
+      adjacencyDict,
+      {
+        youngsModulus: +(youngsModulusRef.current?.value || "0") * 1000000000, //Convert to Pa
+        linkCrossSectionalArea: linkCrossSectionalArea,
+        gravitationAcceleration: +(
+          gravitationAccelerationRef.current?.value || "0"
+        ), //Acceleration due to gravity (m/s^2)
+        linearDensity:
+          +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
+        groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
+        pixelToMeterRatio: 100,
+        groundStiffnessFactor: 1000000,
+        groundFrictionalFactor: 10,
+      }
+    );
+    redrawStructure(newNodeDict, adjacencyDict, stressDict, maxStress);
+    setNodeDict(newNodeDict);
     setForceUpdate((curr) => !curr);
+    setShowingStress(true);
   };
 
   return (
@@ -483,11 +538,14 @@ function StructuralSolverApp() {
           <AccordionDetails>
             <div className="node-card-grid">
               {Array.from(nodeDict.entries())
-                .sort((a, b) => a[0] - b[0])
+                .sort((a, b) => {
+                  if (a[0] === selectedNode?.id) return -300;
+                  return a[0] - b[0];
+                })
                 .map((ele) => (
                   <NodeCard
                     node={ele[1]}
-                    isSelected={false}
+                    isSelected={ele[1].id === selectedNode?.id}
                     updateNode={updateNode}
                     key={ele[1].x.toString() + ele[1].y.toString()}
                     systemProperties={{
@@ -506,7 +564,7 @@ function StructuralSolverApp() {
               Simulate
             </Typography>
             <Typography sx={{ color: "text.secondary" }}>
-              Equlibriated structure simulation; Vibration Analysis
+              Equlibriated structure simulation
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: "flex", justifyContent: "center" }}>

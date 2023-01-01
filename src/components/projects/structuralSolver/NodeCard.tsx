@@ -14,7 +14,7 @@ function NodeCard(props: nodeCardProps) {
 
   return (
     <Paper
-      elevation={2}
+      elevation={props.isSelected ? 20 : 2}
       sx={{
         padding: "0.5rem",
         display: "flex",
@@ -39,7 +39,6 @@ function NodeCard(props: nodeCardProps) {
           endAdornment: <InputAdornment position="end">m</InputAdornment>,
         }}
         onChange={(event) => {
-          console.log(+event.target.value);
           if (!props.node) return;
           props.node.x =
             +event.target.value * props.systemProperties.pixelToMeterRatio;
@@ -60,7 +59,6 @@ function NodeCard(props: nodeCardProps) {
           endAdornment: <InputAdornment position="end">m</InputAdornment>,
         }}
         onChange={(event) => {
-          console.log(+event.target.value);
           if (!props.node) return;
           props.node.y =
             -event.target.value * props.systemProperties.pixelToMeterRatio +
@@ -79,7 +77,6 @@ function NodeCard(props: nodeCardProps) {
           endAdornment: <InputAdornment position="end">kg</InputAdornment>,
         }}
         onChange={(event) => {
-          console.log(+event.target.value);
           if (!props.node) return;
           props.node.mass = +event.target.value;
           props.updateNode(props.node);

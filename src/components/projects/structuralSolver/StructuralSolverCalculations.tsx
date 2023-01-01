@@ -142,9 +142,10 @@ const solveStructure = (
   // console.log(nodeList);
   // console.log(solution);
   // console.log(fx);
-  console.log(iter);
+  // console.log(iter);
   // console.log(isConverged);
 
+  //Adapt solution back into dictionary form
   for (let i = 0; i < solution.length; ++i) {
     const nodeID = indexToId.get(i) || 0;
     const node = nodeDict.get(nodeID);
@@ -153,7 +154,34 @@ const solveStructure = (
     node.y = solution[i][1];
   }
 
-  return nodeDict;
+  //Calculate the stress and store the max stress.
+  let maxStress = 0;
+  const stressDict: Map<number, Map<number, number>> = new Map();
+  for (const nodeID of Array.from(nodeDict.keys()))
+    stressDict.set(nodeID, new Map()); //Preload the entreis with empty maps
+
+  for (let i = 0; i < solution.length; ++i) {
+    for (let j = 0; j < solution.length; ++j) {
+      if (!adjacencyMatrix[i][j]) continue;
+
+      const newLength =
+        Math.sqrt(
+          (solution[i][0] - solution[j][0]) ** 2 +
+            (solution[i][1] - solution[j][1]) ** 2
+        ) / systemProperties.pixelToMeterRatio;
+
+      const stress = Math.abs(
+        ((newLength - adjacencyMatrix[i][j]) / adjacencyMatrix[i][j]) *
+          systemProperties.youngsModulus
+      );
+
+      maxStress = Math.max(stress, maxStress);
+      const nodeID1 = indexToId.get(i) || 0;
+      const nodeID2 = indexToId.get(j) || 0;
+      stressDict.get(nodeID1)?.set(nodeID2, stress);
+    }
+  }
+  return { newNodeDict: nodeDict, stressDict, maxStress };
 };
 
 //Zeroth Order Powell Optimization. For the number of nodes expected, it would be far more efficient to use something like BFGS although the implementation is more difficult and excessive for a simple project like this.
