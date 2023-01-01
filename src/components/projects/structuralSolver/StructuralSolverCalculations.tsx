@@ -116,7 +116,7 @@ const solveStructure = (
           systemProperties.groundStiffnessFactor *
           ((systemProperties.groundReference - x[i + yOffset]) /
             systemProperties.pixelToMeterRatio) **
-            4;
+            2;
         systemEnergy +=
           (systemProperties.groundFrictionalFactor *
             Math.abs(nodeList[i][0] - x[i])) /

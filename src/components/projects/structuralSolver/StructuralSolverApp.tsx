@@ -33,6 +33,8 @@ function StructuralSolverApp() {
   const canvasRef = useRef<HTMLCanvasElement>(null); //Reference to Canvas
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
 
+  const [forceUpdate, setForceUpdate] = useState(false);
+
   const [nodeMode, setNodeMode] = useState<string | null>("free");
   const [linkageMode, setLinkageMode] = useState<string | null>("round");
   const [selectionMode, setSelectionMode] = useState<string | null>("build");
@@ -306,13 +308,14 @@ function StructuralSolverApp() {
         +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
       groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
       pixelToMeterRatio: 100,
-      groundStiffnessFactor: 500000,
+      groundStiffnessFactor: 100000,
       groundFrictionalFactor: 10,
     });
 
     redrawStructure(newDict, adjacencyDict);
     // console.log(newDict);
     setNodeDict(newDict);
+    setForceUpdate((curr) => !curr);
   };
 
   return (
@@ -486,9 +489,7 @@ function StructuralSolverApp() {
                     node={ele[1]}
                     isSelected={false}
                     updateNode={updateNode}
-                    key={
-                      ele[0] + ":" + ele[1].x.toString() + ele[1].y.toString()
-                    }
+                    key={ele[1].x.toString() + ele[1].y.toString()}
                     systemProperties={{
                       pixelToMeterRatio: 100,
                       groundReference: (canvasRef.current?.height || 0) / 2.1,
