@@ -214,7 +214,7 @@ function StructuralSolverApp() {
         if (selectedNode) return;
 
         //Make a new Node otherwise
-        const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 10 };
+        const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 0 };
         if (nodeMode == "fixed") newNode.isFixed = true;
         setNodeDict(
           (currNodeDict) => new Map(currNodeDict.set(nextID, newNode))
