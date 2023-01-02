@@ -7,11 +7,27 @@ import mech323 from "../../images/projects/mech323.jpg";
 import apsc200 from "../../images/projects/apsc200.jpg";
 import car from "../../images/projects/car.jpg";
 import lttp from "../../images/projects/lttp.jpg";
+import structural from "../../images/projects/structural.jpg";
 
 function Projects() {
   return (
     <Container maxWidth="xl">
       <section className="projects-container">
+        <ProjectsCard
+          title="Pin-Jointed Structure Simulator"
+          subtitle="Simulation of User-Defined Structures Under Gravitational Load"
+          image={structural}
+          chips={[
+            "TypeScript",
+            "Energy Minimization",
+            "Structural Analysis",
+            "Graph Theory",
+            "Numerical Optimization",
+          ]}
+          description={`An simulation tool that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specfied. The solution is generated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! `}
+          githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
+          tryItOut="/projects/structural-solver"
+        />
         <ProjectsCard
           title="Listen To the Path"
           subtitle="Hackathon Winner: Game Playable by Audio Only"
