@@ -21,21 +21,33 @@ type ProjectsCardProps = {
   image: any;
   githubLink?: string;
   explore?: string;
+  tryItOut?: string;
 };
 
 function ProjectsCard(props: ProjectsCardProps) {
   let buttons = (
     <div className="button-container">
       <ButtonGroup size="small" variant="contained">
-        {props?.githubLink && <Button href={props?.githubLink}>Github</Button>}
+        {props?.tryItOut && <Button href={props?.tryItOut}>Try it Out!</Button>}
+        {props?.githubLink && (
+          <Button target="_blank" href={props?.githubLink}>
+            Github
+          </Button>
+        )}
         {props?.explore && (
-          <Button href={props?.explore}>Explore Further</Button>
+          <Button target="_blank" href={props?.explore}>
+            Explore Further
+          </Button>
         )}
       </ButtonGroup>
     </div>
   );
 
-  if (props?.githubLink === undefined && props?.explore === undefined) {
+  if (
+    props?.githubLink === undefined &&
+    props?.explore === undefined &&
+    props?.tryItOut === undefined
+  ) {
     buttons = <></>;
   }
 

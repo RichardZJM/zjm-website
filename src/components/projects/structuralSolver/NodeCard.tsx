@@ -72,7 +72,7 @@ function NodeCard(props: nodeCardProps) {
         type="number"
         label="Mass"
         sx={{ width: "100%" }}
-        defaultValue={props.node.mass.toFixed(3)}
+        defaultValue={props.node.mass.toFixed(0)}
         InputProps={{
           endAdornment: <InputAdornment position="end">kg</InputAdornment>,
         }}

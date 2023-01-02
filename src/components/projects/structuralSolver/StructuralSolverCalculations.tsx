@@ -16,7 +16,7 @@ const closestNode = (x: number, y: number, nodeList: Node[]) => {
   return { closeNode, minDistance };
 };
 
-const solveStructure = (
+async function solveStructure(
   nodeDict: Map<number, Node>,
   adjacencyDict: Map<number, Set<number>>,
   systemProperties = {
@@ -29,7 +29,7 @@ const solveStructure = (
     groundStiffnessFactor: 500,
     groundFrictionalFactor: 1,
   }
-) => {
+) {
   // console.log(systemProperties);
   //Convert Dictionary Representation to Matrix-based representations
   //Start by making the positional vectors for the nodes
@@ -132,7 +132,7 @@ const solveStructure = (
   // for (const ele of nodeList) x.push(ele[1]);
   // console.log(evaluateSystemEnergy(x));
 
-  const { solution, fx, iter, isConverged } = powellOptimization(
+  const { solution, iter } = powellOptimization(
     evaluateSystemEnergy,
     nodeList,
     fixedNodesIndicies,
@@ -142,7 +142,7 @@ const solveStructure = (
   // console.log(nodeList);
   // console.log(solution);
   // console.log(fx);
-  // console.log(iter);
+  console.log(iter);
   // console.log(isConverged);
 
   //Adapt solution back into dictionary form
@@ -182,7 +182,7 @@ const solveStructure = (
     }
   }
   return { newNodeDict: nodeDict, stressDict, maxStress };
-};
+}
 
 //Zeroth Order Powell Optimization. For the number of nodes expected, it would be far more efficient to use something like BFGS although the implementation is more difficult and excessive for a simple project like this.
 const powellOptimization = (

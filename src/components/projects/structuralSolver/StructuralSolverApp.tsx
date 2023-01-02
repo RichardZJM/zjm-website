@@ -33,7 +33,8 @@ function StructuralSolverApp() {
   const canvasRef = useRef<HTMLCanvasElement>(null); //Reference to Canvas
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
 
-  const [_, setForceUpdate] = useState(false);
+  // eslint-disable-next-line
+  const [isCalculating, setIsCalculating] = useState(false); //May be used it a loading spinner in the future
   const [showingStress, setShowingStress] = useState(false);
 
   const [nodeMode, setNodeMode] = useState<string | null>("free");
@@ -185,7 +186,7 @@ function StructuralSolverApp() {
             return;
           }
           //If the closest node to click is the selected node, deselect the node and end
-          if (selectedNode.id == closeNode.id) {
+          if (selectedNode.id === closeNode.id) {
             redrawNode(selectedNode);
             setSelectedNode(null);
             return;
@@ -228,7 +229,7 @@ function StructuralSolverApp() {
 
         //Make a new Node otherwise
         const newNode: Node = { x, y, isFixed: false, id: nextID, mass: 0 };
-        if (nodeMode == "fixed") newNode.isFixed = true;
+        if (nodeMode === "fixed") newNode.isFixed = true;
         setNodeDict(
           (currNodeDict) => new Map(currNodeDict.set(nextID, newNode))
         );
@@ -251,7 +252,7 @@ function StructuralSolverApp() {
   const redrawNode = (node: Node | undefined | null) => {
     if (!contextRef.current || !node) return;
     contextRef.current.fillStyle = "grey";
-    if (node.isFixed == true) {
+    if (node.isFixed === true) {
       contextRef.current.fillStyle = "black";
     }
     contextRef.current.fillRect(node.x - 10, node.y - 10, 20, 20);
@@ -339,6 +340,7 @@ function StructuralSolverApp() {
     return "hsl(" + hue + ",100%,50%)";
   };
   const handleSolve = () => {
+    setIsCalculating(true);
     //Default linkage surface is a circle. A = pi * (Ro**2 - Ri**2)
     let linkCrossSectionalArea =
       (Math.PI *
@@ -346,31 +348,41 @@ function StructuralSolverApp() {
           (+(innerWallDistanceRef.current?.value || "0")) ** 2)) /
       1000000; //Convert to m^2;
     if (linkCrossSectionalArea < 0)
-      alert("Error: Outer wall of link cannot be smaller that the inner wall!");
+      alert(
+        "Warning: Outer wall of link cannot be smaller that the inner wall! System is unstable."
+      );
+    if ((youngsModulusRef.current?.value || 0) > 350)
+      alert(
+        "Warning: Young's Modulus is large. System may be numerically unstable."
+      );
     //If the square mode is active, convert to square. A = ((2Ro)**2 - (2Ri)**2) Conversion factor used instead of direct formula.
-    if (linkageMode == "square") linkCrossSectionalArea *= 4 / Math.PI;
+    if (linkageMode === "square") linkCrossSectionalArea *= 4 / Math.PI;
 
-    const { newNodeDict, stressDict, maxStress } = solveStructure(
-      nodeDict,
-      adjacencyDict,
-      {
-        youngsModulus: +(youngsModulusRef.current?.value || "0") * 1000000000, //Convert to Pa
-        linkCrossSectionalArea: linkCrossSectionalArea,
-        gravitationAcceleration: +(
-          gravitationAccelerationRef.current?.value || "0"
-        ), //Acceleration due to gravity (m/s^2)
-        linearDensity:
-          +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
-        groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
-        pixelToMeterRatio: 100,
-        groundStiffnessFactor: 1000000,
-        groundFrictionalFactor: 10,
+    solveStructure(nodeDict, adjacencyDict, {
+      youngsModulus: +(youngsModulusRef.current?.value || "0") * 1000000000, //Convert to Pa
+      linkCrossSectionalArea: linkCrossSectionalArea,
+      gravitationAcceleration: +(
+        gravitationAccelerationRef.current?.value || "0"
+      ), //Acceleration due to gravity (m/s^2)
+      linearDensity:
+        +(densityRef.current?.value || "0") * linkCrossSectionalArea, //Linear Density of Links   (kg/m)
+      groundReference: (canvasRef.current?.height || 0) / 2.1, //Height of ground reference
+      pixelToMeterRatio: 100,
+      groundStiffnessFactor: 1000000,
+      groundFrictionalFactor: 10,
+    }).then(
+      function (value) {
+        const { newNodeDict, stressDict, maxStress } = value;
+        redrawStructure(newNodeDict, adjacencyDict, stressDict, maxStress);
+        setNodeDict(newNodeDict);
+        setIsCalculating(false);
+        setShowingStress(true);
+      },
+      function (error) {
+        alert("Error!" + error);
+        setIsCalculating(false);
       }
     );
-    redrawStructure(newNodeDict, adjacencyDict, stressDict, maxStress);
-    setNodeDict(newNodeDict);
-    setForceUpdate((curr) => !curr);
-    setShowingStress(true);
   };
 
   return (
@@ -567,7 +579,14 @@ function StructuralSolverApp() {
               Equlibriated structure simulation
             </Typography>
           </AccordionSummary>
-          <AccordionDetails sx={{ display: "flex", justifyContent: "center" }}>
+          <AccordionDetails
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
             <Button variant="contained" onClick={handleSolve}>
               Simulate the System Under Gravity
             </Button>
