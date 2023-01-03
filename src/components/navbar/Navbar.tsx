@@ -4,6 +4,7 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +22,7 @@ import "./Navbar.css";
 function Navbar() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigator = useNavigate();
-  const smallScreen = useMediaQuery("(max-width:600px)");
+  const smallScreen = useMediaQuery("(max-width:720px)");
 
   const navContent = (
     <>
@@ -29,6 +30,7 @@ function Navbar() {
       <NavButton buttonText="Work" to="work-experience" />
       <NavButton buttonText="Skills" to="skills" />
       <NavButton buttonText="Projects" to="projects" />
+      <NavButton buttonText="Contact" to="contact" />
     </>
   );
 
@@ -66,42 +68,45 @@ function Navbar() {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <div className="modal-container">
-          <MenuItem>
-            <Button
-              onClick={() => {
-                navigator("about");
-              }}
-            >
-              About
-            </Button>
+          <MenuItem
+            onClick={() => {
+              navigator("about");
+              handleClose();
+            }}
+          >
+            <Typography variant="h6">About</Typography>
           </MenuItem>
-
-          <MenuItem>
-            <Button
-              onClick={() => {
-                navigator("work-experience");
-              }}
-            >
-              Work Experience
-            </Button>
+          <MenuItem
+            onClick={() => {
+              navigator("work-experience");
+              handleClose();
+            }}
+          >
+            <Typography variant="h6">Work Experience</Typography>
           </MenuItem>
-          <MenuItem>
-            <Button
-              onClick={() => {
-                navigator("skills");
-              }}
-            >
-              Skills
-            </Button>
+          <MenuItem
+            onClick={() => {
+              navigator("skills");
+              handleClose();
+            }}
+          >
+            <Typography variant="h6">Skills</Typography>
           </MenuItem>
-          <MenuItem>
-            <Button
-              onClick={() => {
-                navigator("projects");
-              }}
-            >
-              Projects
-            </Button>
+          <MenuItem
+            onClick={() => {
+              navigator("projects");
+              handleClose();
+            }}
+          >
+            <Typography variant="h6">Projects</Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigator("contact");
+              handleClose();
+            }}
+          >
+            <Typography variant="h6">Contact Me!</Typography>
           </MenuItem>
         </div>
       </Menu>
