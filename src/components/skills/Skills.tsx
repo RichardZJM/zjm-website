@@ -107,7 +107,6 @@ function Skills() {
           </div>
         </section>
       </Container>
-      <PotentialContributions />
     </>
   );
 }
