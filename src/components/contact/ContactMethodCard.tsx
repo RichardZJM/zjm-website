@@ -5,7 +5,8 @@ import "./ContactMethodCard.css";
 type ContactMethodCardProps = {
   title: string;
   icon: any;
-  description: string;
+  colour: string;
+  description?: string;
   link?: any;
   buttonText?: any;
   image?: any;
@@ -14,7 +15,10 @@ type ContactMethodCardProps = {
 function ContactMethodCard(props: ContactMethodCardProps) {
   const buttonText = props.buttonText || "Go Now";
   return (
-    <div className="contact-method-container">
+    <div
+      style={{ borderColor: props.colour }}
+      className="contact-method-container"
+    >
       <div className="contact-method-title-container">
         {props.icon}
         <Typography variant="h4">{props.title}</Typography>
