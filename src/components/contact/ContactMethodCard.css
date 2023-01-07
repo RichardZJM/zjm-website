@@ -7,12 +7,12 @@
   border: #98b7f5 1rem solid;
   border-radius: 1rem;
   padding: 1rem;
-  height: 10rem;
+  min-height: 10rem;
 }
 
 .contact-method-title-container {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
   justify-content: space-between;
 }

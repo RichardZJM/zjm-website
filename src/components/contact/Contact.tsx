@@ -26,21 +26,18 @@ function Contact() {
             icon={<EmailIcon color="primary" fontSize="large" />}
             buttonText="See Profile"
           />
-
           <ContactMethodCard
             title="Github"
             description="Peruse some of the code behind some of my projects. See additional works and contributions."
             colour="#98b7f5"
-            icon={<GithubIcon sx={{ color: "#98b7f5" }} fontSize="large" />}
+            icon={<GithubIcon color="primary" fontSize="large" />}
             link="https://github.com/RichardZJM"
           />
           <ContactMethodCard
             title="Resume"
             description="Some personal information has been redacted. Full version to be provided upon request."
             colour="#98b7f5"
-            icon={
-              <ContactPageIcon sx={{ color: "#98b7f5" }} fontSize="large" />
-            }
+            icon={<ContactPageIcon color="primary" fontSize="large" />}
             link="https://www.linkedin.com/in/richard-meng-zjm/"
             buttonText="View Or Download"
           />
