@@ -10,6 +10,7 @@ type ContactMethodCardProps = {
   link?: any;
   buttonText?: any;
   image?: any;
+  altText?: string;
 };
 
 function ContactMethodCard(props: ContactMethodCardProps) {
@@ -23,7 +24,11 @@ function ContactMethodCard(props: ContactMethodCardProps) {
         {props.icon}
         <Typography variant="h4">{props.title}</Typography>
       </div>
-
+      {props.image ? (
+        <img src={props.image} alt="Image" className="contact-email-image" />
+      ) : (
+        <></>
+      )}
       <Typography>{props.description}</Typography>
       {props.link ? (
         <Button href={props.link} target="_blank">

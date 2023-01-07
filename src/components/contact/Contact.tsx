@@ -21,10 +21,11 @@ function Contact() {
         <div className="contact-methods-grid">
           <ContactMethodCard
             title="Primary Email"
-            description="Image is used for spam protection."
+            description="Image is used for spam mitigation."
             colour="#98b7f5"
+            image={require("../../images/contact/primaryemail.png")}
             icon={<EmailIcon color="primary" fontSize="large" />}
-            buttonText="See Profile"
+            altText="Image of Primary Email Address"
           />
           <ContactMethodCard
             title="Github"
@@ -50,23 +51,26 @@ function Contact() {
             buttonText="See Profile"
           />
           <ContactMethodCard
-            title="Phone"
-            colour="#17bbc1"
-            description="To be provided upon request. Canadian phone number."
-            icon={<LocalPhoneIcon color="secondary" fontSize="large" />}
-          />
-          <ContactMethodCard
             title="Secondary Email"
             description="Image is used for spam protection."
             colour="#17bbc1"
+            image={require("../../images/contact/secondaryemail.png")}
             icon={<EmailIcon color="secondary" fontSize="large" />}
             buttonText="See Profile"
+            altText="Image of Secondary Email Address"
           />
+
           <ContactMethodCard
             title="Location"
             colour="#17bbc1"
             icon={<PublicIcon color="secondary" fontSize="large" />}
             buttonText="See Profile"
+          />
+          <ContactMethodCard
+            title="Phone"
+            colour="#17bbc1"
+            description="To be provided upon request. Canadian phone number."
+            icon={<LocalPhoneIcon color="secondary" fontSize="large" />}
           />
         </div>
       </section>
