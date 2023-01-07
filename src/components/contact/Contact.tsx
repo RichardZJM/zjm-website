@@ -21,7 +21,7 @@ function Contact() {
         <div className="contact-methods-grid">
           <ContactMethodCard
             title="Primary Email"
-            description="Image is used for spam mitigation."
+            description="Image is used for spam mitigation. Currently may be inactive."
             colour="#98b7f5"
             image={require("../../images/contact/primaryemail.png")}
             icon={<EmailIcon color="primary" fontSize="large" />}
@@ -36,15 +36,15 @@ function Contact() {
           />
           <ContactMethodCard
             title="Resume"
-            description="Some personal information has been redacted. Full version to be provided upon request."
+            description="Some personal information may be redacted. Full version to be provided upon request."
             colour="#98b7f5"
             icon={<ContactPageIcon color="primary" fontSize="large" />}
-            link="https://www.linkedin.com/in/richard-meng-zjm/"
+            link="/resumes/Zijian_(Richard)_Meng_Resume_v2022-03.pdf"
             buttonText="View Or Download"
           />
           <ContactMethodCard
             title="LinkedIn"
-            description="LinkedIn Profile."
+            description="LinkedIn Profile. Richard Meng, ZJM."
             colour="#98b7f5"
             icon={<LinkedInIcon color="primary" fontSize="large" />}
             link="https://www.linkedin.com/in/richard-meng-zjm/"
@@ -63,6 +63,7 @@ function Contact() {
           <ContactMethodCard
             title="Location"
             colour="#17bbc1"
+            description="Currently completeling undergraduate studies in Kingston, ON. Hometown of Ottawa, ON. Canada."
             icon={<PublicIcon color="secondary" fontSize="large" />}
             buttonText="See Profile"
           />

@@ -29,6 +29,16 @@ function Projects() {
           tryItOut="/projects/structural-solver"
         />
         <ProjectsCard
+          title="APDL SOLID185 Tool"
+          subtitle="An ANSYS Tool for Automating the Generation of Area and Volume Commands in SOLID185 Elements"
+          image={structural}
+          chips={["TypeScript", "Python", "Loop Finding", "Graph Theory"]}
+          description={`APDL is a command set used in the popular structural analysis software ANSYS. SOLID185 mapped meshing in APDL requires the manual user definition of keypoints, lines, areas, and volumes. The latter two can generally be derived from the first two, with the exception of very niche ambigious cases. This online tool, expedites the mapped meshing process by generating area and volume commands utilizing the graph generate by the user-defined keypoints and lines (i.e. verticies and edges). Resulted in personal time saving of several hours. Tool was distributed amongst class of several dozen students to same more manhours.`}
+          githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
+          tryItOut="/projects/structural-solver"
+        />
+
+        <ProjectsCard
           title="Listen To the Path"
           subtitle="Hackathon Winner: Game Playable by Audio Only"
           image={lttp}

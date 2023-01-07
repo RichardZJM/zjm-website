@@ -25,7 +25,11 @@ function ContactMethodCard(props: ContactMethodCardProps) {
         <Typography variant="h4">{props.title}</Typography>
       </div>
       {props.image ? (
-        <img src={props.image} alt="Image" className="contact-email-image" />
+        <img
+          src={props.image}
+          alt="Email address as graphic"
+          className="contact-email-image"
+        />
       ) : (
         <></>
       )}

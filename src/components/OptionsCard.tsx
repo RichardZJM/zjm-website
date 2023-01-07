@@ -19,7 +19,11 @@ function OptionsCard(props: OptionsCardProps) {
       }}
     >
       <h2 className="option-title">{props.title}</h2>
-      <img src={props.image} alt="flavor-image" className="flavor-image" />
+      <img
+        src={props.image}
+        alt="Flavour Background"
+        className="flavor-image"
+      />
       <h2 className="option-description">{props.description}</h2>
     </div>
   );
