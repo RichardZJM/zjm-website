@@ -28,7 +28,11 @@ function ProjectsCard(props: ProjectsCardProps) {
   let buttons = (
     <div className="button-container">
       <ButtonGroup size="small" variant="contained">
-        {props?.tryItOut && <Button href={props?.tryItOut}>Try it Out!</Button>}
+        {props?.tryItOut && (
+          <Button href={props?.tryItOut} target="_blank">
+            Try it Out!
+          </Button>
+        )}
         {props?.githubLink && (
           <Button target="_blank" href={props?.githubLink}>
             Github
