@@ -134,31 +134,31 @@ function HomePage(props: { welcomeMessage: string }) {
           <OptionsCard
             image={require("../../images/aboutBG.png")}
             title="About"
-            description=" Introduction, personal interests,career goals, strengths and weaknesses."
+            description=" Introduction, personal interests, career goals."
             link="/about"
           />
           <OptionsCard
             image={require("../../images/workBG.jpg")}
             title="Work Experience"
-            description="Mechanical engineering work experience. Applied skills, projects, overview, and testimonials."
+            description="Work experience. Applied skills, overview, and references."
             link="/work-experience"
           />
           <OptionsCard
             image={require("../../images/engineeringBG.jpg")}
-            title="Design Experience & Projects"
-            description="Coursework, design team, and personal projects. Examples and code."
+            title="Projects"
+            description="Personal projects, capstone, research projects. Demos and code."
             link="/projects"
           />
           <OptionsCard
             image={require("../../images/skillsBG.jpg")}
-            title="Skills & Potential Contributions"
-            description="Technical and professional skill summary. Potential contributions to groups."
+            title="Skills"
+            description="Technical and professional skill summary."
             link="/skills"
           />
           <OptionsCard
             image={require("../../images/contactBG.jpg")}
             title="Contact Me!"
-            description="Contact Info, Github, Resume, LinkedIn"
+            description="Contact Info, Github, Resume, LinkedIn."
             link="/contact"
           />
         </Box>
