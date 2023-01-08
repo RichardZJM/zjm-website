@@ -8,6 +8,7 @@ import apsc200 from "../../images/projects/apsc200.jpg";
 import car from "../../images/projects/car.jpg";
 import lttp from "../../images/projects/lttp.jpg";
 import structural from "../../images/projects/structural.jpg";
+import apdl from "../../images/projects/apdltools.png";
 
 function Projects() {
   return (
@@ -24,7 +25,7 @@ function Projects() {
             "Graph Theory",
             "Numerical Optimization",
           ]}
-          description={`An simulation tool that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specfied. The solution is generated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! `}
+          description={`An simulation tool that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specified. The solution is generated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! `}
           githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
           tryItOut="/projects/structural-solver"
         />
@@ -42,6 +43,21 @@ function Projects() {
           description={`A game designed with accessible features, particularly with the visually impaired in mind. Developed during a Hackathon, it required rapid learning of new technologies, determination, and teamwork. Winner of "Best Overall Hack" and "Best Game", CuHacking 2021`}
           githubLink="https://github.com/Rajykins/ListenToThePath"
           explore="https://youtu.be/riZb6pExfhQ"
+        />
+        <ProjectsCard
+          title="APDL SOLID185 Tool"
+          subtitle="An ANSYS Tool for Automating the Generation of Area and Volume Commands in SOLID185 Elements"
+          image={apdl}
+          chips={[
+            "TypeScript",
+            "Python",
+            "Loop Finding",
+            "Graph Theory",
+            "User Input Parsing",
+          ]}
+          description={`APDL is a command set used in the popular structural analysis software ANSYS. SOLID185 mapped meshing in APDL requires the manual user definition of keypoints, lines, areas, and volumes. The latter two can generally be derived from the first two, with the exception of very niche ambigious cases. This online tool expedites the mapped meshing process by generating area and volume commands utilizing the graph given by the user-defined keypoints and lines (i.e. verticies and edges). Resulted in personal time saving of several hours. Tool was distributed amongst class of several dozen students to same more manhours.`}
+          githubLink="https://github.com/RichardZJM/apdl_tools"
+          tryItOut="https://apdl-tools.netlify.app/"
         />
         <ProjectsCard
           title="Gear Ratio Optimizer"
