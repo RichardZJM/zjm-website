@@ -8,7 +8,7 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import "./ProjectsCard.css";
 
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
@@ -25,6 +25,9 @@ type ProjectsCardProps = {
 };
 
 function ProjectsCard(props: ProjectsCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const accordianHeaderText = isOpen ? "Show Less" : "Read More";
+
   let buttons = (
     <div className="button-container">
       <ButtonGroup size="small" variant="contained">
@@ -68,9 +71,15 @@ function ProjectsCard(props: ProjectsCardProps) {
           <Typography variant="body1">{props.subtitle}</Typography>
         </Paper>
       </div>
-      <Accordion className="acoord" disableGutters>
+      <Accordion
+        className="acoord"
+        disableGutters
+        onChange={() => {
+          setIsOpen((currOpen) => !currOpen);
+        }}
+      >
         <AccordionSummary expandIcon={<AutoStoriesIcon />}>
-          <Typography variant="h6">Read More</Typography>
+          <Typography variant="h6">{accordianHeaderText}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {props.description}
