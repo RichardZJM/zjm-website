@@ -24,7 +24,8 @@ function NodeCard(props: nodeCardProps) {
       }}
     >
       <Typography variant="body1">
-        <b>{`Node ${props.node.id}`}</b>
+        <b>{props.node.id}</b>: {props.node.isFixed ? <b> Fixed</b> : "Free"}{" "}
+        Node
       </Typography>
       <TextField
         size="small"

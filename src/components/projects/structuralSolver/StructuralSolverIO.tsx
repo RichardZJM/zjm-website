@@ -35,4 +35,58 @@ function convertJSONToStructure(json: string) {
   return { nodeDict, adjacencyDict };
 }
 
-export { convertStructureToJSON, convertJSONToStructure };
+function saveToLocalStorage(
+  structureName: string,
+  nodeDict: Map<number, Node>,
+  adjacencyDict: Map<number, Set<number>>
+) {
+  localStorage.setItem(
+    structureName,
+    convertStructureToJSON(nodeDict, adjacencyDict)
+  );
+  const currentRepository: string[] = JSON.parse(
+    localStorage.getItem("repo") || "[]"
+  );
+  currentRepository.push(structureName);
+  localStorage.setItem(
+    "repo",
+    JSON.stringify(Array.from(new Set(currentRepository).keys())) //Set to get rid of duplicates
+  );
+}
+
+function deleteFromLocalStorage(structureName: string) {
+  localStorage.removeItem(structureName);
+  const currentRepository: string[] = JSON.parse(
+    localStorage.getItem("repo") || "[]"
+  );
+
+  const repoSet = new Set(currentRepository);
+  repoSet.delete(structureName);
+  localStorage.setItem(
+    "repo",
+    JSON.stringify(Array.from(repoSet.keys())) //Set to get rid of duplicates
+  );
+}
+
+function reloadUserSaves() {
+  const currentRepository: string[] = JSON.parse(
+    localStorage.getItem("repo") || "[]"
+  );
+  return currentRepository;
+}
+
+function loadUserSave(structureName: string) {
+  const json = localStorage.getItem(structureName);
+  if (!json) {
+    alert("Error! Save is corrupted or lost!");
+    return;
+  }
+  return convertJSONToStructure(json);
+}
+
+export {
+  loadUserSave,
+  saveToLocalStorage,
+  reloadUserSaves,
+  deleteFromLocalStorage,
+};

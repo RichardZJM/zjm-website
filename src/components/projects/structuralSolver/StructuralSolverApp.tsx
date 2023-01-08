@@ -19,9 +19,13 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import NodeCard from "./NodeCard";
 import {
-  convertJSONToStructure,
-  convertStructureToJSON,
+  deleteFromLocalStorage,
+  loadUserSave,
+  reloadUserSaves,
+  saveToLocalStorage,
 } from "./StructuralSolverIO";
+import { simpleTri } from "./StructuralSolverDemos";
+import UserSaveCard from "./UserSaveCard";
 
 type Node = {
   x: number;
@@ -36,10 +40,14 @@ export type { Node };
 function StructuralSolverApp() {
   const canvasRef = useRef<HTMLCanvasElement>(null); //Reference to Canvas
   const contextRef = useRef<CanvasRenderingContext2D | null>(null); //Reference to Canvas Context
+  const nextSaveName = useRef<HTMLTextAreaElement>();
 
   // eslint-disable-next-line
   const [isCalculating, setIsCalculating] = useState(false); //May be used it a loading spinner in the future
   const [showingStress, setShowingStress] = useState(false);
+
+  const [presets, setPresets] = useState<string[]>();
+  const [userSaves, setUserSaves] = useState<string[]>([]);
 
   const [nodeMode, setNodeMode] = useState<string | null>("free");
   const [linkageMode, setLinkageMode] = useState<string | null>("round");
@@ -59,6 +67,9 @@ function StructuralSolverApp() {
 
   //Use Effect intializes the canvas to the correct DPI
   useEffect(() => {
+    setPresets([simpleTri]);
+    setUserSaves(reloadUserSaves());
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.width = window.innerWidth * 2;
@@ -96,12 +107,36 @@ function StructuralSolverApp() {
   ) => {
     setLinkageMode((currentMode) => newMode || currentMode);
   };
-  const handleLoadStructure = () => {
-    const json = convertStructureToJSON(nodeDict, adjacencyDict);
-    console.log(json);
-    const out = convertJSONToStructure(json);
-    console.log(out.nodeDict, out.adjacencyDict);
+
+  //Load, Save, and Delete the user saves. The load and save functions are passes as props.
+  const handleLoadStructure = (structureName: string) => {
+    const out = loadUserSave(structureName);
+    if (!out) {
+      alert("Error! Save is corrupted or lost!");
+      return;
+    }
+    let newNextID = 0;
+    setNodeDict(out.nodeDict);
+    for (const ID of Array.from(out.nodeDict.keys()))
+      newNextID = Math.max(newNextID, ID);
+
+    setNextID(newNextID + 1);
+    setAdjacencyDict(() => {
+      redrawStructure(out.nodeDict, out.adjacencyDict);
+      return out.adjacencyDict;
+    });
   };
+
+  const handleSaveStructure = () => {
+    if (!nextSaveName.current || !nextSaveName.current.value) return;
+    saveToLocalStorage(nextSaveName.current.value, nodeDict, adjacencyDict);
+    setUserSaves(reloadUserSaves());
+  };
+  const handleDeleteStructure = (structureName: string) => {
+    deleteFromLocalStorage(structureName);
+    setUserSaves(reloadUserSaves());
+  };
+
   //Function to update a node in the node dict in the node card (Passed as Props to node card)
   const updateNode = (newNode: Node) => {
     setNodeDict((currNodeDict) => {
@@ -622,9 +657,28 @@ function StructuralSolverApp() {
               gap: "1rem",
             }}
           >
-            <Button variant="contained" onClick={handleLoadStructure}>
-              Load Structure
+            <Button
+              onClick={() => {
+                handleSaveStructure();
+              }}
+            >
+              SAVE
             </Button>
+            <TextField
+              size="small"
+              variant="outlined"
+              label="New Save Name"
+              sx={{ width: "100%" }}
+              inputRef={nextSaveName}
+            ></TextField>
+            {userSaves.map((saveName) => (
+              <UserSaveCard
+                structureName={saveName}
+                loadStructure={handleLoadStructure}
+                deleteStructure={handleDeleteStructure}
+                key={saveName}
+              />
+            ))}
           </AccordionDetails>
         </Accordion>
 
