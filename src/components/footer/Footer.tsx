@@ -1,5 +1,4 @@
 import { BottomNavigation, Button, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Footer.css";
 function Footer() {

@@ -14,7 +14,6 @@ import communication from "../../images/skills/communication.jpg";
 import time from "../../images/skills/time.jpg";
 import problemSolving from "../../images/skills/problemSolving.jpg";
 import adaptability from "../../images/skills/adaptability.jpg";
-import PotentialContributions from "./PotentialContributions";
 
 function Skills() {
   const theme = useTheme();
