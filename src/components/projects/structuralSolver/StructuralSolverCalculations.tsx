@@ -136,7 +136,7 @@ async function solveStructure(
     evaluateSystemEnergy,
     nodeList,
     fixedNodesIndicies,
-    100000
+    10000
   );
   // console.log(systemProperties.groundReference);
   // console.log(nodeList);
@@ -191,8 +191,8 @@ const powellOptimization = (
   exclusion = new Set<Number>([]),
   maxIter = 1000
 ) => {
-  const eps = 1e-3; //Convergence Threshold
-  let alpha = 0.001; //Scaling Rate (Dynamic)
+  const eps = 1e-2; //Convergence Threshold
+  let alpha = 0.00005; //Scaling Rate (Dynamic)
   let isConverged = false; //Convergence Flag
 
   const x: number[] = [];
