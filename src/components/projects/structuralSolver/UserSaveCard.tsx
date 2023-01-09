@@ -6,6 +6,7 @@ type UserSaveCardProps = {
   loadStructure: Function;
   deleteStructure: Function;
   isPreset?: boolean;
+  preset?: string;
 };
 
 function UserSaveCard(props: UserSaveCardProps) {
@@ -18,14 +19,18 @@ function UserSaveCard(props: UserSaveCardProps) {
       }}
     >
       <Button
-        variant="contained"
+        variant="outlined"
+        color={props.isPreset ? "secondary" : "primary"}
+        fullWidth
         onClick={() => {
-          props.loadStructure(props.structureName);
+          if (props.preset) props.loadStructure(props.preset);
+          else props.loadStructure(props.structureName);
         }}
-      >{`Load: ${props.structureName}`}</Button>
+      >{`Load ${props.structureName}`}</Button>
+
       {!props.isPreset && (
         <Button
-          variant="contained"
+          variant="outlined"
           color="error"
           size="large"
           onClick={() => {

@@ -77,6 +77,7 @@ function reloadUserSaves() {
 
 function loadUserSave(structureName: string) {
   const json = localStorage.getItem(structureName);
+  console.log(json);
   if (!json) {
     alert("Error! Save is corrupted or lost!");
     return;
@@ -84,9 +85,18 @@ function loadUserSave(structureName: string) {
   return convertJSONToStructure(json);
 }
 
+function loadPreset(structure: string) {
+  if (!structure) {
+    alert("Error! Preset is corrupted or lost!");
+    return;
+  }
+  return convertJSONToStructure(structure);
+}
+
 export {
   loadUserSave,
   saveToLocalStorage,
   reloadUserSaves,
   deleteFromLocalStorage,
+  loadPreset,
 };

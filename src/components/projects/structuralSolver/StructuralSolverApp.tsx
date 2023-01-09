@@ -20,11 +20,18 @@ import InputAdornment from "@mui/material/InputAdornment";
 import NodeCard from "./NodeCard";
 import {
   deleteFromLocalStorage,
+  loadPreset,
   loadUserSave,
   reloadUserSaves,
   saveToLocalStorage,
 } from "./StructuralSolverIO";
-import { simpleTri } from "./StructuralSolverDemos";
+import {
+  leaningTowerDemo,
+  triangleDemo,
+  cantileverTrussDemo,
+  suspensionBridgeDemo,
+  RotationDemo,
+} from "./StructuralSolverDemos";
 import UserSaveCard from "./UserSaveCard";
 
 type Node = {
@@ -46,7 +53,13 @@ function StructuralSolverApp() {
   const [isCalculating, setIsCalculating] = useState(false); //May be used it a loading spinner in the future
   const [showingStress, setShowingStress] = useState(false);
 
-  const [presets, setPresets] = useState<string[]>();
+  const presets = new Map([
+    ["Triangle Demo", triangleDemo],
+    ["Rotation Demo", RotationDemo],
+    ["Leaning Tower Demo", leaningTowerDemo],
+    ["Cantilever Truss Demo", cantileverTrussDemo],
+    ["Suspension Bridge Demo", suspensionBridgeDemo],
+  ]);
   const [userSaves, setUserSaves] = useState<string[]>([]);
 
   const [nodeMode, setNodeMode] = useState<string | null>("free");
@@ -67,7 +80,6 @@ function StructuralSolverApp() {
 
   //Use Effect intializes the canvas to the correct DPI
   useEffect(() => {
-    setPresets([simpleTri]);
     setUserSaves(reloadUserSaves());
 
     const canvas = canvasRef.current;
@@ -108,6 +120,13 @@ function StructuralSolverApp() {
     setLinkageMode((currentMode) => newMode || currentMode);
   };
 
+  const handleClearCanvas = () => {
+    setNodeDict(new Map());
+    setAdjacencyDict(new Map());
+    redrawStructure(new Map(), new Map());
+    setSelectedNode(null);
+    setNextID(1);
+  };
   //Load, Save, and Delete the user saves. The load and save functions are passes as props.
   const handleLoadStructure = (structureName: string) => {
     const out = loadUserSave(structureName);
@@ -126,10 +145,31 @@ function StructuralSolverApp() {
       return out.adjacencyDict;
     });
   };
+  const handleLoadPreset = (structureJSON: string) => {
+    const out = loadPreset(structureJSON);
+    if (!out) {
+      alert("Error! Save is corrupted or lost!");
+      return;
+    }
+    let newNextID = 0;
+    setNodeDict(out.nodeDict);
+    for (const ID of Array.from(out.nodeDict.keys()))
+      newNextID = Math.max(newNextID, ID);
+
+    setNextID(newNextID + 1);
+    setAdjacencyDict(() => {
+      redrawStructure(out.nodeDict, out.adjacencyDict);
+      return out.adjacencyDict;
+    });
+  };
 
   const handleSaveStructure = () => {
     if (!nextSaveName.current || !nextSaveName.current.value) return;
-    saveToLocalStorage(nextSaveName.current.value, nodeDict, adjacencyDict);
+    saveToLocalStorage(
+      nextSaveName.current.value.toUpperCase(),
+      nodeDict,
+      adjacencyDict
+    );
     setUserSaves(reloadUserSaves());
   };
   const handleDeleteStructure = (structureName: string) => {
@@ -447,16 +487,70 @@ function StructuralSolverApp() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-              gap: "1rem",
-            }}
+            sx={{ display: "flex", gap: "0.5rem", flexDirection: "column" }}
           >
-            <Button variant="contained" onClick={handleSolve}>
-              Simulate the System Under Gravity
-            </Button>
+            <Typography variant="body2">
+              This simulator is specifically designed for pin-jointed members.
+              This means all linkages are attached to nodes and are free to
+              rotate about the node. This means that for linkages to resist
+              shearing and rotational motions, it is essential that truss-like
+              structures are constructed.
+            </Typography>
+            <Typography variant="body2">
+              The model construction begins with the build tools which are set
+              to Build Mode and Free Nodes by default. Toggles allow the user to
+              switch to Delete Mode and Fixed Nodes respectively. In build mode,
+              clicking on the workspace places a node of the type selected by
+              the toggle. Clicking on a node selected the node. Clicking on the
+              blank canvas or the originating node deselects the nodes; clicking
+              on a different node creates a link between two nodes. In Delete
+              Mode, clicking on a node delete it and all the links associated
+              with it.
+            </Typography>
+            <Typography variant="body2">
+              Generally, Free nodes will make up the bulk of your model. The
+              nodes are mobile and can be used to model deformation. Fixed Nodes
+              are used as boundary conditions and represent immobile structures
+              like walls or floors. Additionally, free nodes will be repelled by
+              the ground level should the gravitational force bring them in
+              contact. The simulation is not tuned to model free nodes without
+              links and may experience numerical instability.
+            </Typography>
+            <Typography variant="body2">
+              One must remember that there is no mass on free nodes by default.
+              The Node Specifications tab is used to impart mass on the node of
+              choice. Users can additionally specify the precise location of the
+              node using Cartesian coordinates. For ease of finding the desired
+              node, selecting the node in Build Mode will cause that node to
+              appear at the front of the node specification listing.
+            </Typography>
+            <Typography variant="body2">
+              The System Properties tab allows the user to modify the
+              cross-sectional area of the linkages or the material used in the
+              system. By default, the system is models thin-walled aluminum
+              tubes. These properties generally respond well to mass within the
+              range of 30-10000 kg. The user is free to modify the material
+              although excessively large Young’s Modulus or large cross-sections
+              may cause instability. Treat these settings with caution.
+              Generally, values of less than 350GPa and less than 20mm work well
+              although a more robust optimizer may be implemented in the future.
+            </Typography>
+            <Typography variant="body2">
+              The user can save and load their models as needed using the
+              presets and saves tab. Saving is done by providing a name to the
+              model and hitting the save button. Presets and saves can be loaded
+              by selecting from the list below. Saves are deleted similarly.
+              Make sure to save before simulating a large system as you cannot
+              current revert to the original system before simulation.
+            </Typography>
+            <Typography variant="body2">
+              Finally, for complex structures like the suspension bridge preset,
+              several minutes may be needed to produce a result. This is a
+              browser-based physics simulation using energy minimization which
+              isn’t particularly efficient. In complex cases and during
+              catastrophic failure the system may reach the iteration cap an
+              yield and unconverged result.
+            </Typography>
           </AccordionDetails>
         </Accordion>
 
@@ -497,6 +591,15 @@ function StructuralSolverApp() {
               <ToggleButton value="free"> Free Node </ToggleButton>
               <ToggleButton value="fixed"> Fixed Node</ToggleButton>
             </ToggleButtonGroup>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                handleClearCanvas();
+              }}
+            >
+              {" "}
+              Clear
+            </Button>
           </AccordionDetails>
         </Accordion>
 
@@ -657,28 +760,42 @@ function StructuralSolverApp() {
               gap: "1rem",
             }}
           >
-            <Button
-              onClick={() => {
-                handleSaveStructure();
-              }}
-            >
-              SAVE
-            </Button>
-            <TextField
-              size="small"
-              variant="outlined"
-              label="New Save Name"
-              sx={{ width: "100%" }}
-              inputRef={nextSaveName}
-            ></TextField>
-            {userSaves.map((saveName) => (
-              <UserSaveCard
-                structureName={saveName}
-                loadStructure={handleLoadStructure}
-                deleteStructure={handleDeleteStructure}
-                key={saveName}
+            <div className="save-options-container">
+              <TextField
+                size="small"
+                variant="outlined"
+                label="New Save Name"
+                sx={{ width: "20rem" }}
+                inputRef={nextSaveName}
               />
-            ))}
+              <Button
+                onClick={() => {
+                  handleSaveStructure();
+                }}
+              >
+                SAVE
+              </Button>
+            </div>
+            <div className="user-save-cards-grid">
+              {Array.from(presets.entries()).map(([presetName, preset]) => (
+                <UserSaveCard
+                  structureName={presetName}
+                  loadStructure={handleLoadPreset}
+                  deleteStructure={handleDeleteStructure} // Cannot be actually called
+                  key={presetName}
+                  isPreset={true}
+                  preset={preset}
+                />
+              ))}
+              {userSaves.map((saveName) => (
+                <UserSaveCard
+                  structureName={saveName}
+                  loadStructure={handleLoadStructure}
+                  deleteStructure={handleDeleteStructure}
+                  key={saveName}
+                />
+              ))}
+            </div>
           </AccordionDetails>
         </Accordion>
 

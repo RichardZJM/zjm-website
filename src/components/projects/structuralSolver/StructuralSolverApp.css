@@ -29,3 +29,19 @@ canvas {
   overflow-y: auto;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 }
+
+.save-options-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.user-save-cards-grid {
+  display: grid;
+  gap: 1rem 2rem;
+  width: 100%;
+  max-height: 430px;
+  overflow-y: auto;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
