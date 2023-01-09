@@ -548,8 +548,8 @@ function StructuralSolverApp() {
               several minutes may be needed to produce a result. This is a
               browser-based physics simulation using energy minimization which
               isn’t particularly efficient. In complex cases and during
-              catastrophic failure the system may reach the iteration cap an
-              yield and unconverged result.
+              catastrophic failure the system may reach the iteration cap and
+              yield an unconverged result.
             </Typography>
           </AccordionDetails>
         </Accordion>
