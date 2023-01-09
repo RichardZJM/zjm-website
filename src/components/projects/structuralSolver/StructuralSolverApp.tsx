@@ -501,7 +501,7 @@ function StructuralSolverApp() {
               to Build Mode and Free Nodes by default. Toggles allow the user to
               switch to Delete Mode and Fixed Nodes respectively. In build mode,
               clicking on the workspace places a node of the type selected by
-              the toggle. Clicking on a node selected the node. Clicking on the
+              the toggle. Clicking on a node selects the node. Clicking on the
               blank canvas or the originating node deselects the nodes; clicking
               on a different node creates a link between two nodes. In Delete
               Mode, clicking on a node delete it and all the links associated
