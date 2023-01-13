@@ -63,7 +63,7 @@ function Contact() {
           <ContactMethodCard
             title="Location"
             colour="#17bbc1"
-            description="Currently completeling undergraduate studies in Kingston, ON. Hometown of Ottawa, ON. Canada."
+            description="Currently completing undergraduate studies in Kingston, ON. Hometown of Ottawa, ON. Canada."
             icon={<PublicIcon color="secondary" fontSize="large" />}
             buttonText="See Profile"
           />

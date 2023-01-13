@@ -6,7 +6,8 @@ import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
 import OptionsCard from "../OptionsCard";
-import About from "../About/About";
+// import About from "../About/About";
+import Featured from "../featured/Featured";
 
 /**
  * Functional Component for the home page of the webside
@@ -94,6 +95,7 @@ function HomePage(props: { welcomeMessage: string }) {
           </Container>
         </Container>
       </section>
+      <Featured />
       <section className="quick-options section-container">
         <Typography
           variant="h4"
@@ -163,7 +165,6 @@ function HomePage(props: { welcomeMessage: string }) {
           />
         </Box>
       </section>
-      <About />
     </>
   );
 }

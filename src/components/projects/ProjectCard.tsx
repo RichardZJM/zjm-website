@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import "./ProjectsCard.css";
 
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import { useNavigate } from "react-router-dom";
 
 type ProjectsCardProps = {
   title: string;
@@ -27,6 +28,8 @@ type ProjectsCardProps = {
 function ProjectsCard(props: ProjectsCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const accordianHeaderText = isOpen ? "Show Less" : "Read More";
+
+  const link = props.tryItOut || props.explore || props.githubLink;
 
   let buttons = (
     <div className="button-container">
@@ -65,12 +68,20 @@ function ProjectsCard(props: ProjectsCardProps) {
         style={{ backgroundImage: `url(${props.image})` }}
       >
         <Paper className="project-title-container">
-          <Typography variant="h5">{props.title}</Typography>
+          <a
+            href={link}
+            target="_blank"
+            className="project-click-wrapper"
+            rel="noreferrer"
+          >
+            <Typography variant="h5">{props.title}</Typography>
+          </a>
         </Paper>
         <Paper className="project-title-container">
           <Typography variant="body1">{props.subtitle}</Typography>
         </Paper>
       </div>
+
       <Accordion
         className="acoord"
         disableGutters
