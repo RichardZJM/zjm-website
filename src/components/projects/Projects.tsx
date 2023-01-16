@@ -35,12 +35,13 @@ function Projects() {
           subtitle="Capstone: Development of a GUI based CFD model with OpenFOAM Solvers for Condair Inc."
           image={same}
           chips={[
+            "Ongoing",
             "Python",
             "OpenFOAM",
             "Fluid Mechanics",
             "Model Tuning and Optimization",
           ]}
-          description={"Hello"}
+          description={"The SAM-e is a steam distribution manifold manufactured by Condair Inc. As an undergraduate engineering capstone, a representative model is being created to help Condair experiment with model-driven design and develop the next generation of product. With a group of five students, an OpenFoam computational fluid dynamics model is being developed. Experimental data provided by Condair will be used to validate the model, on top which the team will create a user interfaces to increase usability for Condair engineering teams. "}
           explore={"https://youtu.be/Nsgq0Kj2ymU"}
         />
         <ProjectsCard

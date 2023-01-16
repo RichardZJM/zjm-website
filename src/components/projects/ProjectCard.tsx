@@ -12,7 +12,6 @@ import React, { useState } from "react";
 import "./ProjectsCard.css";
 
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import { useNavigate } from "react-router-dom";
 
 type ProjectsCardProps = {
   title: string;
@@ -93,7 +92,8 @@ function ProjectsCard(props: ProjectsCardProps) {
           <Typography variant="h6">{accordianHeaderText}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {props.description}
+          <Typography variant="body2"> {props.description}</Typography>
+          
           <div className="used-chip-container">
             {props.chips.map((ele) => (
               <Chip size="small" label={ele} />

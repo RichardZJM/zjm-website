@@ -1,0 +1,22 @@
+.same-capstone-article-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  width: 100%;
+}
+.same-capstone-section-container {
+  width: 45%;
+  min-width: 20rem;
+}
+
+.same-capstone-skills-container {
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem;
+  border: rgb(200, 163, 235) 2px solid;
+  border-radius: 1rem;
+  padding-left: 1.5rem;
+  box-shadow: 1rem;
+  box-shadow: 2px 4px 3px #00000046;
+}
