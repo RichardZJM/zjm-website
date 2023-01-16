@@ -9,6 +9,7 @@ import car from "../../images/projects/car.jpg";
 import lttp from "../../images/projects/lttp.jpg";
 import structural from "../../images/projects/structural.jpg";
 import apdl from "../../images/projects/apdltools.png";
+import same from "../../images/projects/same.png";
 
 function Projects() {
   return (
@@ -28,6 +29,20 @@ function Projects() {
           description={`An simulation tool that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specified. The solution is generated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! `}
           githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
           tryItOut="/projects/structural-solver"
+        />
+        <ProjectsCard
+          title="SAM-e Fluid Modelling"
+          subtitle="Capstone: Development of a GUI based CFD model with OpenFOAM Solvers for Condair Inc."
+          image={same}
+          chips={[
+            "Ongoing",
+            "Python",
+            "OpenFOAM",
+            "Fluid Mechanics",
+            "Model Tuning and Optimization",
+          ]}
+          description={"The SAM-e is a steam distribution manifold manufactured by Condair Inc. As an undergraduate engineering capstone, a representative model is being created to help Condair experiment with model-driven design and develop the next generation of product. With a group of five students, an OpenFoam computational fluid dynamics model is being developed. Experimental data provided by Condair will be used to validate the model, on top which the team will create a user interfaces to increase usability for Condair engineering teams. "}
+          explore={"https://youtu.be/Nsgq0Kj2ymU"}
         />
         <ProjectsCard
           title="Listen To the Path"

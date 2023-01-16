@@ -23,6 +23,12 @@
   gap: 1rem;
 }
 
+.project-click-wrapper {
+  width: 100%;
+  text-decoration: none;
+  color: black;
+}
+
 .project-title-container {
   padding: 1rem;
   width: fit-content;

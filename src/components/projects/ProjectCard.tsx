@@ -28,6 +28,8 @@ function ProjectsCard(props: ProjectsCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const accordianHeaderText = isOpen ? "Show Less" : "Read More";
 
+  const link = props.tryItOut || props.explore || props.githubLink;
+
   let buttons = (
     <div className="button-container">
       <ButtonGroup size="small" variant="contained">
@@ -65,12 +67,20 @@ function ProjectsCard(props: ProjectsCardProps) {
         style={{ backgroundImage: `url(${props.image})` }}
       >
         <Paper className="project-title-container">
-          <Typography variant="h5">{props.title}</Typography>
+          <a
+            href={link}
+            target="_blank"
+            className="project-click-wrapper"
+            rel="noreferrer"
+          >
+            <Typography variant="h5">{props.title}</Typography>
+          </a>
         </Paper>
         <Paper className="project-title-container">
           <Typography variant="body1">{props.subtitle}</Typography>
         </Paper>
       </div>
+
       <Accordion
         className="acoord"
         disableGutters
@@ -82,7 +92,8 @@ function ProjectsCard(props: ProjectsCardProps) {
           <Typography variant="h6">{accordianHeaderText}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {props.description}
+          <Typography variant="body2"> {props.description}</Typography>
+          
           <div className="used-chip-container">
             {props.chips.map((ele) => (
               <Chip size="small" label={ele} />
