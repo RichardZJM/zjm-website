@@ -21,7 +21,7 @@ function Contact() {
         <div className="contact-methods-grid">
           <ContactMethodCard
             title="Primary Email"
-            description="Image is used for spam mitigation. Currently may be inactive."
+            description="Image is used for spam mitigation."
             colour="#98b7f5"
             image={require("../../images/contact/primaryemail.png")}
             icon={<EmailIcon color="primary" fontSize="large" />}
@@ -39,7 +39,7 @@ function Contact() {
             description="Some personal information may be redacted. Full version to be provided upon request."
             colour="#98b7f5"
             icon={<ContactPageIcon color="primary" fontSize="large" />}
-            link="/resumes/Zijian_(Richard)_Meng_Resume_v2022-03.pdf"
+            link="/resumes/Zijian_(Richard)_Meng_Resume_v2023-01.pdf"
             buttonText="View Or Download"
           />
           <ContactMethodCard
@@ -52,7 +52,7 @@ function Contact() {
           />
           <ContactMethodCard
             title="Secondary Email"
-            description="Image is used for spam protection."
+            description="Image is used for spam mitigation."
             colour="#17bbc1"
             image={require("../../images/contact/secondaryemail.png")}
             icon={<EmailIcon color="secondary" fontSize="large" />}

@@ -15,6 +15,11 @@ root.render(
       @import
       url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Gantari:wght@100;300;400;700&display=swap');
     </style>
+    <style>
+      @import
+      url('https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap');
+    </style>
+
     <BrowserRouter>
       <ScrollToTop />
       <App />
