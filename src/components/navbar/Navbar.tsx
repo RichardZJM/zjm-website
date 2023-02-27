@@ -22,7 +22,7 @@ import "./Navbar.css";
 function Navbar() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigator = useNavigate();
-  const smallScreen = useMediaQuery("(max-width:720px)");
+  const smallScreen = useMediaQuery("(max-width:800px)");
 
   const navContent = (
     <>
@@ -121,11 +121,11 @@ function Navbar() {
             backgroundColor: "white",
             borderRadius: "20px",
             padding: "0",
-            marginLeft: "1rem",
+            marginLeft: "0rem",
           }}
           style={{ backgroundColor: "white" }}
         >
-          <ZJMLogo height="4rem" width="6rem" />
+          <ZJMLogo height="3.5rem" width="5rem" />
         </Button>
         {barContent}
       </Toolbar>

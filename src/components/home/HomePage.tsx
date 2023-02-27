@@ -71,7 +71,7 @@ function HomePage(props: { welcomeMessage: string }) {
             <img
               data-aos="flip-right"
               className="drawn-profile-pic"
-              src={require("../../images/PFP.png")}
+              src={require("../../images/PFP3.jpg")}
               alt=" Profile of Zijian (Richard) Meng"
             />
             <Paper
@@ -134,31 +134,31 @@ function HomePage(props: { welcomeMessage: string }) {
           }}
         >
           <OptionsCard
-            image={require("../../images/aboutBG.png")}
+            image={require("../../images/homeOptions/aboutBG.png")}
             title="About"
             description=" Introduction, personal interests, career goals."
             link="/about"
           />
           <OptionsCard
-            image={require("../../images/workBG.jpg")}
+            image={require("../../images/homeOptions/workBG.jpg")}
             title="Work Experience"
             description="Work experience. Applied skills, overview, and references."
             link="/work-experience"
           />
           <OptionsCard
-            image={require("../../images/engineeringBG.jpg")}
+            image={require("../../images/homeOptions/engineeringBG.jpg")}
             title="Projects"
             description="Personal projects, capstone, research projects. Demos and code."
             link="/projects"
           />
           <OptionsCard
-            image={require("../../images/skillsBG.jpg")}
+            image={require("../../images/homeOptions/skillsBG.jpg")}
             title="Skills"
             description="Technical and professional skill summary."
             link="/skills"
           />
           <OptionsCard
-            image={require("../../images/contactBG.jpg")}
+            image={require("../../images/homeOptions/contactBG.jpg")}
             title="Contact Me!"
             description="Contact Info, Github, Resume, LinkedIn."
             link="/contact"
