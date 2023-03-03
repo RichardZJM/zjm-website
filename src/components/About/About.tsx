@@ -1,16 +1,16 @@
 import { Typography, Paper, Container, Chip, useTheme } from "@mui/material";
 import React from "react";
 import "./About.css";
-import SWCard from "./SWCard";
+// import SWCard from "./SWCard";
 
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import SchoolIcon from "@mui/icons-material/School";
-import SmsIcon from "@mui/icons-material/Sms";
-import WorkIcon from "@mui/icons-material/Work";
+// import AccountTreeIcon from "@mui/icons-material/AccountTree";
+// import SchoolIcon from "@mui/icons-material/School";
+// import SmsIcon from "@mui/icons-material/Sms";
+// import WorkIcon from "@mui/icons-material/Work";
 
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
-import EggIcon from "@mui/icons-material/Egg";
-import SearchIcon from "@mui/icons-material/Search";
+// import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+// import EggIcon from "@mui/icons-material/Egg";
+// import SearchIcon from "@mui/icons-material/Search";
 
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
@@ -98,16 +98,14 @@ function About() {
           <Paper className="career-goals">
             <Typography variant="h5">A Combination of Interests</Typography>
             <Typography variant="h6">
-              An ideal path would combine aspects of my interests...
-              <br /> and pay decently...
-              <br />
-              There are some ideas in mind.
+              An ideal path would combine my strengths and interests in
+              computing and engineering...
             </Typography>
           </Paper>
           <div className="goals-chips-container">
             <Chip color="secondary" label="Master's Degree" />
             <Chip color="secondary" label="Software Enginering Job" />
-            <Chip color="secondary" label="Robotics Engineering" />
+            <Chip color="secondary" label="Computational Sciences" />
             <Chip color="secondary" label="Mechanical Engineer" />
             <Chip
               color="secondary"
@@ -116,7 +114,7 @@ function About() {
             />
           </div>
         </div>
-        <div className="strengths-weaknesses-container">
+        {/* <div className="strengths-weaknesses-container">
           <div className="s-w-wrapper">
             <Typography variant="h3" color="white" sx={{ fontWeight: "600" }}>
               Strengths
@@ -175,7 +173,7 @@ function About() {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </Container>
   );

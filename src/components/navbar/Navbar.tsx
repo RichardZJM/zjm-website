@@ -121,7 +121,7 @@ function Navbar() {
             backgroundColor: "white",
             borderRadius: "20px",
             padding: "0",
-            marginLeft: "0rem",
+            marginLeft: "0.5rem",
           }}
           style={{ backgroundColor: "white" }}
         >
