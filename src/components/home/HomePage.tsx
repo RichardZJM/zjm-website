@@ -35,8 +35,6 @@ function HomePage(props: { welcomeMessage: string }) {
             margin: "2rem 0 3rem 0",
           }}
         >
-          <ZJMLogo height="fit-content(24rem)" width="auto" auto={true} />
-
           <Paper
             data-aos="fade-up"
             data-aos-duration="1500"
@@ -48,6 +46,7 @@ function HomePage(props: { welcomeMessage: string }) {
               fontSize: "12vw",
             }}
           >
+            <ZJMLogo height="fit-content(24rem)" width="auto" auto={true} />
             <Typography
               variant="h1"
               sx={{
