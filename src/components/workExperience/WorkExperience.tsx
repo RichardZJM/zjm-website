@@ -10,7 +10,7 @@ function WorkExperience() {
       <Container maxWidth="xl">
         <WorkExperienceCard
           image={require("../../images/hanonSystemsLogo.jpg")}
-          title="Mechanical Engineering Intern"
+          title="Product Engineering Intern"
           employer="Hanon Systems Canada Inc."
           dates="May 2021 — June 2022"
           description="R&D Fluid Transport. Development of Ford, GM, Lucid HVAC fluid line prototypes."
