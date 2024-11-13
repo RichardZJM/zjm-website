@@ -33,16 +33,10 @@ function HanonSystems() {
           color="primary"
           textAlign="center"
           marginTop="2rem"
-          data-aos="fade-up"
         >
           Hanon Systems Canada Inc.
         </Typography>
-        <Typography
-          variant="h4"
-          color="secondary"
-          textAlign="center"
-          data-aos="fade-up"
-        >
+        <Typography variant="h4" color="secondary" textAlign="center">
           May 2021 — June 2022
         </Typography>
         <div className="job-description-container">
@@ -52,7 +46,6 @@ function HanonSystems() {
             maxWidth="30rem"
             paddingLeft="1rem"
             color="secondary"
-            data-aos="fade-right"
           >
             Hanon Systems is a global maufacturer of automotive thermal
             solutions. I was under R&D HVAC Fluid Transport, developing
@@ -64,17 +57,11 @@ function HanonSystems() {
             className="hanon-image"
             src={require("../../../images/hanonSystemsLogo.jpg")}
             alt="Hanon Systems'Logo"
-            data-aos="fade-left"
           />
         </div>
 
         <div className="split-container">
-          <Typography
-            variant="h4"
-            textAlign="center"
-            color="primary"
-            data-aos="flip-up"
-          >
+          <Typography variant="h4" textAlign="center" color="primary">
             Key Duties
           </Typography>
           <ul className="duties-list">

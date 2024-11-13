@@ -95,7 +95,7 @@ function HomePage(props: { welcomeMessage: string }) {
         </Container>
       </section>
       <Featured />
-      <section className="quick-options section-container">
+      {/* <section className="quick-options section-container">
         <Typography
           variant="h4"
           sx={{
@@ -163,7 +163,7 @@ function HomePage(props: { welcomeMessage: string }) {
             link="/contact"
           />
         </Box>
-      </section>
+      </section> */}
     </>
   );
 }
