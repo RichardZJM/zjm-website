@@ -48,14 +48,14 @@ function Experience() {
                   description="Researched, designed, manufactured, and tested the anti-roll bar as part of the Queen's Baja SAE off-road vehicle design team. Usage ANSYS and SolidWorks; common machining operations such as milling and turning."
                   color={"#8ABACC"}
                 />
-                {/* <WorkCard
+                <WorkCard
                   image={automatic}
                   title="Teaching Assistant"
                   employer="Automatic Controls Course"
                   location="Winter 23'"
                   description="TA for grading and organization and "
                   color={"#B9D6D9"}
-                /> */}
+                />
                 <WorkCard
                   image={cad}
                   title="Lead Lab Teaching Assistant"
@@ -63,7 +63,7 @@ function Experience() {
                   location="Fall 23', 24'"
                   description="Led and organized 2 other TAs in lab sessions containing 80 students.
                   Performed live demonstrations including technical drawing skills and CAD software using SolidWorks, presenting and explaining content. Supervision of students, mentorship of smaller groups, tutorials, and marking."
-                  color={"#F8F5E2"}
+                  color={"#d9dad8"}
                 />
                 <WorkCard
                   image={hanon}
@@ -73,7 +73,7 @@ function Experience() {
                   link="/experience/hanon-systems"
                   description="”Best engineering intern in the history of Hanon Belleville” - Former Manager (Click for Ref. Ltr.). Developed and organized the builds of fluid transport prototypes for automotive thermal solutions and HVAC. Work included projects for electric vehicles from Ford, GM, and Lucid. Completed 342 prototype build requests under historically high demand. Click to read more. 
                   "
-                  color={"#FDFBEF"}
+                  color={"#f4eed2"}
                 />
               </div>
             </div>
