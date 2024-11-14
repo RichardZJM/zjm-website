@@ -6,15 +6,18 @@ import WorkCard from "./WorkCard";
 
 import "./SkillsAndWork.css";
 
-import python from "../../images/skills/python.jpg";
-import cSharp from "../../images/skills/cSharp.jpg";
-import cad from "../../images/skills/cad.jpeg";
-import manufacturing from "../../images/skills/manufacturing.jpeg";
+import python from "../../images/experience/python.jpg";
+import hanon from "../../images/experience/hanonSystems.jpg";
+import cSharp from "../../images/experience/cSharp.jpg";
+import snow from "../../images/experience/snow.jpg";
+import cad from "../../images/experience/cad.jpg";
+import automatic from "../../images/experience/automatic.jpeg";
+import manufacturing from "../../images/experience/manufacturing.jpeg";
 
-import communication from "../../images/skills/communication.jpg";
-import time from "../../images/skills/time.jpg";
-import problemSolving from "../../images/skills/problemSolving.jpg";
-import adaptability from "../../images/skills/adaptability.jpg";
+import communication from "../../images/experience/communication.jpg";
+import time from "../../images/experience/time.jpg";
+import problemSolving from "../../images/experience/problemSolving.jpg";
+import adaptability from "../../images/experience/adaptability.jpg";
 
 function Experience() {
   const theme = useTheme();
@@ -38,36 +41,39 @@ function Experience() {
               </Paper>
               <div className="experience-container">
                 <WorkCard
-                  image={cSharp}
-                  title="Queen's Baja Sae"
-                  location="2021 - 2034"
-                  description="Java and C# experience building applications. Usage of common tools like collections, streams, and applied object oriented programming. Unity."
-                  color={theme.palette.primary.main}
+                  image={snow}
+                  title="Queen's Baja SAE"
+                  employer="Queen's Baja SAE Design Team"
+                  location="2019-2020"
+                  description="Researched, designed, manufactured, and tested the anti-roll bar as part of the Queen's Baja SAE off-road vehicle design team. Usage ANSYS and SolidWorks; common machining operations such as milling and turning."
+                  color={"#8ABACC"}
                 />
-                <WorkCard
-                  image={cad}
+                {/* <WorkCard
+                  image={automatic}
                   title="Teaching Assistant"
-                  location="2021 - 2034"
-                  description="Usage of CAD software, SolidWorks, for design and analysis. Experience from design teams and coursework."
-                  color={theme.palette.primary.main}
-                />
-                <WorkCard
-                  image={manufacturing}
-                  title="Lead Lab Teaching Assistant"
-                  employer="Engineering Graphics"
-                  location="Fall 23', 24'"
-                  description="Experience with common manufacturing methods such as milling, drilling, tube bending, crimping, brazing."
-                  color={"#FFFFFF"}
-                />
+                  employer="Automatic Controls Course"
+                  location="Winter 23'"
+                  description="TA for grading and organization and "
+                  color={"#B9D6D9"}
+                /> */}
                 <WorkCard
                   image={cad}
+                  title="Lead Lab Teaching Assistant"
+                  employer="Engineering Graphics Course"
+                  location="Fall 23', 24'"
+                  description="Led and organized 2 other TAs in lab sessions containing 80 students.
+                  Performed live demonstrations including technical drawing skills and CAD software using SolidWorks, presenting and explaining content. Supervision of students, mentorship of smaller groups, tutorials, and marking."
+                  color={"#F8F5E2"}
+                />
+                <WorkCard
+                  image={hanon}
                   title="Product Engineering Intern"
                   employer="Hanon Systems Canada"
                   location="05/21' – 06/22'"
                   link="/experience/hanon-systems"
-                  description="”Best engineering intern in the history of Hanon Belleville” - Former Manager (From Available Ref. Ltr.). Developed and organized the builds of fluid transport prototypes for automotive thermal solutions and HVAC. Work included projects for electric vehicles from Ford, GM, and Lucid. Completed 342 prototype build requests under historically high demand. Click the title to read more. 
+                  description="”Best engineering intern in the history of Hanon Belleville” - Former Manager (Click for Ref. Ltr.). Developed and organized the builds of fluid transport prototypes for automotive thermal solutions and HVAC. Work included projects for electric vehicles from Ford, GM, and Lucid. Completed 342 prototype build requests under historically high demand. Click to read more. 
                   "
-                  color={theme.palette.background.paper}
+                  color={"#FDFBEF"}
                 />
               </div>
             </div>

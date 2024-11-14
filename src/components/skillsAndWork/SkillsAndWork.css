@@ -10,7 +10,7 @@
   grid-template-columns: 1fr 1fr;
   width: 100%;
   overflow-y: hidden;
-  background-image: url("../../images/skills/background.jpg");
+  background-image: url("../../images/experience/background.jpg");
   background-size: cover;
   background-position: center;
   padding: 2rem 0;
@@ -33,10 +33,15 @@
 
 .experience-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   width: 100%;
   overflow-y: hidden;
+}
+
+.experience-container > *:nth-child(n) {
+  z-index: calc(1);
+  /* Forcing all the children to have a fixed z-order fixes shennanigans with shifting z-order */
 }
 
 @media only screen and (max-width: 1000px) {

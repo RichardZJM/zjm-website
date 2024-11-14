@@ -17,15 +17,13 @@ function WorkCard(props: WorkCardProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
-  // Adjust font size for both title and description
   useEffect(() => {
     const resizeText = (element: HTMLElement | null, startingSize: number) => {
       if (!element) return;
 
-      let fontSize = startingSize; // Starting font size
+      let fontSize = startingSize;
       element.style.fontSize = `${fontSize}px`;
 
-      // Decrease font size until text fits within the container
       while (
         element.scrollWidth > element.clientWidth ||
         element.scrollHeight > element.clientHeight
@@ -35,22 +33,24 @@ function WorkCard(props: WorkCardProps) {
       }
     };
 
+    // Store the current references to title and description elements
+    const titleElement = titleRef.current;
+    const descriptionElement = descriptionRef.current;
+
     // Apply resizing to title and description elements
-    resizeText(titleRef.current, 35);
-    resizeText(descriptionRef.current, 20);
+    resizeText(titleElement, 25);
+    resizeText(descriptionElement, 20);
 
-    // Run on load and resize
-    window.addEventListener("resize", () => {
-      resizeText(titleRef.current, 35);
-      resizeText(descriptionRef.current, 20);
-    });
+    // Resize handler for window resize events
+    const handleResize = () => {
+      resizeText(titleElement, 25);
+      resizeText(descriptionElement, 20);
+    };
 
-    return () =>
-      window.removeEventListener("resize", () => {
-        resizeText(titleRef.current, 35);
-        resizeText(descriptionRef.current, 20);
-      });
-  }, [props.title, props.description]); // Re-run effect if title or description changes
+    // Add and clean up the resize event listener
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [props.title, props.description]);
 
   const navigate = useNavigate();
   const handleLinkClick = () => {
@@ -59,15 +59,12 @@ function WorkCard(props: WorkCardProps) {
     }
   };
 
-  let cursor = "default";
-  if (props.link) {
-    cursor = "pointer";
-  }
+  const cursor = props.link ? "pointer" : "default";
 
   return (
     <article
       onClick={handleLinkClick}
-      className="work-card"
+      className={`work-card ${props?.link ? "link-hover" : ""}`}
       style={{ backgroundColor: props.color, cursor: cursor }}
     >
       <div
@@ -81,20 +78,20 @@ function WorkCard(props: WorkCardProps) {
         </Paper>
       </div>
       <div className="work-description-container">
-        {props?.employer && (
-          <Typography
-            sx={{
-              fontFamily: "Oxygen",
-              fontSize: "30",
-              fontWeight: "700",
-            }}
-          >
-            {props.employer}
-          </Typography>
-        )}
-        <Typography sx={{ marginBottom: "0.5rem" }}>
-          {props.location}
-        </Typography>
+        <div>
+          {props?.employer && (
+            <Typography
+              sx={{
+                fontFamily: "Oxygen",
+                fontSize: "30",
+                fontWeight: "700",
+              }}
+            >
+              {props.employer}
+            </Typography>
+          )}
+          <Typography sx={{ marginTop: "0.5rem" }}>{props.location}</Typography>
+        </div>
         <div>
           <p className="description-text" ref={descriptionRef}>
             {props.description}

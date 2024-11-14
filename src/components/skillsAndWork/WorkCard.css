@@ -4,7 +4,7 @@
   max-width: 60rem;
   display: grid;
   grid-template-columns: 2fr 3fr;
-  border-radius: 0 2rem 0 0;
+  border-radius: 0 0 2rem 0;
   overflow: hidden;
   border: 2px solid rgb(255, 255, 255);
   transition: all 0.2s;
@@ -18,10 +18,11 @@
 
 .work-image-container {
   background-size: cover;
+  background-position: center;
   display: inline-flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 2rem;
+  align-items: center;
+  flex-direction: column-reverse;
+  padding: 0.7rem 0;
   max-width: 100%;
   overflow: hidden;
 }
@@ -43,7 +44,8 @@
 
 .work-description-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  justify-content: space-between;
   padding: 1rem;
   overflow: hidden;
 }
@@ -53,17 +55,24 @@
 }
 
 .work-card:hover ~ .work-card {
-  transform: translateY(14rem);
+  transform: translateY(-14rem);
 }
 
 .work-card:not(:first-child) {
-  margin-top: -14rem;
+  margin-bottom: -14rem;
   box-shadow: 0.25rem -0.75rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.link-hover:hover {
+  filter: brightness(0.92);
+  cursor: pointer;
 }
 
 .description-text {
   padding: 0;
-  margin: 0;
   font-weight: 300;
   max-height: 13rem;
+  flex-grow: 1;
+  vertical-align: top;
+  flex-grow: 1;
 }
