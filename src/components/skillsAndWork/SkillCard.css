@@ -10,6 +10,12 @@
   transition: all 0.2s;
 }
 
+@media only screen and (max-width: 1200px) {
+  .skill-card {
+    max-width: 40rem;
+  }
+}
+
 .skill-image-container {
   background-size: cover;
   background-position: center;
