@@ -19,16 +19,9 @@ function Footer() {
       <Button
         variant="outlined"
         size="small"
-        onClick={() => navigate("/work-experience")}
+        onClick={() => navigate("/experience")}
       >
-        Work Experience
-      </Button>
-      <Button
-        variant="outlined"
-        size="small"
-        onClick={() => navigate("/skills")}
-      >
-        Skills
+        Experience
       </Button>
       <Button
         variant="outlined"
@@ -50,7 +43,7 @@ function Footer() {
         src={require("../../images/ZJM_Logo.png")}
         alt="ZJM's Logo"
       ></img>
-      <Typography>Zijian Meng's E-Portfolio and Website 2023</Typography>
+      <Typography>Zijian Meng's E-Portfolio and Website 2024</Typography>
     </BottomNavigation>
   );
 }

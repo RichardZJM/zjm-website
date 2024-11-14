@@ -39,7 +39,7 @@ function Contact() {
             description="Some personal information may be redacted. Full version to be provided upon request."
             colour="#98b7f5"
             icon={<ContactPageIcon color="primary" fontSize="large" />}
-            link="/resumes/Zijian_(Richard)_Meng_Resume_v2023-01.pdf"
+            link="/resumes/Zijian_(Richard)_Meng_Resume_v2024-03.pdf"
             buttonText="View Or Download"
           />
           <ContactMethodCard
@@ -63,7 +63,7 @@ function Contact() {
           <ContactMethodCard
             title="Location"
             colour="#17bbc1"
-            description="Currently completing undergraduate studies in Kingston, ON. Hometown of Ottawa, ON. Canada."
+            description="Currently completing MASc studies in Kingston, ON. Hometown of Ottawa, ON. Canada."
             icon={<PublicIcon color="secondary" fontSize="large" />}
             buttonText="See Profile"
           />

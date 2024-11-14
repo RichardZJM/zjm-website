@@ -9,8 +9,8 @@ import possibleWelcomeMessages from "./components/WelcomeMessages";
 import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 import Footer from "./components/footer/Footer";
-import About from "./components/About/About";
-import Skills from "./components/skills/Skills";
+import About from "./components/about/About";
+import Experience from "./components/skillsAndWork/SkillsAndWork";
 import Projects from "./components/projects/Projects";
 import StructuralSolverApp from "./components/projects/structuralSolver/StructuralSolverApp";
 import Contact from "./components/contact/Contact";
@@ -35,12 +35,8 @@ function App() {
             element={<HomePage welcomeMessage={welcomeMessage} />}
           />
           <Route path="about" element={<About />} />
-          <Route path="work-experience" element={<WorkExperience />} />
-          <Route
-            path="work-experience/hanon-systems"
-            element={<HanonSystems />}
-          />
-          <Route path="skills" element={<Skills />} />
+          <Route path="experience" element={<Experience />} />
+          <Route path="experience/hanon-systems" element={<HanonSystems />} />
           <Route path="projects" element={<Projects />} />
           <Route
             path="projects/structural-solver"

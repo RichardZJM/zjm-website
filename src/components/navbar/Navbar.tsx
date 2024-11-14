@@ -27,8 +27,7 @@ function Navbar() {
   const navContent = (
     <>
       <NavButton buttonText="About" to="about" />
-      <NavButton buttonText="Work" to="work-experience" />
-      <NavButton buttonText="Skills" to="skills" />
+      <NavButton buttonText="Experience" to="experience" />
       <NavButton buttonText="Projects" to="projects" />
       <NavButton buttonText="Contact" to="contact" />
     </>
@@ -78,19 +77,11 @@ function Navbar() {
           </MenuItem>
           <MenuItem
             onClick={() => {
-              navigator("work-experience");
+              navigator("experience");
               handleClose();
             }}
           >
-            <Typography variant="h6">Work Experience</Typography>
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              navigator("skills");
-              handleClose();
-            }}
-          >
-            <Typography variant="h6">Skills</Typography>
+            <Typography variant="h6">Experience</Typography>
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -106,7 +97,7 @@ function Navbar() {
               handleClose();
             }}
           >
-            <Typography variant="h6">Contact Me!</Typography>
+            <Typography variant="h6">Contact</Typography>
           </MenuItem>
         </div>
       </Menu>

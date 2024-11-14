@@ -35,8 +35,6 @@ function HomePage(props: { welcomeMessage: string }) {
             margin: "2rem 0 3rem 0",
           }}
         >
-          <ZJMLogo height="fit-content(24rem)" width="auto" auto={true} />
-
           <Paper
             data-aos="fade-up"
             data-aos-duration="1500"
@@ -48,6 +46,7 @@ function HomePage(props: { welcomeMessage: string }) {
               fontSize: "12vw",
             }}
           >
+            <ZJMLogo height="fit-content(24rem)" width="auto" auto={true} />
             <Typography
               variant="h1"
               sx={{
@@ -71,7 +70,7 @@ function HomePage(props: { welcomeMessage: string }) {
             <img
               data-aos="flip-right"
               className="drawn-profile-pic"
-              src={require("../../images/PFP3.jpg")}
+              src={require("../../images/PFP4.jpg")}
               alt=" Profile of Zijian (Richard) Meng"
             />
             <Paper
@@ -96,7 +95,7 @@ function HomePage(props: { welcomeMessage: string }) {
         </Container>
       </section>
       <Featured />
-      <section className="quick-options section-container">
+      {/* <section className="quick-options section-container">
         <Typography
           variant="h4"
           sx={{
@@ -164,7 +163,7 @@ function HomePage(props: { welcomeMessage: string }) {
             link="/contact"
           />
         </Box>
-      </section>
+      </section> */}
     </>
   );
 }

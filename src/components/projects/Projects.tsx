@@ -11,6 +11,7 @@ import structuralSimBG from "../../images/projects/structural.jpg";
 import apdlBG from "../../images/projects/apdltools.png";
 import sameCFDBG from "../../images/projects/same.png";
 import mdTrainingBG from "../../images/projects/mtp.jpg";
+import smallCellBG from "../../images/projects/smallcell.png";
 import websiteBG from "../../images/projects/website.jpg";
 
 function Projects() {
@@ -18,8 +19,41 @@ function Projects() {
     <Container maxWidth="xl">
       <section className="projects-container">
         <ProjectsCard
+          title="Research Paper: Small Cells, Big Speedups"
+          subtitle="Fast Active Learning of Machine Learning Interatomic Potentials"
+          image={smallCellBG}
+          chips={[
+            "Submission Pending",
+            "Machine Learning",
+            "Active Learning",
+            "HPC Clusters",
+            "Molecular Dynamics",
+            "DFT",
+          ]}
+          description={`Submitting to Computational Materials Science. Machine learning interatomic potentials (MLIPs) often use on-the-fly active learning, adding configurations from simulated trajectories, but large-cell ab initio calculations are costly. We developed a small-cell training protocol for MLIPs that preserves quality while cutting computational costs. Our approach shows that training with smaller systems (1 to 16 atoms) achieves similar accuracy. In a potassium case study, we applied active learning with 2-atom models, incrementally adding atoms and reducing costs by up to two orders of magnitude compared to 54-atom cells. Static and thermodynamic properties matched large-cell results, capturing essential data for modeling large-scale phenomena. We benchmarked protocol variations and provided recommendations.`}
+          githubLink="https://github.com/RichardZJM/Small-Cell-MTP-training"
+        />
+
+        <ProjectsCard
+          title="FEM Pin-Jointed Structure Simulator"
+          subtitle="Finite Element Simulation of User-Defined Structures Under Gravitational Load"
+          image={structuralSimBG}
+          chips={[
+            "React",
+            "Finite Element",
+            "Energy Minimization",
+            "Structural Analysis",
+            "Graph Theory",
+            "Numerical Optimization",
+          ]}
+          description={`An FEM simulation tool/game that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specified. The solution is then calculated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! Prototyped in Python, built with React.`}
+          githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
+          tryItOut="/projects/structural-solver"
+        />
+
+        <ProjectsCard
           title="Machine Learning Interatomic Potential Training"
-          subtitle="Undergraduate Research Project: Training of a Potassium Metal Potential for Molecular Dynamics"
+          subtitle="Winner of Arkley Prize: ML Training of Potentials for Molecular Dynamics"
           image={mdTrainingBG}
           chips={[
             "Ongoing",
@@ -29,33 +63,15 @@ function Projects() {
             "Molecular Dynamics",
             "DFT",
           ]}
-          description={`Undergraduate Research Project. Molecular dynamics simulations depend on interatomic potentials to describe the movement of atoms as classical particles. Quantum chemistry techniques like Density Functional Theory provide an accurate but infeasibly expensive solution. Machine learning potentials can provide practical prediction models through training on quantum mechanical datasets. As part of the Queen's Nuclear Group, datasets are generated and processed on Compute Canada HPC clusters. Subsequent active and passive training of an MTP model is used to generate a potassium metal model which is validated against DFT results and physical property prediction.`}
+          description={`Winner of Arkley Prize for best Mech Eng. Undergraduate Research Project supported by oral presentation. Molecular dynamics simulations depend on interatomic potentials to describe the movement of atoms as classical particles. Quantum chemistry techniques like Density Functional Theory provide an accurate but infeasibly expensive solution. Machine learning potentials can provide practical prediction models through training on quantum mechanical datasets. As part of the Queen's Nuclear Group, datasets are generated and processed on Compute Canada HPC clusters. Subsequent active and passive training of an MTP model is used to generate a potassium metal model which is validated against DFT results and physical property prediction.`}
           githubLink="https://github.com/RichardZJM/K-MTP-training"
         />
 
         <ProjectsCard
-          title="Pin-Jointed Structure Simulator"
-          subtitle="Simulation of User-Defined Structures Under Gravitational Load"
-          image={structuralSimBG}
-          chips={[
-            "React",
-            "TypeScript",
-            "Energy Minimization",
-            "Structural Analysis",
-            "Graph Theory",
-            "Numerical Optimization",
-          ]}
-          description={`A simulation tool that calculates the stress and deformation of a pin-jointed structure under load. Users can use the interactive GUI to graphically plot free and fixed nodes. Links are defined through the selection of nodes. The structure's material and link profile design can also be specified. The solution is then calculated through potential energy minimization and stresses are plotted by colour. Try it out and simulate classic structures like towers, bridges, and cantilevers! Prototyped in Python, built with React.`}
-          githubLink="https://github.com/RichardZJM/zjm-website/tree/structural-solver/src/components/projects/structuralSolver"
-          tryItOut="/projects/structural-solver"
-        />
-
-        <ProjectsCard
           title="SAM-e Fluid Modelling"
-          subtitle="Capstone: Development of a GUI based CFD model with OpenFOAM Solvers for Condair Inc."
+          subtitle="PEO Engineering Competition 3rd Place: CFD Simulation of Steam Manifold."
           image={sameCFDBG}
           chips={[
-            "Ongoing",
             "Python",
             "OpenFOAM",
             "Fluid Mechanics",
