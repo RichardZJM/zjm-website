@@ -25,8 +25,10 @@ function WorkCard(props: WorkCardProps) {
       element.style.fontSize = `${fontSize}px`;
 
       while (
-        element.scrollWidth > element.clientWidth ||
-        element.scrollHeight > element.clientHeight
+        (element.scrollWidth > element.clientWidth &&
+          element.clientWidth > 0) || // Check for clientWidth > 0
+        (element.scrollHeight > element.clientHeight &&
+          element.clientHeight > 0) // Check for clientHeight >
       ) {
         fontSize--;
         element.style.fontSize = `${fontSize}px`;
@@ -34,23 +36,29 @@ function WorkCard(props: WorkCardProps) {
     };
 
     // Store the current references to title and description elements
-    const titleElement = titleRef.current;
-    const descriptionElement = descriptionRef.current;
+    const currentTitleRef = titleRef.current;
+    const currentDescriptionRef = descriptionRef.current;
 
     // Apply resizing to title and description elements
-    resizeText(titleElement, 25);
-    resizeText(descriptionElement, 20);
+    resizeText(currentTitleRef, 25);
+    resizeText(currentDescriptionRef, 20);
 
     // Resize handler for window resize events
     const handleResize = () => {
-      resizeText(titleElement, 25);
-      resizeText(descriptionElement, 20);
+      resizeText(currentTitleRef, 25);
+      resizeText(currentDescriptionRef, 20);
     };
 
-    // Add and clean up the resize event listener
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [props.title, props.description]);
+    const observer = new ResizeObserver(handleResize);
+    if (currentTitleRef) observer.observe(currentTitleRef);
+    if (currentDescriptionRef) observer.observe(currentDescriptionRef);
+
+    return () => {
+      if (currentTitleRef) observer.unobserve(currentTitleRef);
+      if (currentDescriptionRef) observer.unobserve(currentDescriptionRef);
+      observer.disconnect();
+    };
+  }, []);
 
   const navigate = useNavigate();
   const handleLinkClick = () => {

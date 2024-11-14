@@ -40,12 +40,16 @@ function SkillCard(props: SkillCardProps) {
       resizeText(currentDescriptionRef); // Use the stored value
     };
 
-    window.addEventListener("resize", handleResize);
+    const observer = new ResizeObserver(handleResize);
+    if (currentTitleRef) observer.observe(currentTitleRef);
+    if (currentDescriptionRef) observer.observe(currentDescriptionRef);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Correct cleanup
+      if (currentTitleRef) observer.unobserve(currentTitleRef);
+      if (currentDescriptionRef) observer.unobserve(currentDescriptionRef);
+      observer.disconnect();
     };
-  }, [props.title, props.description]);
+  }, []);
 
   return (
     <article className="skill-card" style={{ backgroundColor: props.color }}>
