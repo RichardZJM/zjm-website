@@ -17,7 +17,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 function About() {
   const theme = useTheme();
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" disableGutters>
       <section className="about-container">
         <div className="location-container">
           <Typography variant="h3" color="white" sx={{ fontWeight: "700" }}>

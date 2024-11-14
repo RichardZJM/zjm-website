@@ -9,7 +9,7 @@ import possibleWelcomeMessages from "./components/WelcomeMessages";
 import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 import Footer from "./components/footer/Footer";
-import About from "./components/About/About";
+import About from "./components/about/About";
 import Experience from "./components/skillsAndWork/SkillsAndWork";
 import Projects from "./components/projects/Projects";
 import StructuralSolverApp from "./components/projects/structuralSolver/StructuralSolverApp";

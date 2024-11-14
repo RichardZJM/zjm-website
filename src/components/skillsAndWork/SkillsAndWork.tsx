@@ -23,7 +23,7 @@ function Experience() {
   const theme = useTheme();
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" disableGutters>
         <section className="experience-section">
           <div className="experience-grid">
             <div className="experience-type-wrapper top-wrapper">

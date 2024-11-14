@@ -1,7 +1,7 @@
 .work-card {
   height: 20rem;
   width: 90%;
-  max-width: 60rem;
+  max-width: 64rem;
   display: grid;
   grid-template-columns: 2fr 3fr;
   border-radius: 0 0 2rem 0;
@@ -32,6 +32,7 @@
   padding: 0.5rem;
   overflow: hidden;
   max-width: 85%;
+  width: 85%;
 }
 
 .title-text {
@@ -55,12 +56,12 @@
 }
 
 .work-card:hover ~ .work-card {
-  transform: translateY(-14rem);
+  transform: translateY(-13rem);
 }
 
 .work-card:not(:first-child) {
   margin-bottom: -14rem;
-  box-shadow: 0.25rem -0.75rem 0.75rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0.25rem 0.75rem 0.75rem rgba(0, 0, 0, 0.15);
 }
 
 .link-hover:hover {
@@ -69,7 +70,7 @@
 }
 
 .description-text {
-  padding: 0;
+  padding-top: 0.5rem;
   font-weight: 300;
   max-height: 13rem;
   flex-grow: 1;
