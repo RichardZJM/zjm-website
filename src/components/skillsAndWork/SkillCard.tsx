@@ -13,15 +13,16 @@ function SkillCard(props: SkillCardProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
-  // Adjust font size for both title and description
   useEffect(() => {
+    const currentTitleRef = titleRef.current; // Store current ref value
+    const currentDescriptionRef = descriptionRef.current; // Store current ref value
+
     const resizeText = (element: HTMLElement | null) => {
       if (!element) return;
 
-      let fontSize = 25; // Starting font size
+      let fontSize = 25;
       element.style.fontSize = `${fontSize}px`;
 
-      // Decrease font size until text fits within the container
       while (
         element.scrollWidth > element.clientWidth ||
         element.scrollHeight > element.clientHeight
@@ -31,22 +32,20 @@ function SkillCard(props: SkillCardProps) {
       }
     };
 
-    // Apply resizing to title and description elements
-    resizeText(titleRef.current);
-    resizeText(descriptionRef.current);
+    resizeText(currentTitleRef); // Use the stored value
+    resizeText(currentDescriptionRef); // Use the stored value
 
-    // Run on load and resize
-    window.addEventListener("resize", () => {
-      resizeText(titleRef.current);
-      resizeText(descriptionRef.current);
-    });
+    const handleResize = () => {
+      resizeText(currentTitleRef); // Use the stored value
+      resizeText(currentDescriptionRef); // Use the stored value
+    };
 
-    return () =>
-      window.removeEventListener("resize", () => {
-        resizeText(titleRef.current);
-        resizeText(descriptionRef.current);
-      });
-  }, [props.title, props.description]); // Re-run effect if title or description changes
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Correct cleanup
+    };
+  }, [props.title, props.description]);
 
   return (
     <article className="skill-card" style={{ backgroundColor: props.color }}>

@@ -1,12 +1,10 @@
-import { Box, Paper, Typography, useTheme } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ZJMLogo from "../ZJMLogo";
 import "./HomePage.css";
-import OptionsCard from "../OptionsCard";
-// import About from "../About/About";
 import Featured from "../featured/Featured";
 
 /**
@@ -14,8 +12,6 @@ import Featured from "../featured/Featured";
  * @returns JSX of the Home Page
  */
 function HomePage(props: { welcomeMessage: string }) {
-  const theme = useTheme();
-
   React.useEffect(() => {
     AOS.init({ duration: 600, once: true });
     AOS.refresh();

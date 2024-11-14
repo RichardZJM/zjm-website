@@ -6,7 +6,6 @@ import HomePage from "./components/home/HomePage";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/Theming";
 import possibleWelcomeMessages from "./components/WelcomeMessages";
-import WorkExperience from "./components/workExperience/WorkExperience";
 import HanonSystems from "./components/workExperience/hanonSystems/HanonSystems";
 import Footer from "./components/footer/Footer";
 import About from "./components/about/About";
