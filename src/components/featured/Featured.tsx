@@ -8,11 +8,11 @@ function Featured() {
   return (
     <Container
       sx={{
-        marginTop: "2rem",
+        marginTop: "6rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginBottom: "7rem",
+        marginBottom: "6rem",
       }}
       maxWidth="xl"
     >
@@ -34,7 +34,6 @@ function Featured() {
         sx={{
           fontWeight: "600",
           color: theme.palette.primary.main,
-          fontStyle: "italic",
         }}
       >
         Check out the featured content below!
@@ -47,71 +46,29 @@ function Featured() {
           flexDirection: "column",
           gap: "2rem",
           padding: "2rem 1rem",
-          marginTop: "2rem",
+          marginTop: "6rem",
         }}
       >
-        <Typography variant="h4">SAM-e Fluid Modelling</Typography>
-
-        <article className="same-capstone-article-container">
-          <div className="same-capstone-section-container">
-            <Typography>
-              The SAM-e is a steam distribution manifold manufactured by Condair
-              Inc. As an undergraduate engineering capstone, a representative
-              model is being created to help Condair experiment with
-              model-driven design and develop the next generation of product.
-              With a group of five students, an OpenFoam computational fluid
-              dynamics model is being developed. Experimental data provided by
-              Condair will be used to validate the model, on top which the team
-              will create a user interfaces to increase usability for Condair
-              engineering teams.
-            </Typography>
-          </div>
-
-          <div className="same-capstone-section-container">
-            <Typography>
-              It was an excellent opportunity to practice my professional and
-              technical skills:
-            </Typography>
-            <ul className="same-capstone-skills-container">
-              <li>
-                <Typography color="primary">
-                  Iterative Design Development
-                </Typography>
-              </li>
-              <li>
-                <Typography color="primary">
-                  Fluid Mechanics & Thermodynamics
-                </Typography>
-              </li>
-              <li>
-                <Typography color="primary">Computational Modelling</Typography>
-              </li>
-              <li>
-                <Typography color="primary">Code Maintenance</Typography>
-              </li>
-              <li>
-                <Typography color="secondary">
-                  Collaboration & Teamwork
-                </Typography>
-              </li>
-              <li>
-                <Typography color="secondary">
-                  Adapting To & Adopting Unfamilar Technologies
-                </Typography>
-              </li>
-              <li>
-                <Typography color="secondary">
-                  Meeting and Updating Project Scope to Client Needs
-                </Typography>
-              </li>
-            </ul>
-          </div>
-        </article>
-        <Typography variant="h5">
-          Have some time? Why not watch a explanatory video?
+        <Typography
+          variant="h4"
+          sx={{ maxWidth: "60rem", textAlign: "center", fontWeight: "600" }}
+        >
+          Professional Engineers Ontario, Kingston Engineering Competition 2023
+          3rd Place: SAM-e Fluid Modelling
         </Typography>
+
+        <div className="same-capstone-section-container">
+          <Typography variant="h5">
+            The SAM-e is a steam distribution manifold manufactured by Condair
+            Inc. As an undergraduate engineering capstone, an OpenFOAM model was
+            created to help Condair experiment with model-driven design and
+            develop their next generation of product.
+          </Typography>
+        </div>
+
+        <Typography variant="h5">Watch the explanatory video below!</Typography>
       </Paper>
-      <YoutubeEmbed embedID="Nsgq0Kj2ymU" />
+      <YoutubeEmbed embedID="Fz-x_mDFdRQ" />
     </Container>
   );
 }
