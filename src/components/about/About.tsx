@@ -1,4 +1,4 @@
-import { Typography, Paper, Container, Chip, useTheme } from "@mui/material";
+import { Typography, Paper, Container, Chip } from "@mui/material";
 import React from "react";
 import "./About.css";
 // import SWCard from "./SWCard";
@@ -12,17 +12,27 @@ import "./About.css";
 // import EggIcon from "@mui/icons-material/Egg";
 // import SearchIcon from "@mui/icons-material/Search";
 
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+// import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 function About() {
-  const theme = useTheme();
   return (
-    <Container maxWidth="xl" disableGutters>
+    <Container maxWidth={false} disableGutters>
       <section className="about-container">
         <div className="location-container">
-          <Typography variant="h3" color="white" sx={{ fontWeight: "700" }}>
-            Origins
-          </Typography>
+          <Paper
+            sx={{
+              padding: "1rem",
+              height: "fit-content",
+            }}
+          >
+            <Typography
+              variant="h3"
+              textAlign="center"
+              sx={{ fontWeight: "700" }}
+            >
+              Origins
+            </Typography>
+          </Paper>
           <Paper
             sx={{
               padding: "1rem",
@@ -31,7 +41,7 @@ function About() {
             }}
           >
             <Typography variant="h5">
-              A mechanical engineering student attending{" "}
+              A graduate engineering student attending{" "}
               <em>Queen's University</em>, hailing from <em>Ottawa, Ontario</em>
               .
               <br />
@@ -46,7 +56,7 @@ function About() {
               textAlign="center"
               sx={{ fontWeight: "700" }}
             >
-              Mechanical Design Interests
+              Engineering Design
             </Typography>
           </div>
           <div className="body-container">
@@ -56,11 +66,9 @@ function About() {
               textAlign="center"
               sx={{ fontWeight: "500", width: "90%" }}
             >
-              A{" "}
-              <em style={{ color: theme.palette.secondary.main }}>
-                fascination
-              </em>{" "}
-              with mechanical design, physical problem solving, and tinkering.
+              A fascination with algorithims, mechanical design, scientific
+              modelling, problem solving, and tinkering—whether physical or with
+              code.
             </Typography>
             <div className="hobby-container">
               <Typography
@@ -72,19 +80,19 @@ function About() {
               </Typography>
               <Chip label="3-D Printing" color="secondary" size="medium" />
               <Chip label="Aluminum Casting" color="secondary" size="medium" />
-              <Chip label="Origami" color="secondary" size="medium" />
+              <Chip label="Game Development" color="secondary" size="medium" />
             </div>
           </div>
         </div>
         <div className="programming-container">
           <div className="programming-text-container">
             <Typography variant="h3" color="white" sx={{ fontWeight: "700" }}>
-              A Second Curiosity
+              Software and Computing
             </Typography>
             <Typography variant="h5" color="white">
-              I've always been interested in coding too. From creating simple
-              video games in my youth, to using computaional tools for
-              engineering design.
+              I've been interested in software since my youth, learning Java in
+              7th Grade. Programming has since come to feature in my engineering
+              and research toolbox.
             </Typography>
           </div>
           <img
@@ -103,15 +111,15 @@ function About() {
             </Typography>
           </Paper>
           <div className="goals-chips-container">
-            <Chip color="secondary" label="Master's Degree" />
-            <Chip color="secondary" label="Software Enginering Job" />
+            <Chip color="secondary" label="PhD Degree" />
             <Chip color="secondary" label="Computational Sciences" />
-            <Chip color="secondary" label="Mechanical Engineer" />
-            <Chip
+            <Chip color="secondary" label="High Performance Computing" />
+            <Chip color="secondary" label="Software Enginering Job" />
+            {/* <Chip
               color="secondary"
               icon={<HelpOutlineIcon />}
               label="Novelist"
-            />
+            /> */}
           </div>
         </div>
         {/* <div className="strengths-weaknesses-container">
