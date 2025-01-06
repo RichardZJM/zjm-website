@@ -22,8 +22,9 @@ import innovation from "../../images/experience/innovation.jpg";
 import thermodynamics from "../../images/experience/thermodynamics.jpg";
 import presentation from "../../images/experience/presentation.jpg";
 import other from "../../images/experience/other.jpg";
-import books from "../../images/experience/books.jpg";
+// import books from "../../images/experience/books.jpg";
 import papers from "../../images/experience/papers.jpg";
+import unene from "../../images/experience/unene.jpg";
 
 function Experience() {
   return (
@@ -153,37 +154,43 @@ function Experience() {
                 <SkillCard
                   image={other}
                   title="More Awards"
-                  description="Lorne C Elder Scholarship • Lena MacNeil Scholarship • Dean's Scholar • Queen's General Bursary"
+                  description="CGS-M NSERC Scholarship • Lorne C Elder Scholarship • Lena MacNeil Scholarship • Dean's Scholar • Queen's General Bursary"
                   color={"#73a7bf"}
                 />
-                <SkillCard
+                {/* <SkillCard
                   image={books}
                   title="CGS-M NSERC Scholarship"
                   description="Awarded to high-calibre scholars who are engaged in an eligible Master's program in Canada. (2024)"
                   color={"#83b3c7"}
-                />
+                /> */}
                 <SkillCard
                   image={papers}
                   title="R. Samuel McLaughlin Fellowship"
                   description="Awarded annually on the recommendation of a Department, Program, School or Faculty to eligible Master's or Doctoral students. (2023)"
-                  color={"#9dc2cf"}
+                  color={"#83b3c7"}
                 />
                 <SkillCard
                   image={thermodynamics}
                   title="Conn-Gilbert Award"
                   description="Awarded to a Mechanical Engineering student, in the year in which the student graduates, who has the highest average on the core courses in Thermodynamics. (2023)"
-                  color={"#b6d4d6"}
+                  color={"#9dc2cf"}
                 />
                 <SkillCard
                   image={innovation}
                   title="Colin T. Bayne Memorial Award"
                   description="Awarded to the graduating Mechanical Engineering student who, in the opinion of the Department, has shown most proficiency in innovative design. (2023)"
-                  color={"#d7ded1"}
+                  color={"#b6d4d6"}
                 />
                 <SkillCard
                   image={presentation}
                   title="L. M. Arkley Prize"
                   description="Awarded to a fourth year Mechanical Engineering student who submits the best paper, supported by an oral presentation. (2023)"
+                  color={"#d7ded1"}
+                />
+                <SkillCard
+                  image={unene}
+                  title="UNENE 2024 Best Student Thesis"
+                  description="Awarded to the student presenting the best 7-minute presentation of their research at the UNENE workshop. (2024)"
                   color={"#eae9e1"}
                 />
               </div>

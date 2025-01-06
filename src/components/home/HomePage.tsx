@@ -66,7 +66,7 @@ function HomePage(props: { welcomeMessage: string }) {
             <img
               data-aos="flip-right"
               className="drawn-profile-pic"
-              src={require("../../images/PFP4.jpg")}
+              src={require("../../images/PFP5.jpg")}
               alt=" Profile of Zijian (Richard) Meng"
             />
             <Paper
