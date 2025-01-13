@@ -131,7 +131,7 @@ function Experience() {
                 <SkillCard
                   image={python}
                   title="Python"
-                  description="Python. General usage, scripting, and engineering analysis; open source contributions. Scientific packages such as NumPy, SciPy, Tensorflow. PyTorch."
+                  description="Python. General usage, scripting, and engineering analysis. Scientific packages such as NumPy, SciPy, Tensorflow. PyTorch."
                   color={"#eae9e1"}
                 />
               </div>
@@ -154,7 +154,7 @@ function Experience() {
                 <SkillCard
                   image={other}
                   title="More Awards"
-                  description="CGS-M NSERC Scholarship • Lorne C Elder Scholarship • Lena MacNeil Scholarship • Dean's Scholar • Queen's General Bursary"
+                  description="Alexander Graham Bell CGS-M NSERC Scholarship • Lorne C Elder Scholarship • Lena MacNeil Scholarship • Dean's Scholar • Queen's General Bursary"
                   color={"#73a7bf"}
                 />
                 {/* <SkillCard

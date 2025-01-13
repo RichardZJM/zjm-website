@@ -43,7 +43,7 @@ function Footer() {
         src={require("../../images/ZJM_Logo.png")}
         alt="ZJM's Logo"
       ></img>
-      <Typography>Zijian Meng's E-Portfolio and Website 2024</Typography>
+      <Typography>Zijian Meng's E-Portfolio and Website 2025</Typography>
     </BottomNavigation>
   );
 }
