@@ -125,7 +125,7 @@ function Experience() {
                 <SkillCard
                   image={code}
                   title="C++"
-                  description="C++ for perfomant code and parallel implementation. Some experience with OpenMPI and Cuda."
+                  description="C++ for perfomant code and parallel implementation. Kokkos performance portability pacakge. OpenMPI and Cuda."
                   color={"#d7ded1"}
                 />
                 <SkillCard
