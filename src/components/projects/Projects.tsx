@@ -13,6 +13,7 @@ import sameCFDBG from "../../images/projects/same.png";
 import mdTrainingBG from "../../images/projects/mtp.jpg";
 import smallCellBG from "../../images/projects/smallcell.png";
 import websiteBG from "../../images/projects/website.jpg";
+import mtpGPU from "../../images/projects/mtpgpu.png";
 
 function Projects() {
   return (
@@ -23,15 +24,30 @@ function Projects() {
           subtitle="Fast Active Learning of Machine Learning Interatomic Potentials"
           image={smallCellBG}
           chips={[
-            "Submission Pending",
+            "Published",
             "Machine Learning",
             "Active Learning",
-            "HPC Clusters",
+            "High-Performance Computing",
             "Molecular Dynamics",
-            "DFT",
           ]}
-          description={`Submitting to Computational Materials Science. Machine learning interatomic potentials (MLIPs) often use on-the-fly active learning, adding configurations from simulated trajectories, but large-cell ab initio calculations are costly. We developed a small-cell training protocol for MLIPs that preserves quality while cutting computational costs. Our approach shows that training with smaller systems (1 to 16 atoms) achieves similar accuracy. In a potassium case study, we applied active learning with 2-atom models, incrementally adding atoms and reducing costs by up to two orders of magnitude compared to 54-atom cells. Static and thermodynamic properties matched large-cell results, capturing essential data for modeling large-scale phenomena. We benchmarked protocol variations and provided recommendations.`}
+          description={`Published in Computational Materials Science. Machine learning interatomic potentials (MLIPs) often use on-the-fly active learning, adding configurations from simulated trajectories, but large-cell ab initio calculations are costly. We developed a small-cell training protocol for MLIPs that preserves quality while cutting computational costs. Our approach shows that training with smaller systems (1 to 16 atoms) achieves similar accuracy. In a potassium case study, we applied active learning with 2-atom models, incrementally adding atoms and reducing costs by up to two orders of magnitude compared to 54-atom cells. Static and thermodynamic properties matched large-cell results, capturing essential data for modeling large-scale phenomena. We benchmarked protocol variations and provided recommendations.`}
+          // explore={"https://youtu.be/Nsgq0Kj2ymU"}
           githubLink="https://github.com/RichardZJM/Small-Cell-MTP-training"
+        />
+
+        <ProjectsCard
+          title="MTP GPU"
+          subtitle="GPU Acceleration for Machine Learning Interatomic Potentials"
+          image={mtpGPU}
+          chips={[
+            "Machine Learning",
+            "GPU Acceleration",
+            "Molecular Dynamics",
+            "High-Performance Computing",
+            "Kokkos / CUDA",
+          ]}
+          description={`GPU acceleration for the popular Moment Tensor Potential within the LAMMPS Molecular Dynamics simulation engine. In addition to the GPU acceleration, there are further CPU optimizations that build upon previous works, yielding speedups of up to two times.`}
+          githubLink="https://github.com/RichardZJM/lammps-mtp"
         />
 
         <ProjectsCard
