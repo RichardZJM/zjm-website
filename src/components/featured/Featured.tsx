@@ -38,6 +38,35 @@ function Featured() {
       >
         Check out the featured content below!
       </Typography>
+      <Paper
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "2rem",
+          padding: "2rem 1rem",
+          marginTop: "6rem",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{ maxWidth: "60rem", textAlign: "center", fontWeight: "600" }}
+        >
+          Master's Thesis Defense Presentation
+        </Typography>
+
+        <div className="same-capstone-section-container">
+          <Typography variant="h5">
+            My Master's of Applied Science, Mechanical and Materials Engineering
+            (co-supervised with Electrical and Computer Engineering) thesis
+            defense presentation. Recorded at Nicol Hall, Queen's University, on
+            November 10th 2025.
+          </Typography>
+        </div>
+
+        <Typography variant="h5">Watch the recording below!</Typography>
+      </Paper>
+      <YoutubeEmbed embedID="hP_jupqCgoM" />
 
       <Paper
         sx={{

@@ -39,7 +39,7 @@ function Contact() {
             description="Some personal information may be redacted. Full version to be provided upon request."
             colour="#98b7f5"
             icon={<ContactPageIcon color="primary" fontSize="large" />}
-            link="/resumes/Zijian_(Richard)_Meng_Resume_v2025-05.pdf"
+            link="/resumes/Zijian_(Richard)_Meng_Resume_v2025-07.pdf"
             buttonText="View Or Download"
           />
           <ContactMethodCard
