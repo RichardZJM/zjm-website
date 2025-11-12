@@ -6,6 +6,7 @@ import WorkCard from "./WorkCard";
 
 import "./SkillsAndWork.css";
 
+import cnl from "../../images/experience/cnl.jpg";
 import hanon from "../../images/experience/hanonSystems.jpg";
 import snow from "../../images/experience/snow.jpg";
 import cad from "../../images/experience/cad.jpg";
@@ -58,7 +59,7 @@ function Experience() {
                   image={automatic}
                   title="Teaching Assistant"
                   employer="Automatic Controls Course"
-                  location="Winter 23'"
+                  location="Winter 2023"
                   description="Communicating with students, marking, and proctoring. Content included control theory, laplace transform, MATLAB, and controllers. "
                   color={"#B9D6D9"}
                 />
@@ -66,7 +67,7 @@ function Experience() {
                   image={cad}
                   title="Lead Lab Teaching Assistant"
                   employer="Engineering Graphics Course"
-                  location="Fall 23', 24'"
+                  location="Fall 2023, 2024"
                   description="Led and organized 2 other TAs in lab sessions containing 80 students.
                   Performed live demonstrations including technical drawing skills and CAD software using SolidWorks, presenting and explaining content. Supervision of students, mentorship of smaller groups, tutorials, and marking."
                   color={"#d9dad8"}
@@ -75,11 +76,20 @@ function Experience() {
                   image={hanon}
                   title="Product Engineering Intern"
                   employer="Hanon Systems Canada"
-                  location="05/21' – 06/22'"
+                  location="05/2021 – 06/2022"
                   link="/experience/hanon-systems"
                   description="”Best engineering intern in the history of Hanon Belleville” - Former Manager (Click for Ref. Ltr.). Developed and organized the builds of fluid transport prototypes for automotive thermal solutions and HVAC. Work included projects for electric vehicles from Ford, GM, and Lucid. Completed 342 prototype build requests under historically high demand. Click to read more. 
                   "
                   color={"#f0ead3"}
+                />
+                <WorkCard
+                  image={cnl}
+                  title="Computational Modelling Intern"
+                  employer="Canadian Nuclear Laboratories"
+                  location="09/2025 – 12/2025"
+                  description="Conducted computational materials modeling of helium behavior in 304 stainless steel irradiated under reactor conditions at Chalk River Laboratories. Applied Object Kinetic Monte Carlo methods to study helium production and migration, supporting experimental findings from salvaged service pieces from the National Research Universal reactor.
+                  "
+                  color={"#eae9e1"}
                 />
               </div>
             </div>

@@ -14,11 +14,28 @@ import mdTrainingBG from "../../images/projects/mtp.jpg";
 import smallCellBG from "../../images/projects/smallcell.png";
 import websiteBG from "../../images/projects/website.jpg";
 import mtpGPU from "../../images/projects/mtpgpu.png";
+import latticeBG from "../../images/projects/lattice.jpg";
 
 function Projects() {
   return (
     <Container maxWidth="xl">
       <section className="projects-container">
+        <ProjectsCard
+          title="Research Paper: Basis Function Pruning"
+          subtitle="Cost-Aware and Data-Driven Basis Set Optimization in MTPs"
+          image={latticeBG}
+          chips={[
+            "Preprint",
+            "Machine Learning",
+            "Genetic Algorithims",
+            "High-Performance Computing",
+            "Molecular Dynamics",
+          ]}
+          description={`Moment Tensor Potentials (MTPs) are machine-learning interatomic potentials whose basis functions are typically selected using a level-based scheme that is data-agnostic. We introduce a post-training, cost-aware pruning strategy that removes expensive basis functions with minimal loss of accuracy. Applied to nickel and silicon–oxygen systems, it yields models up to seven times faster than standard MTPs with no loss in fitting quality. The method requires no new data and remains fully compatible with current MTP implementations. This approach may be explored with other formalisims.`}
+          explore={"https://arxiv.org/abs/2510.19737"}
+          githubLink="https://github.com/RichardZJM/MTP_basis_optimization"
+        />
+
         <ProjectsCard
           title="Research Paper: Small Cells, Big Speedups"
           subtitle="Fast Active Learning of Machine Learning Interatomic Potentials"
@@ -31,7 +48,9 @@ function Projects() {
             "Molecular Dynamics",
           ]}
           description={`Published in Computational Materials Science. Machine learning interatomic potentials (MLIPs) often use on-the-fly active learning, adding configurations from simulated trajectories, but large-cell ab initio calculations are costly. We developed a small-cell training protocol for MLIPs that preserves quality while cutting computational costs. Our approach shows that training with smaller systems (1 to 16 atoms) achieves similar accuracy. In a potassium case study, we applied active learning with 2-atom models, incrementally adding atoms and reducing costs by up to two orders of magnitude compared to 54-atom cells. Static and thermodynamic properties matched large-cell results, capturing essential data for modeling large-scale phenomena. We benchmarked protocol variations and provided recommendations.`}
-          // explore={"https://youtu.be/Nsgq0Kj2ymU"}
+          explore={
+            "https://www.sciencedirect.com/science/article/pii/S0927025625002629"
+          }
           githubLink="https://github.com/RichardZJM/Small-Cell-MTP-training"
         />
 
